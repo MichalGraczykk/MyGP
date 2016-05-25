@@ -1,0 +1,77 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+    <title>Michał Graczyk - Projekt Dyplomowy</title>
+
+    <meta name="description" content="Opis w Google" />
+    <meta name="keywords" content="słowa, kluczowe, wypisane, po, porzecinku" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            Internetowy system wypożyczania przedmiotów
+        </div>
+        <div class="navigation">
+            <ol>
+                <li>@Html.ActionLink("Strona Główna", "Index", "Home")</li>
+                <li>@Html.ActionLink("CreateUser", "Create", "Users")</li>
+                <li><a href="#">Asortyment</a></li>
+                <li><a href="#">Zaloguj się</a></li>
+                <li><a href="#">@Html.ActionLink("Users", "Index", "Users")</a></li>
+            </ol>
+        </div>
+        <div class="container">
+            @RenderBody()
+        </div>
+        <div class="socialmedia">
+            <a href="http://facebook.com" target="_blank" class="socialmedia">
+                <div class="fb"><i class="icon-facebook"></i></div>
+            </a>
+
+            <a href="http://youtube.com" target="_blank" class="socialmedia">
+                <div class="yt"><i class="icon-youtube"></i></div>
+            </a>
+
+            <a href="http://twitter.com" target="_blank" class="socialmedia">
+                <div class="tw"><i class="icon-twitter"></i></div>
+            </a>
+            <div style="clear:both;"></div>
+        </div>
+        <div class="footer">
+            Michał Graczyk - Praca Dyplomowa &copy; 2016
+        </div>
+    </div>
+    @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script>
+            $(document).ready(function () {
+                var NavY = $('.navigation').offset().top;
+
+                var moveNavigation = function () {
+                    var ScrollY = $(window).scrollTop();
+
+                    if (ScrollY > NavY) {
+                        $('.navigation').addClass('move');
+                    } else {
+                        $('.navigation').removeClass('move');
+                    }
+                };
+
+                moveNavigation();
+
+                $(window).scroll(function () {
+                    moveNavigation();
+                });
+            });
+    </script>
+</body>
+</html>

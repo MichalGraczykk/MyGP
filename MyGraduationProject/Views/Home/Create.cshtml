@@ -1,0 +1,101 @@
+﻿@model MyGraduationProject.Models.User
+@using System.Web.Optimization
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>User</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.USER_ID, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(Model => Model.USER_ID)
+                @Html.ValidationMessageFor(Model => Model.USER_ID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.LOGIN, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(Model => Model.LOGIN
+                @Html.ValidationMessageFor(Model => Model.LOGIN)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.PASSWORD, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(Model => Model.PASSWORD)
+                @Html.ValidationMessageFor(Model => Model.PASSWORD)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.ROLE_ID, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(Model => Model.rola)
+                @Html.ValidationMessageFor(Model => Model.rola)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.NAME, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(Model => Model.imie)
+                @Html.ValidationMessageFor(Model => Model.imie)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.nazwisko, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(Model => Model.nazwisko)
+                @Html.ValidationMessageFor(Model => Model.nazwisko)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.ulica, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(Model => Model.ulica)
+                @Html.ValidationMessageFor(Model => Model.ulica)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.nrDomu, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(Model => Model.nrDomu)
+                @Html.ValidationMessageFor(Model => Model.nrDomu)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.nrLokalu, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(Model => Model.nrLokalu)
+                @Html.ValidationMessageFor(Model => Model.nrLokalu)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.wiek, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(Model => Model.wiek)
+                @Html.ValidationMessageFor(Model => Model.wiek)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
