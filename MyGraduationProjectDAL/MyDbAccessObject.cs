@@ -1,31 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MyGraduationProject.Models;
-using MyGraduationProject.DataBase;
 
-namespace MyGraduationProjectDAL
+namespace MyGraduationProjectDAL {
+    public class MyDbAccessObject : Core.DataAccessObject<DatabaseContext>
     {
-    public class MyDbAccessObject : Core.DataAccessObject<Database.MyGraduationProje>
-    {
-        public MyDbAccessObject(Database database)
+        public MyDbAccessObject(DatabaseContext database)
             : base(database)
         {
         }
-        /*
-        public GFTMarketDatabaseInstance(Database database)
-                : base(database)
-            {
-            }
-            */
+
         public override void Delete<Entity>(Entity dbObject)
             {
                 if (dbObject.GetType().Name == "Reservation")
                 {
-                    _database.Transactions.Remove(dbObject.GetInstance<Reservation>());
+                    _database.Reservations.Remove(dbObject.GetInstance<Reservation>());
                     _database.SaveChanges();
                 }
                 else
@@ -39,7 +27,7 @@ namespace MyGraduationProjectDAL
                 switch (dbObject.GetType().Name)
                 {
                     case "Transaction":
-                        _database.Transactions.Add(dbObject.GetInstance<Reservation>());
+                        _database.Reservations.Add(dbObject.GetInstance<Reservation>());
                         _database.SaveChanges();
                         break;
                     case "Item":
@@ -56,7 +44,7 @@ namespace MyGraduationProjectDAL
                 switch (typeof(Entity).Name)
                 {
                     case "Reservation":
-                        return (Entity)Convert.ChangeType(_database.Transactions.Find(entityId),
+                        return (Entity)Convert.ChangeType(_database.Reservations.Find(entityId),
                             typeof(Reservation));
 
                     case "Item":
@@ -72,9 +60,9 @@ namespace MyGraduationProjectDAL
                 switch (typeof(Entity).Name)
                 {
                     case "Transaction":
-                        _database.Transactions.Remove(_database.Transactions
+                        _database.Reservations.Remove(_database.Reservations
                             .Find(dbObject.GetInstance<Reservation>().RESERVATION_ID));
-                        _database.Transactions.Add(dbObject.GetInstance<Reservation>());
+                        _database.Reservations.Add(dbObject.GetInstance<Reservation>());
                         break;
 
                     case "Item":

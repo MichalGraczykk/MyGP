@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MyGraduationProject.Models.DatabaseEntities.Interfaces;
-using 
+
 namespace MyGraduationProjectDAL.Core
 {
     public abstract class DataAccessObject<Database> : IDisposable
