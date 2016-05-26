@@ -17,7 +17,7 @@ namespace MyGraduationProject.Controllers
             ViewData["tytul"] = "TytulTest";
             ViewData["liczba"] = "LiczbaTest";
 
-            using (DatabaseContext db = new DatabaseContext())
+            using (MyGPDatabaseContext db = new MyGPDatabaseContext())
             {
                 
                 return View(db.Users.ToList());
@@ -27,6 +27,8 @@ namespace MyGraduationProject.Controllers
         // GET: /Users/Create
         public ActionResult Create()
         {
+
+
             return View();
         }
 

@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using MyGraduationProject.Models;
+using MyGraduationProject.DataAccessLayer;
 
 namespace MyGraduationProject.Controllers
 {
     public class UsersController : Controller
     {
-        private DatabaseContext db = new DatabaseContext();
+        private MyGPDatabaseContext db = new MyGPDatabaseContext();
 
         // GET: Users
         public ActionResult Index()
@@ -24,6 +23,35 @@ namespace MyGraduationProject.Controllers
         // GET: Users/Details/5
         public ActionResult Details(int? id)
         {
+            using(var db = new MyGPDatbaseInstance(new MyGPDatabaseContext()))
+            {
+
+                try
+                {
+                    db.Delete(new Item());
+                }
+                catch (ArgumentException e)
+                {
+
+                    throw new MySuperException("dupa", e);
+                }
+                finally
+                {
+                    //revert delete
+                }
+
+
+                var checker = true;
+                if (checker)
+                {
+                    List<Item> list = db.GetItemsThatConfilctsWithDate(DateTime.Now, new DateTime(2001, 11, 32)).ToList(); 
+                }
+                else
+                {
+                    throw new MySuperException("checker has value o a false");
+                }
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

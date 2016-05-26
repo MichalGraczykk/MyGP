@@ -187,26 +187,16 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MySuperCoolException.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DatabaseEntities\DatabaseModel.cs" />
-    <Compile Include="Models\DatabaseEntities\Interfaces\IDataBaseEntity.cs" />
-    <Compile Include="Models\DatabaseEntities\Item.cs" />
-    <Compile Include="Models\DatabaseEntities\Reservation.cs" />
-    <Compile Include="Models\DatabaseEntities\ReservationStatus.cs" />
-    <Compile Include="Models\DatabaseEntities\Role.cs" />
-    <Compile Include="Models\DatabaseEntities\User.cs" />
-    <Compile Include="Models\DatabaseEntities\UsersAdress.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="scripts\jquery-1.10.2.min.map" />
@@ -230,6 +220,19 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\IDataBaseEntity\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\graczusdeveloer\MyGraduationProject.Models\MyGraduationProject.Models.csproj">
+      <Project>{311336ca-cc42-445b-b3da-41708333170f}</Project>
+      <Name>MyGraduationProject.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\graczusdeveloer\MyGraduationProjectDAL\MyGraduationProjectDAL.csproj">
+      <Project>{1140913c-c58a-4d5a-b778-bfdf0866ff00}</Project>
+      <Name>MyGraduationProjectDAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
