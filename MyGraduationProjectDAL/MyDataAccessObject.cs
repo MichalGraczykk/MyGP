@@ -24,6 +24,16 @@ namespace MyGraduationProject.DataAccessLayer
                     _database.SaveChanges();
                     break;
 
+                case "User":                 
+                    _database.Users.Remove(dbObject.GetInstance<User>());
+                    _database.SaveChanges();
+                    break;
+
+                case "UsersAdress":
+                    _database.UsersAdresses.Remove(dbObject.GetInstance<UsersAdress>());
+                    _database.SaveChanges();
+                    break;
+
                 default:
                     throw new ArgumentException();
             }
@@ -39,10 +49,37 @@ namespace MyGraduationProject.DataAccessLayer
                     _database.Reservations.Add(dbObject.GetInstance<Reservation>());
                     _database.SaveChanges();
                     break;
+
                 case "Item":
                     _database.Items.Add(dbObject.GetInstance<Item>());
                     _database.SaveChanges();
                     break;
+
+                case "User":
+                    _database.Users.Add(dbObject.GetInstance<User>());
+                    _database.SaveChanges();
+                    break;
+
+                case "UsersAdress":
+                    _database.UsersAdresses.Add(dbObject.GetInstance<UsersAdress>());
+                    _database.SaveChanges();
+                    break;
+
+                case "States":
+                    _database.States.Add(dbObject.GetInstance<State>());
+                    _database.SaveChanges();
+                    break;
+
+                case "Role":
+                    _database.Roles.Add(dbObject.GetInstance<Role>());
+                    _database.SaveChanges();
+                    break;
+
+                case "ReservationStatus":
+                    _database.ReservationStatuses.Add(dbObject.GetInstance<ReservationStatus>());
+                    _database.SaveChanges();
+                    break;
+
                 default:
                     throw new InvalidOperationException();
             }
@@ -59,6 +96,27 @@ namespace MyGraduationProject.DataAccessLayer
                 case "Item":
                     return (Entity)Convert.ChangeType(_database.Items.Find(entityId),
                         typeof(Item));
+
+                case "ReservationStatus":
+                    return (Entity)Convert.ChangeType(_database.ReservationStatuses.Find(entityId),
+                        typeof(ReservationStatus));
+
+                case "Role":
+                    return (Entity)Convert.ChangeType(_database.Roles.Find(entityId),
+                        typeof(Role));
+
+                case "State":
+                    return (Entity)Convert.ChangeType(_database.States.Find(entityId),
+                        typeof(State));
+
+                case "User":
+                    return (Entity)Convert.ChangeType(_database.Users.Find(entityId),
+                        typeof(User));
+
+                case "UsersAdress":
+                    return (Entity)Convert.ChangeType(_database.UsersAdresses.Find(entityId),
+                        typeof(UsersAdress));
+
                 default:
                     throw new InvalidOperationException();
             }
@@ -121,6 +179,15 @@ namespace MyGraduationProject.DataAccessLayer
                     .GetValue(dbObject).ToString());
 
                     userAdress = (IQueryable<UsersAdress>)dbObject.GetInstance<UsersAdress>();
+                    break;
+
+                case "State":
+                    var state = _database.States
+                    .Where(o => o.STATE_ID.ToString() == typeof(State)
+                    .GetProperty("STATE_ID")
+                    .GetValue(dbObject).ToString());
+
+                    state = (IQueryable<State>)dbObject.GetInstance<State>();
                     break;
 
                 default:
