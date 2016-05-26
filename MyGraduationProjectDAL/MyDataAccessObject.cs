@@ -24,7 +24,7 @@ namespace MyGraduationProject.DataAccessLayer
                     _database.SaveChanges();
                     break;
 
-                case "User":                 
+                case "User":
                     _database.Users.Remove(dbObject.GetInstance<User>());
                     _database.SaveChanges();
                     break;
@@ -199,9 +199,9 @@ namespace MyGraduationProject.DataAccessLayer
         public IEnumerable<Item> GetItemsThatConfilctsWithDate(DateTime startDate, DateTime endDate)
         {
             IEnumerable<Item> results = _database.Reservations
-                .Where(reservation => reservation.DATE_FROM < startDate && reservation.DATE_TO > endDate)
+                .Where(reservation => reservation.DATE_FROM < startDate && reservation.DATE_TO > startDate || reservation.DATE_FROM < endDate && reservation.DATE_TO > endDate)
                 .Select(reservation => reservation.Item);
-            //TODO check thats correct
+            //TODO dopisz warunek ktory zwroci itemy tylko o okreslonej nazwie
 
             return results;
         }
