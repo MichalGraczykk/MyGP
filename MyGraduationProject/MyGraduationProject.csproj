@@ -233,8 +233,8 @@
       <Project>{311336ca-cc42-445b-b3da-41708333170f}</Project>
       <Name>MyGraduationProject.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\graczusdeveloer\MyGraduationProjectDAL\MyGraduationProjectDAL.csproj">
-      <Project>{1140913c-c58a-4d5a-b778-bfdf0866ff00}</Project>
+    <ProjectReference Include="..\MyGraduationProjectDAL\MyGraduationProjectDAL.csproj">
+      <Project>{c3cfe22e-f2d1-43b0-9b0a-a73d1574230a}</Project>
       <Name>MyGraduationProjectDAL</Name>
     </ProjectReference>
   </ItemGroup>

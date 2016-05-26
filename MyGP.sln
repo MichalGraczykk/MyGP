@@ -9,7 +9,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "MyGraduationProject.Databas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGraduationProject.Models", "..\graczusdeveloer\MyGraduationProject.Models\MyGraduationProject.Models.csproj", "{311336CA-CC42-445B-B3DA-41708333170F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGraduationProjectDAL", "..\graczusdeveloer\MyGraduationProjectDAL\MyGraduationProjectDAL.csproj", "{1140913C-C58A-4D5A-B778-BFDF0866FF00}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGraduationProjectDAL", "MyGraduationProjectDAL\MyGraduationProjectDAL.csproj", "{C3CFE22E-F2D1-43B0-9B0A-A73D1574230A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +31,10 @@ Global
 		{311336CA-CC42-445B-B3DA-41708333170F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{311336CA-CC42-445B-B3DA-41708333170F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{311336CA-CC42-445B-B3DA-41708333170F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1140913C-C58A-4D5A-B778-BFDF0866FF00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1140913C-C58A-4D5A-B778-BFDF0866FF00}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1140913C-C58A-4D5A-B778-BFDF0866FF00}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1140913C-C58A-4D5A-B778-BFDF0866FF00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3CFE22E-F2D1-43B0-9B0A-A73D1574230A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3CFE22E-F2D1-43B0-9B0A-A73D1574230A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3CFE22E-F2D1-43B0-9B0A-A73D1574230A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3CFE22E-F2D1-43B0-9B0A-A73D1574230A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

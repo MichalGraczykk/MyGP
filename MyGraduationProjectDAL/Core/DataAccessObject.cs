@@ -4,9 +4,9 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MyGraduationProject.Models.DatabaseEntities.Interfaces;
+using MyGraduationProject.Models.Interfaces;
 
-namespace MyGraduationProjectDAL.Core
+namespace MyGraduationProject.DataAccessLayer.Core
 {
     public abstract class DataAccessObject<Database> : IDisposable
         where Database : DbContext
