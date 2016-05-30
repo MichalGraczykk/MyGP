@@ -205,5 +205,14 @@ namespace MyGraduationProject.DataAccessLayer
 
             return results;
         }
+		
+		public IEnumerable<User> FindUserByLogin(string userLogin)
+		{
+            IEnumerable<User> user = _database.Users
+            .Where(u => u.LOGIN == userLogin);
+            
+            return user;
+			//TODO sprawdz czy jest poprawnie i czemu tu musi byc lista
+		}
     }
 }
