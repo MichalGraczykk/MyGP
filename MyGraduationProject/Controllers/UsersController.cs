@@ -29,46 +29,19 @@ namespace MyGraduationProject.Controllers
             //zapytanie zagniezdzone musi zwracac boola dla tego na koncu jest any(), any zwraca informacje czy wystepuje jakis element w liscie(jesli lista bedzie pusta to zwroci false w przeciwnym wypadku frue)
 
             // pobierze liste itemow dostepnych w chwili wywolania widoku
-            var availableItems = db.Items
-                .Where(i => i.Reservations
-                    .Where(reservation =>
-                        reservation.DATE_FROM > startDate && reservation.DATE_FROM > endDate 
-                        || reservation.DATE_TO < startDate && reservation.DATE_TO < endDate).Any() 
-                    || i.Reservations.Any()
-                );
+            var itemsOfOutRange = db.Items.Where(i => i.Reservations.Where(reservation => reservation.DATE_FROM > startDate && reservation.DATE_FROM > endDate || reservation.DATE_TO < startDate && reservation.DATE_TO < endDate).Any());
+            var itemsWithoutReservation = db.Items.Where(i => !i.Reservations.Any());
+            var listOfAvailableItems = new List<Item>();
+            listOfAvailableItems.AddRange(itemsOfOutRange);
+            listOfAvailableItems.AddRange(itemsWithoutReservation);
 
-
-            //TODO rozkmin to
-            //sprawdzi czy item na pewno jest dostepny w momencie stworzenia rezerwacji
-
-            //powinno byc false
-            var itemId = 2;
-            var itemToBook = db.Items.Where(i => i.ITEM_ID == itemId).FirstOrDefault();
-            var isAvailable = itemToBook.Reservations
-                .Where(reservation =>
-                    reservation.DATE_FROM > startDate && reservation.DATE_FROM > endDate
-                    || reservation.DATE_TO < startDate && reservation.DATE_TO < endDate).Any()
-                    || !itemToBook.Reservations.Any();
-
-
-            //powinno byc true
-            var itemId2 = 3;
+            //dostępnosc produktu podczas tworzenia rezerwacji
+            //isAvailable powinno byc false dla 2, dla 3,6 true
+            var itemId2 = 6;
             var itemToBook2 = db.Items.Where(i => i.ITEM_ID == itemId2).FirstOrDefault();
-            var isAvailable2 = itemToBook2.Reservations
-                .Where(reservation =>
-                    reservation.DATE_FROM > startDate && reservation.DATE_FROM > endDate
-                    || reservation.DATE_TO < startDate && reservation.DATE_TO < endDate).Any()
-                    || !itemToBook2.Reservations.Any();
-
-
-            //powinno byc true
-            var itemId6 = 6;
-            var itemToBook6 = db.Items.Where(i => i.ITEM_ID == itemId6).FirstOrDefault();
-            var isAvailable6 = itemToBook6.Reservations
-                .Where(reservation =>
-                    reservation.DATE_FROM > startDate && reservation.DATE_FROM > endDate
-                    || reservation.DATE_TO < startDate && reservation.DATE_TO < endDate).Any() 
-                || !itemToBook6.Reservations.Any();
+            var isOutOfDateRange2 = itemToBook2.Reservations.Where(reservation => reservation.DATE_FROM > startDate && reservation.DATE_FROM > endDate || reservation.DATE_TO < startDate && reservation.DATE_TO < endDate).Any();
+            var haveNoReservation2 = !itemToBook2.Reservations.Any();
+            var isAvailable2 = isOutOfDateRange2 || haveNoReservation2;
 
             if (id == null)
             {
