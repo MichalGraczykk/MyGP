@@ -31,17 +31,17 @@ namespace MyGraduationProject.Controllers
             // pobierze liste itemow dostepnych w chwili wywolania widoku
             var itemsOfOutRange = db.Items.Where(i => i.Reservations.Where(reservation => reservation.DATE_FROM > startDate && reservation.DATE_FROM > endDate || reservation.DATE_TO < startDate && reservation.DATE_TO < endDate).Any());
             var itemsWithoutReservation = db.Items.Where(i => !i.Reservations.Any());
-            var listOfAvailableItems = new List<Item>();
+            var listOfAvailableItems = new List<Item>(); // Finalna lista dostepnych itemow
             listOfAvailableItems.AddRange(itemsOfOutRange);
             listOfAvailableItems.AddRange(itemsWithoutReservation);
 
             //dostępnosc produktu podczas tworzenia rezerwacji
             //isAvailable powinno byc false dla 2, dla 3,6 true
-            var itemId2 = 6;
-            var itemToBook2 = db.Items.Where(i => i.ITEM_ID == itemId2).FirstOrDefault();
-            var isOutOfDateRange2 = itemToBook2.Reservations.Where(reservation => reservation.DATE_FROM > startDate && reservation.DATE_FROM > endDate || reservation.DATE_TO < startDate && reservation.DATE_TO < endDate).Any();
-            var haveNoReservation2 = !itemToBook2.Reservations.Any();
-            var isAvailable2 = isOutOfDateRange2 || haveNoReservation2;
+            var itemId = 6;
+            var itemToBook = db.Items.Where(i => i.ITEM_ID == itemId).FirstOrDefault();
+            var isOutOfDateRange = itemToBook.Reservations.Where(reservation => reservation.DATE_FROM > startDate && reservation.DATE_FROM > endDate || reservation.DATE_TO < startDate && reservation.DATE_TO < endDate).Any();
+            var haveNoReservation = !itemToBook.Reservations.Any();
+            var isAvailable = isOutOfDateRange || haveNoReservation; // czy dany item jest dostepny
 
             if (id == null)
             {
