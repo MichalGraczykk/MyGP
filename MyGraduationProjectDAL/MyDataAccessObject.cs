@@ -202,7 +202,6 @@ namespace MyGraduationProject.DataAccessLayer
                 .Where(reservation => reservation.DATE_FROM < startDate && reservation.DATE_TO > startDate || reservation.DATE_FROM < endDate && reservation.DATE_TO > endDate)
                 .Select(reservation => reservation.Item);
             //TODO dopisz warunek ktory zwroci itemy tylko o okreslonej nazwie
-
             return results;
         }
 		

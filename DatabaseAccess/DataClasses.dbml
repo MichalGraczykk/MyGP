@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="MyGraduationProject.Database" Class="DataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(localdb)\ProjectsV13;Initial Catalog=MyGraduationProject.Database;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True" SettingsObjectName="DatabaseAccess.Properties.Settings" SettingsPropertyName="MyGraduationProject_DatabaseConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Items" Member="Items">
+    <Type Name="Item">
+      <Column Name="ITEM_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
+      <Column Name="DESCRPTION" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PHOTO" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PRICE_PER_DAY" Type="System.Decimal" DbType="Decimal(9,2)" CanBeNull="true" />
+      <Column Name="STATE_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Item_Reservation" Member="Reservations" ThisKey="ITEM_ID" OtherKey="ITEM_ID" Type="Reservation" />
+      <Association Name="State_Item" Member="State" ThisKey="STATE_ID" OtherKey="STATE_ID" Type="State" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UsersAdresses" Member="UsersAdresses">
+    <Type Name="UsersAdress">
+      <Column Name="ADRESS_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="STREET_NAME" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="STREET_NUMBER" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="POSSESION_NUMBER" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Association Name="UsersAdress_User" Member="Users" ThisKey="ADRESS_ID" OtherKey="ADRESS_ID" Type="User" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="USER_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LOGIN" Type="System.String" DbType="NChar(12)" CanBeNull="true" />
+      <Column Name="PASSWORD" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
+      <Column Name="NAME" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
+      <Column Name="SURNAME" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
+      <Column Name="AGE" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="ADRESS_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ROLE_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="User_Reservation" Member="Reservations" ThisKey="USER_ID" OtherKey="USER_ID" Type="Reservation" />
+      <Association Name="UsersAdress_User" Member="UsersAdress" ThisKey="ADRESS_ID" OtherKey="ADRESS_ID" Type="UsersAdress" IsForeignKey="true" />
+      <Association Name="Role_User" Member="Role" ThisKey="ROLE_ID" OtherKey="ROLE_ID" Type="Role" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.States" Member="States">
+    <Type Name="State">
+      <Column Name="STATE_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="STATE_NAME" Type="System.String" DbType="NChar(15)" CanBeNull="true" />
+      <Association Name="State_Item" Member="Items" ThisKey="STATE_ID" OtherKey="STATE_ID" Type="Item" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Roles" Member="Roles">
+    <Type Name="Role">
+      <Column Name="ROLE_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
+      <Association Name="Role_User" Member="Users" ThisKey="ROLE_ID" OtherKey="ROLE_ID" Type="User" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ReservationStatuses" Member="ReservationStatuses">
+    <Type Name="ReservationStatuse">
+      <Column Name="STATUS_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
+      <Association Name="ReservationStatuse_Reservation" Member="Reservations" ThisKey="STATUS_ID" OtherKey="STATUS_ID" Type="Reservation" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Reservations" Member="Reservations">
+    <Type Name="Reservation">
+      <Column Name="RESERVATION_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DATE_FROM" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DATE_TO" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ORDER_DATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="OVERALL_PRICE" Type="System.Decimal" DbType="Decimal(12,2)" CanBeNull="true" />
+      <Column Name="USER_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ITEM_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="STATUS_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Item_Reservation" Member="Item" ThisKey="ITEM_ID" OtherKey="ITEM_ID" Type="Item" IsForeignKey="true" />
+      <Association Name="ReservationStatuse_Reservation" Member="ReservationStatuse" ThisKey="STATUS_ID" OtherKey="STATUS_ID" Type="ReservationStatuse" IsForeignKey="true" />
+      <Association Name="User_Reservation" Member="User" ThisKey="USER_ID" OtherKey="USER_ID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

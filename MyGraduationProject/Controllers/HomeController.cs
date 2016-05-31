@@ -1,4 +1,4 @@
-﻿using MyGraduationProject.Models;
+﻿using DatabaseAccess;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,6 +10,7 @@ namespace MyGraduationProject.Controllers
 {
     public class HomeController : Controller
     {
+        private DataClassesDataContext db = new DataClassesDataContext();
         // GET: Home
         public ActionResult Index()
         {
@@ -17,11 +18,8 @@ namespace MyGraduationProject.Controllers
             ViewData["tytul"] = "TytulTest";
             ViewData["liczba"] = "LiczbaTest";
 
-            using (MyGPDatabaseContext db = new MyGPDatabaseContext())
-            {
-                
+
                 return View(db.Users.ToList());
-            }
         }
 
         // GET: /Users/Create
