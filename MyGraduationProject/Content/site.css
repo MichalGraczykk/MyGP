@@ -7,6 +7,11 @@ body {
     text-align: center;
 }
 
+.cen {
+    text-align:center;
+    margin-left:225px;
+}
+
 .wrapper {
 	width: 100%;
 	min-width: 1350px;

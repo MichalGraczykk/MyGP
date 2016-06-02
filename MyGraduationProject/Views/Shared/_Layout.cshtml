@@ -1,4 +1,5 @@
-﻿<!DOCTYPE HTML>
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE HTML>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -23,11 +24,22 @@
                 <li>@Html.ActionLink("Strona Główna", "Index", "Home")</li>
                 <li>@Html.ActionLink("CreateUser", "Create", "Users")</li>
                 <li><a href="#">Asortyment</a></li>
-                <li><a href="#">Zaloguj się</a></li>
+                @if (ViewBag.Auth != null)
+                {
+                <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("LogIn", "Login", "Home")</li>
+                }
                 <li><a href="#">@Html.ActionLink("Users", "Index", "Users")</a></li>
             </ol>
         </div>
         <div class="container">
+            Sprawdzam sesje, principal to:
+            @if (ViewBag.Auth != null)
+            { @ViewBag.Auth.LOGIN }
+            
             @RenderBody()
         </div>
         <div class="socialmedia">
@@ -51,7 +63,6 @@
     @RenderSection("scripts", required: false)
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
     <script>
             $(document).ready(function () {
                 var NavY = $('.navigation').offset().top;

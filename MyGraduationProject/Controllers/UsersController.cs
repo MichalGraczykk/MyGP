@@ -16,6 +16,10 @@ namespace MyGraduationProject.Controllers
         // GET: Users
         public ActionResult Index()
         {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+                ViewBag.Auth = (User)Session["principal"];
+
             var users = db.Users.Include(u => u.Role).Include(u => u.UsersAdress);
             return View(users.ToList());
         }
@@ -23,6 +27,10 @@ namespace MyGraduationProject.Controllers
         // GET: Users/Details/5
         public ActionResult Details(int? id)
         {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+                ViewBag.Auth = (User)Session["principal"];
+
             //rok,miesiac,dzien
             var startDate = new DateTime(2016,06,05);
             var endDate = new DateTime(2016, 07, 02);
@@ -61,6 +69,10 @@ namespace MyGraduationProject.Controllers
         // GET: Users/Create
         public ActionResult Create()
         {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+                ViewBag.Auth = (User)Session["principal"];
+
             ViewBag.ROLE_ID = new SelectList(db.Roles, "ROLE_ID", "NAME");
             ViewBag.ADRESS_ID = new SelectList(db.UsersAdresses, "ADRESS_ID", "STREET_NAME");
             return View();
@@ -73,6 +85,10 @@ namespace MyGraduationProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(User user)
         {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+                ViewBag.Auth = (User)Session["principal"];
+
             if (ModelState.IsValid)
             {
                 db.Users.InsertOnSubmit(user);
@@ -88,6 +104,10 @@ namespace MyGraduationProject.Controllers
         // GET: Users/Edit/5
         public ActionResult Edit(int? id)
         {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+                ViewBag.Auth = (User)Session["principal"];
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -108,6 +128,10 @@ namespace MyGraduationProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(User user)
         {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+                ViewBag.Auth = (User)Session["principal"];
+
             if (ModelState.IsValid)
             {
                 var userToEdit = db.Users.Where(u => u.USER_ID == user.USER_ID).FirstOrDefault();
@@ -131,6 +155,10 @@ namespace MyGraduationProject.Controllers
         // GET: Users/Delete/5
         public ActionResult Delete(int? id)
         {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+                ViewBag.Auth = (User)Session["principal"];
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -148,6 +176,10 @@ namespace MyGraduationProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+                ViewBag.Auth = (User)Session["principal"];
+
             var user = db.Users.Where(u => u.USER_ID == id).FirstOrDefault();
             var adress = user.UsersAdress;
             db.UsersAdresses.DeleteOnSubmit(adress);
