@@ -1,5 +1,4 @@
-﻿@using Microsoft.AspNet.Identity
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -22,24 +21,28 @@
         <div class="navigation">
             <ol>
                 <li>@Html.ActionLink("Strona Główna", "Index", "Home")</li>
-                <li>@Html.ActionLink("CreateUser", "Create", "Users")</li>
+                <li><a href="#">O nas</a></li>
                 <li><a href="#">Asortyment</a></li>
                 @if (ViewBag.Auth != null)
                 {
-                <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
+                    <li>@Html.ActionLink("Wyloguj", "Logout", "Home")</li>
                 }
                 else
                 {
-                    <li>@Html.ActionLink("LogIn", "Login", "Home")</li>
+                    <li>@Html.ActionLink("Zaloguj", "Login", "Home")</li>
                 }
-                <li><a href="#">@Html.ActionLink("Users", "Index", "Users")</a></li>
+                @if (ViewBag.Auth != null && ViewBag.Auth.ROLE_ID == 1)
+                {
+                    <li><a href="#">@Html.ActionLink("Opcje", "Properties", "Admins")</a></li>
+                }
+                else
+                {
+                    <li><a href="#">@Html.ActionLink("Kontakt", "Contact", "Home")</a></li>
+                }
+
             </ol>
         </div>
-        <div class="container">
-            Sprawdzam sesje, principal to:
-            @if (ViewBag.Auth != null)
-            { @ViewBag.Auth.LOGIN }
-            
+        <div class="container">            
             @RenderBody()
         </div>
         <div class="socialmedia">
@@ -57,7 +60,7 @@
             <div style="clear:both;"></div>
         </div>
         <div class="footer">
-            Michał Graczyk - Praca Dyplomowa &copy; 2016
+            Michał Graczyk - Projekt Dyplomowy &copy; 2016
         </div>
     </div>
     @RenderSection("scripts", required: false)

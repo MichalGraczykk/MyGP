@@ -5,9 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -70,9 +67,8 @@
             @Html.DisplayFor(modelItem => item.Role.NAME)
         </td>
         <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.USER_ID })<br/>
-                        @Html.ActionLink("Details", "Details", new { id = item.USER_ID })<br/>
-                        @Html.ActionLink("Delete", "Delete", new { id = item.USER_ID })
+                        @Html.ActionLink("Edytuj", "Edit", new { id = item.USER_ID })<br/>
+                        @Html.ActionLink("Usuń", "Delete", new { id = item.USER_ID })
         </td>
     </tr>
 }

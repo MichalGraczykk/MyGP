@@ -10,7 +10,7 @@ namespace MyGraduationProject.Models
             public string LOGIN { get; set; }
 
             [Required]
-            [DataType(DataType.Password)]//TODO sprawdz co to 
+            [DataType(DataType.Password)]
             [Display(Name = "PASSWORD")]
             public string PASSWORD { get; set; }
     }

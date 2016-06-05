@@ -1,0 +1,93 @@
+﻿@model DatabaseAccess.User
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h3>Czy na pewnu chcesz usunąć tego użytkownika?</h3>
+<hr />
+<div class="smallContainer">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LOGIN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LOGIN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PASSWORD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PASSWORD)
+        </dd>
+
+        <dt>
+            ROLA
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Role.NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SURNAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SURNAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AGE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AGE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UsersAdress.STREET_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UsersAdress.STREET_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UsersAdress.STREET_NUMBER)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UsersAdress.STREET_NUMBER)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UsersAdress.POSSESION_NUMBER)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UsersAdress.POSSESION_NUMBER)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Usuń" class="btn btn-default" /> <br/>
+            @Html.ActionLink("Wróć do listy użytkowników", "Index")
+        </div>
+    }
+</div>

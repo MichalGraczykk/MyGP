@@ -1,0 +1,58 @@
+﻿@model IEnumerable<DatabaseAccess.Item>
+
+@{
+    ViewBag.Title = "ListOfItems";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ITEM_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DESCRPTION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PHOTO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRICE_PER_DAY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State.STATE_NAME)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var i in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => i.ITEM_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => i.NAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => i.DESCRPTION)
+            </td>
+            <td>
+                <a href="@Html.DisplayFor(modelItem => i.PHOTO)" target="_blank">KLIK</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => i.PRICE_PER_DAY)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => i.State.STATE_NAME)
+            </td>
+            <td>
+                @Html.ActionLink("Edytuj", "EditItem", new { id = i.ITEM_ID })<br />
+            </td>
+        </tr>
+    }
+</table>
+
