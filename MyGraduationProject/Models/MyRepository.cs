@@ -16,10 +16,10 @@ namespace MyGraduationProject.Models
 
         private DataClassesDataContext db = new DataClassesDataContext();
 
-        public List<User> GetAllUsers()
+        public IEnumerable<User> GetAllUsers()
         {
             var users = db.Users;
-            return users.ToList();
+            return users;
         }
 
         public User GetUserById(int id)
@@ -29,9 +29,9 @@ namespace MyGraduationProject.Models
             return user;
         }
 
-        public User GetUserByLogin(string login)
+        public IEnumerable<User> GetUserByLogin(string login)
         {
-            var user = db.Users.Where(u => u.LOGIN == login).FirstOrDefault();
+            var user = db.Users.Where(u => u.LOGIN == login);
             return user;
         }
 
@@ -41,16 +41,16 @@ namespace MyGraduationProject.Models
             return user;
         }
 
-        public List<Item> GetAllItems()
+        public IEnumerable<Item> GetAllItems()
         {
             var items = db.Items;
-            return items.ToList();
+            return items;
         }
 
-        public List<Item> GetAllStatusAvailableItems()
+        public IEnumerable<Item> GetAllStatusAvailableItems()
         {
             var items = db.Items.Where(i => i.STATE_ID == (int)StatesEnum.AVAILABLE);
-            return items.ToList();
+            return items;
         }
 
         public Item GetItemById(int id)
@@ -59,10 +59,10 @@ namespace MyGraduationProject.Models
             return item;
         }
 
-        public List<Reservation> GetAllReservations()
+        public IEnumerable<Reservation> GetAllReservations()
         {
             var item = db.Reservations;
-            return item.ToList();
+            return item;
         }
 
         public Reservation GetReservationById(int id)
@@ -72,7 +72,7 @@ namespace MyGraduationProject.Models
             return reservation;
         }
 
-        public List<Item> GetListOfAvailableItems(DateTime startDate, DateTime endDate)
+        public IEnumerable<Item> GetListOfAvailableItems(DateTime startDate, DateTime endDate)
         {            
             //zapytanie zagniezdzone musi zwracac boola dla tego na koncu jest any(), any zwraca informacje czy wystepuje jakis element w liscie(jesli lista bedzie pusta to zwroci false w przeciwnym wypadku frue)
             // pobierze liste itemow dostepnych w chwili wywolania widoku
@@ -112,6 +112,12 @@ namespace MyGraduationProject.Models
         {
             var reservationStatuses = db.ReservationStatuses;
             return reservationStatuses.ToList();
+        }
+        
+        public IEnumerable<Item> GetAvailableItems()
+        {
+            var items = db.Items.Where(i => i.STATE_ID == (int)(StatesEnum.AVAILABLE));
+            return items;
         }
     }
 }

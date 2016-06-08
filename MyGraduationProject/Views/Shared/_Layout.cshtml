@@ -21,8 +21,8 @@
         <div class="navigation">
             <ol>
                 <li>@Html.ActionLink("Strona Główna", "Index", "Home")</li>
-                <li><a href="#">O nas</a></li>
-                <li><a href="#">Asortyment</a></li>
+                <li>@Html.ActionLink("O nas", "About", "Home")</li>
+                <li>@Html.ActionLink("Asortyment", "Assortment", "Home")</li>
                 @if (ViewBag.Auth != null)
                 {
                     <li>@Html.ActionLink("Wyloguj", "Logout", "Home")</li>
@@ -33,11 +33,11 @@
                 }
                 @if (ViewBag.Auth != null && ViewBag.Auth.ROLE_ID == 1)
                 {
-                    <li><a href="#">@Html.ActionLink("Opcje", "Properties", "Admins")</a></li>
+                    <li>@Html.ActionLink("Opcje", "Properties", "Admins")</li>
                 }
                 else
                 {
-                    <li><a href="#">@Html.ActionLink("Kontakt", "Contact", "Home")</a></li>
+                    <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
                 }
 
             </ol>

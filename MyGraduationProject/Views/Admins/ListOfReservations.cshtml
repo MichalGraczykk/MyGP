@@ -1,25 +1,34 @@
-﻿@model IEnumerable<DatabaseAccess.Reservation>
+﻿@model PagedList.IPagedList<DatabaseAccess.Reservation>
+@using PagedList.Mvc;
+
 @{
     ViewBag.Title = "ListOfReservations";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@using (Html.BeginForm())
+{
+    <span>BOOKING STATUS:</span>
+    @Html.TextBox("BOOKINGSTATUS")
+    <input type="submit" value="Szukaj" class="btn btn-default" />
+}
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.RESERVATION_ID)
+            @Html.DisplayNameFor(model => model.First().RESERVATION_ID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DATE_FROM)
+            @Html.ActionLink("DATE_FROM", "ListOfReservations", new { sorting = ViewBag.SortByDATE_FROM, BOOKINGSTATUS = ViewBag.FindBOOKINGSTATUS })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DATE_TO)
+            @Html.DisplayNameFor(model => model.First().DATE_TO)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ORDER_DATE)
+            @Html.ActionLink("ORDER_DATE", "ListOfReservations", new { sorting = ViewBag.SortByORDER_DATE, BOOKINGSTATUS = ViewBag.FindBOOKINGSTATUS })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.OVERALL_PRICE)
+            @Html.DisplayNameFor(model => model.First().OVERALL_PRICE)
         </th>
         <th>
             ITEM
@@ -32,8 +41,6 @@
         </th>
         <th></th>
     </tr>
-
-
 
     @foreach (var r in Model)
     {
@@ -68,3 +75,8 @@
         </tr>
 }
 </table>
+
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("ListOfReservations",
+                    new { sorting = ViewBag.SortedBy, BOOKINGSTATUS = ViewBag.FindBOOKINGSTATUS, page }))

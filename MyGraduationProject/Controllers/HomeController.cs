@@ -1,5 +1,9 @@
 ﻿using DatabaseAccess;
 using MyGraduationProject.Models;
+using MyGraduationProject.Models.Enums;
+using PagedList;
+using System;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace MyGraduationProject.Controllers
@@ -14,12 +18,76 @@ namespace MyGraduationProject.Controllers
         // GET: Home
         public ActionResult Index()
         {
-
             ViewBag.Auth = null;
             if (Session["principal"] != null)
                 ViewBag.Auth = (User)Session["principal"];
 
-                return View();
+            return View();
+        }
+
+        public ActionResult About()
+        {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+                ViewBag.Auth = (User)Session["principal"];
+
+            return View();
+        }
+
+        public ActionResult Assortment(string sorting, string filtrationNAME, int? page, DateTime? dateFrom, DateTime? dateTo)
+        {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+                ViewBag.Auth = (User)Session["principal"];
+
+            ViewBag.SortedBy = sorting;
+            ViewBag.SortByNAME = sorting == null ? "NAME_Malejaco" : "";
+            ViewBag.SortByPRICE_PER_DAY = sorting == "PRICE_PER_DAY_Malejaco" ? "PRICE_PER_DAY_Rosnaco" : "PRICE_PER_DAY_Malejaco";
+            ViewBag.dateFrom = null;
+            ViewBag.dateTo = null;
+            var items = repo.GetAvailableItems();
+
+            if (ModelState.IsValid)
+            {
+                if(dateFrom != null && dateTo != null)
+                {
+                    items = repo.GetListOfAvailableItems((DateTime)(dateFrom), (DateTime)(dateTo));
+                    ViewBag.dateFrom = dateFrom;
+                    ViewBag.dateTo = dateTo;
+                }                
+
+                if (filtrationNAME != null && filtrationNAME != "")
+                {
+                    //TODO sprawdz czemu nie dziala
+                    items = items.Where(i => i.NAME == filtrationNAME);
+                }
+
+                ViewBag.FindNAME = filtrationNAME;
+
+                switch (sorting)
+                {
+                    case "NAME_Malejaco":
+                        items = items.OrderByDescending(s => s.NAME);
+                        break;
+                    case "PRICE_PER_DAY_Malejaco":
+                        items = items.OrderByDescending(s => s.PRICE_PER_DAY);
+                        break;
+                    case "PRICE_PER_DAY_Rosnaco":
+                        items = items.OrderBy(s => s.PRICE_PER_DAY);
+                        break;
+                    default:
+                        items = items.OrderBy(s => s.NAME);
+                        break;
+                }
+
+                int pageSize = 2;
+                int pageNumber = (page ?? 1);
+                return View(items.ToPagedList(pageNumber, pageSize));
+            }
+            else
+            {
+                return View(items);
+            }
         }
 
         // GET: /Home/Login
@@ -64,6 +132,15 @@ namespace MyGraduationProject.Controllers
                 ViewBag.Auth = (User)Session["principal"];
 
             return View();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Net;
 using System.Web.Mvc;
 using MyGraduationProject.Models;
 using MyGraduationProject.Models.Enums;
+using PagedList;
 
 namespace MyGraduationProject.Controllers
 {
@@ -19,7 +20,7 @@ namespace MyGraduationProject.Controllers
 
         //widok o nazwie Index z folderu Admins wyświetli liste wszystkich użytkowników
         // GET: Admins
-        public ActionResult Index()
+        public ActionResult Index(string sorting , string filtrationLogin, int? page)
         {
             ViewBag.Auth = null;
             if (Session["principal"] != null)
@@ -30,7 +31,42 @@ namespace MyGraduationProject.Controllers
 
                 if (current.ROLE_ID == (int)(RolesEnum.admin))
                 {
-                    return View(repo.GetAllUsers());
+                    ViewBag.SortedBy = sorting;
+                    ViewBag.SortByNAME = sorting == null ? "NAME_Malejaco" : "";
+                    ViewBag.SortBySURNAME = sorting == "SURNAME_Malejaco" ? "SURNAME_Rosnaco" : "SURNAME_Malejaco";
+
+                    var users = repo.GetAllUsers();
+
+                    if (ModelState.IsValid)
+                    {
+                        if (filtrationLogin != null && filtrationLogin != "")
+                        {
+                            users = repo.GetUserByLogin(filtrationLogin);
+                        }
+
+                        ViewBag.FindLogin = filtrationLogin;
+                    
+
+                        switch (sorting)
+                        {
+                            case "NAME_Malejaco":
+                                users = users.OrderByDescending(s => s.NAME);
+                                break;
+                            case "SURNAME_Malejaco":
+                                users = users.OrderByDescending(s => s.SURNAME);
+                                break;
+                            case "SURNAME_Rosnaco":
+                                users = users.OrderBy(s => s.SURNAME);
+                                break;
+                            default:
+                                users = users.OrderBy(s => s.NAME);
+                                break;
+                        }
+
+                        int pageSize = 1;
+                        int pageNumber = (page ?? 1);
+                        return View(users.ToPagedList(pageNumber, pageSize));
+                    }
                 }
                 else
                 {
@@ -145,7 +181,6 @@ namespace MyGraduationProject.Controllers
             ViewBag.Auth = null;
             if (Session["principal"] != null)
             {
-                ViewBag.Auth = (User)(Session["principal"]);
                 var current = new User();
                 current = (User)(Session["principal"]);
 
@@ -153,18 +188,25 @@ namespace MyGraduationProject.Controllers
                 {
                     if (ModelState.IsValid)
                     {
+                        
                         var userToEdit = db.Users.Where(u => u.USER_ID == user.USER_ID).FirstOrDefault();
-                        userToEdit.LOGIN = user.LOGIN;
-                        userToEdit.PASSWORD = user.PASSWORD;
-                        userToEdit.NAME = user.NAME;
-                        userToEdit.SURNAME = user.SURNAME;
-                        userToEdit.AGE = user.AGE;
-                        userToEdit.UsersAdress.STREET_NAME = user.UsersAdress.STREET_NAME;
-                        userToEdit.UsersAdress.STREET_NUMBER = user.UsersAdress.STREET_NUMBER;
-                        userToEdit.UsersAdress.POSSESION_NUMBER = user.UsersAdress.POSSESION_NUMBER;
-                        userToEdit.ROLE_ID = user.ROLE_ID;
 
-                        db.SubmitChanges();
+                            userToEdit.LOGIN = user.LOGIN;
+                            userToEdit.PASSWORD = user.PASSWORD;
+                            userToEdit.NAME = user.NAME;
+                            userToEdit.SURNAME = user.SURNAME;
+                            userToEdit.AGE = user.AGE;
+                            userToEdit.UsersAdress.STREET_NAME = user.UsersAdress.STREET_NAME;
+                            userToEdit.UsersAdress.STREET_NUMBER = user.UsersAdress.STREET_NUMBER;
+                            userToEdit.UsersAdress.POSSESION_NUMBER = user.UsersAdress.POSSESION_NUMBER;
+                            userToEdit.ROLE_ID = user.ROLE_ID;
+                            db.SubmitChanges();
+
+                        if (current.USER_ID == userToEdit.USER_ID)
+                        {
+                            Session["principal"] = userToEdit;
+                        }
+                        ViewBag.Auth = (User)(Session["principal"]);
                         return RedirectToAction("Index");
                     }
                     ViewBag.ROLE_ID = new SelectList(repo.GetAllRoles(), "ROLE_ID", "NAME", user.ROLE_ID);
@@ -262,7 +304,7 @@ namespace MyGraduationProject.Controllers
         }
 
         //GET: Admins/ListOfItems
-        public ActionResult ListOfItems()
+        public ActionResult ListOfItems(string sorting, string filtrationNAME, int? page)
         {
             ViewBag.Auth = null;
             if (Session["principal"] != null)
@@ -273,7 +315,41 @@ namespace MyGraduationProject.Controllers
 
                 if (current.ROLE_ID == (int)(RolesEnum.admin))
                 {
-                    return View(repo.GetAllItems());
+                    ViewBag.SortedBy = sorting;
+                    ViewBag.SortByNAME = sorting == null ? "NAME_Malejaco" : "";
+                    ViewBag.SortByPRICE_PER_DAY = sorting == "PRICE_PER_DAY_Malejaco" ? "PRICE_PER_DAY_Rosnaco" : "PRICE_PER_DAY_Malejaco";
+                    
+                    if (ModelState.IsValid)
+                    { 
+                        var items = repo.GetAllItems();
+
+                        if (filtrationNAME != null && filtrationNAME != "")
+                        {
+                            items = db.Items.Where(i => i.NAME == filtrationNAME);
+                        }
+
+                        ViewBag.FindNAME = filtrationNAME;
+
+                        switch (sorting)
+                        {
+                            case "NAME_Malejaco":
+                                items = items.OrderByDescending(s => s.NAME);
+                                break;
+                            case "PRICE_PER_DAY_Malejaco":
+                                items = items.OrderByDescending(s => s.PRICE_PER_DAY);
+                                break;
+                            case "PRICE_PER_DAY_Rosnaco":
+                                items = items.OrderBy(s => s.PRICE_PER_DAY);
+                                break;
+                            default:
+                                items = items.OrderBy(s => s.NAME);
+                                break;
+                        }
+
+                        int pageSize = 1;
+                        int pageNumber = (page ?? 1);
+                        return View(items.ToPagedList(pageNumber, pageSize));
+                    }
                 }
                 else
                 {
@@ -321,7 +397,7 @@ namespace MyGraduationProject.Controllers
                 {
                     if (ModelState.IsValid)
                     {
-                        //sprawdzamy czy podany login nie jest zajęty
+                        //sprawdzamy czy podana nazwa nie jest zajęta
                         var validation = repo.GetUserByLogin(item.NAME);
                         if (validation == null)
                         {
@@ -331,7 +407,7 @@ namespace MyGraduationProject.Controllers
                         }
                         else
                         {
-                            ModelState.AddModelError("", "Ten login jest juz zajęty");
+                            ModelState.AddModelError("", "Ten przedmiot juz istnieje");
                         }
                     }
 
@@ -417,7 +493,7 @@ namespace MyGraduationProject.Controllers
         }
 
         //GET: Admins/ListOfReservations
-        public ActionResult ListOfReservations()
+        public ActionResult ListOfReservations(string sorting, string BOOKINGSTATUS, int? page)
         {
             ViewBag.Auth = null;
             if (Session["principal"] != null)
@@ -428,8 +504,41 @@ namespace MyGraduationProject.Controllers
 
                 if (current.ROLE_ID == (int)(RolesEnum.admin))
                 {
-                    ViewBag.STATE_ID = new SelectList(repo.GetAllReservationStatuses(), "STATUS_ID", "NAME");
-                    return View(repo.GetAllReservations());
+                    ViewBag.SortedBy = sorting;
+                    ViewBag.SortByDATE_FROM = sorting == null ? "DATE_FROM" : "";
+                    ViewBag.SortByORDER_DATE = sorting == "ORDER_DATE_Malejaco" ? "ORDER_DATE_Rosnaco" : "ORDER_DATE_Malejaco";
+
+                    if (ModelState.IsValid)
+                    {
+                        var reservations = repo.GetAllReservations();
+
+                        if (BOOKINGSTATUS != null && BOOKINGSTATUS != "")
+                        {
+                            reservations = db.Reservations.Where(r => r.ReservationStatuse.NAME == BOOKINGSTATUS);
+                        }
+
+                        ViewBag.FindBOOKINGSTATUS = BOOKINGSTATUS;
+
+                        switch (sorting)
+                        {
+                            case "DATE_FROM_Malejaco":
+                                reservations = reservations.OrderByDescending(s => s.DATE_FROM);
+                                break;
+                            case "ORDER_DATE_Malejaco":
+                                reservations = reservations.OrderByDescending(s => s.ORDER_DATE);
+                                break;
+                            case "ORDER_DATE_Rosnaco":
+                                reservations = reservations.OrderBy(s => s.ORDER_DATE);
+                                break;
+                            default:
+                                reservations = reservations.OrderBy(s => s.DATE_FROM);
+                                break;
+                        }
+                        ViewBag.STATE_ID = new SelectList(repo.GetAllReservationStatuses(), "STATUS_ID", "NAME");
+                        int pageSize = 1;
+                        int pageNumber = (page ?? 1);
+                        return View(reservations.ToPagedList(pageNumber, pageSize));
+                    }
                 }
                 else
                 {
@@ -442,7 +551,6 @@ namespace MyGraduationProject.Controllers
         // GET: Admins/Details/5
         public ActionResult DetailsOfReservation(int? id)
         {
-            //TODO przerobic dla itemow i do wyswietlania uzytkownika transakcji
             ViewBag.Auth = null;
             if (Session["principal"] != null)
             {
@@ -481,7 +589,6 @@ namespace MyGraduationProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DetailsOfReservation(Reservation reservation)
         {
-            //TODO przerobic dla itemow i do wyswietlania uzytkownika transakcji
             ViewBag.Auth = null;
             if (Session["principal"] != null)
             {

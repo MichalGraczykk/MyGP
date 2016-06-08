@@ -1,0 +1,96 @@
+﻿@model PagedList.IPagedList<DatabaseAccess.Item>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Assortment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table>
+    @using (Html.BeginForm())
+    {
+        <tr>
+            <td>
+                <span>NAME:</span>
+                @Html.TextBox("filtrationNAME")
+            </td>
+        </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Szukaj" class="btn btn-default" />
+                </td>
+            </tr>
+    }
+</table>
+
+<br />
+
+    <table>
+        @using (Html.BeginForm())
+        {
+            <tr>
+                <td colspan="2">
+                    Sprawdz dostępność produktów w czasie:
+                    <br/>
+                    <span style="color:#363636">(daty w formacie DD/MM/YYYY)</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Data rozpoczęcia zamówienia:</span><br />
+                    @Html.TextBox("dateFrom")
+                </td>
+                <td>
+                    <span>Data zakończenia zamówienia:</span><br />
+                    @Html.TextBox("dateTo")
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="Sprawdz" class="btn btn-default" />
+                </td>
+            </tr>
+        }
+    </table>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("NAME", "Assortment", new { sorting = ViewBag.SortByNAME, filtrationNAME = ViewBag.FindNAME, dateTo = ViewBag.DateTo, dateFrom = ViewBag.DateFrom })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().DESCRPTION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().PHOTO)
+        </th>
+        <th>
+            @Html.ActionLink("PRICE_PER_DAY", "Assortment", new { sorting = ViewBag.SortByPRICE_PER_DAY, filtrationNAME = ViewBag.FindNAME, dateTo = ViewBag.DateTo, dateFrom = ViewBag.DateFrom })
+        </th>
+    </tr>
+
+    @foreach (var i in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => i.NAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => i.DESCRPTION)
+            </td>
+            <td>
+                <a href="@Html.DisplayFor(modelItem => i.PHOTO)" target="_blank">KLIK</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => i.PRICE_PER_DAY)
+            </td>
+        </tr>
+    }
+</table>
+<br />
+
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Assortment",
+                    new { sorting = ViewBag.SortedBy, filtrationNAME = ViewBag.FindNAME, page, dateTo = ViewBag.DateTo, dateFrom = ViewBag.DateFrom }))

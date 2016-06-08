@@ -1,35 +1,44 @@
-﻿@model IEnumerable<DatabaseAccess.User>
+﻿@model PagedList.IPagedList<DatabaseAccess.User>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@using (Html.BeginForm())
+{
+    <span>LOGIN:</span>
+    @Html.TextBox("filtrationLOGIN")
+    <input type="submit" value="Szukaj" class="btn btn-default" />
+}
+
+<br/>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.LOGIN)
+            @Html.DisplayNameFor(model => model.First().LOGIN)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PASSWORD)
+            @Html.DisplayNameFor(model => model.First().PASSWORD)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NAME)
+            @Html.ActionLink("NAME", "Index", new { sorting = ViewBag.SortByNAME, filtrationLOGIN = ViewBag.FindLOGIN })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SURNAME)
+            @Html.ActionLink("SURNAME", "Index", new { sorting = ViewBag.SortBySURNAME, filtrationLOGIN = ViewBag.FindLOGIN })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AGE)
+            @Html.DisplayNameFor(model => model.First().AGE)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UsersAdress.STREET_NAME)
+            @Html.DisplayNameFor(model => model.First().UsersAdress.STREET_NAME)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UsersAdress.STREET_NUMBER)
+            @Html.DisplayNameFor(model => model.First().UsersAdress.STREET_NUMBER)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UsersAdress.POSSESION_NUMBER)
+            @Html.DisplayNameFor(model => model.First().UsersAdress.POSSESION_NUMBER)
         </th>
         <th>
             ROLA
@@ -73,3 +82,11 @@
     </tr>
 }
 </table>
+<br />
+
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+                    new { page, sorting = ViewBag.SortedBy, filtrationLogin = ViewBag.FindLogin }))
+
+
