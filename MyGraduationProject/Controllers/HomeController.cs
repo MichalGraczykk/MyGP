@@ -59,7 +59,7 @@ namespace MyGraduationProject.Controllers
                 if (filtrationNAME != null && filtrationNAME != "")
                 {
                     //TODO sprawdz czemu nie dziala
-                    items = items.Where(i => i.NAME == filtrationNAME);
+                    items = items.Where(i => i.NAME.Contains(filtrationNAME));
                 }
 
                 ViewBag.FindNAME = filtrationNAME;
