@@ -1,6 +1,5 @@
 ﻿using DatabaseAccess;
 using MyGraduationProject.Models;
-using MyGraduationProject.Models.Enums;
 using PagedList;
 using System;
 using System.Linq;

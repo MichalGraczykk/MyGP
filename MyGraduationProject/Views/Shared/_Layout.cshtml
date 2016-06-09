@@ -22,7 +22,16 @@
             <ol>
                 <li>@Html.ActionLink("Strona Główna", "Index", "Home")</li>
                 <li>@Html.ActionLink("O nas", "About", "Home")</li>
-                <li>@Html.ActionLink("Asortyment", "Assortment", "Home")</li>
+
+                @if (ViewBag.Auth != null && ViewBag.Auth.ROLE_ID == 2)
+                {
+                    <li>@Html.ActionLink("Asortyment", "ListOfArticles", "Client")</li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("Asortyment", "Assortment", "Home")</li>
+                }
+
                 @if (ViewBag.Auth != null)
                 {
                     <li>@Html.ActionLink("Wyloguj", "Logout", "Home")</li>
@@ -31,6 +40,7 @@
                 {
                     <li>@Html.ActionLink("Zaloguj", "Login", "Home")</li>
                 }
+
                 @if (ViewBag.Auth != null && ViewBag.Auth.ROLE_ID == 1)
                 {
                     <li>@Html.ActionLink("Opcje", "Properties", "Admins")</li>

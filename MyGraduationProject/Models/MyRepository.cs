@@ -2,11 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using MyGraduationProject.Controllers;
-using System.Collections;
-using System.Data.Entity;
 using MyGraduationProject.Models.Enums;
 
 namespace MyGraduationProject.Models

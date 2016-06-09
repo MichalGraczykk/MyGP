@@ -1,6 +1,4 @@
 ﻿using DatabaseAccess;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -41,7 +39,7 @@ namespace MyGraduationProject.Controllers
                     {
                         if (filtrationLogin != null && filtrationLogin != "")
                         {
-                            users = repo.GetUserByLogin(filtrationLogin);
+                            users = users.Where(u => u.LOGIN.Contains(filtrationLogin));
                         }
 
                         ViewBag.FindLogin = filtrationLogin;
@@ -325,7 +323,7 @@ namespace MyGraduationProject.Controllers
 
                         if (filtrationNAME != null && filtrationNAME != "")
                         {
-                            items = db.Items.Where(i => i.NAME == filtrationNAME);
+                            items = items.Where(i => i.NAME.Contains(filtrationNAME));
                         }
 
                         ViewBag.FindNAME = filtrationNAME;
@@ -514,7 +512,7 @@ namespace MyGraduationProject.Controllers
 
                         if (BOOKINGSTATUS != null && BOOKINGSTATUS != "")
                         {
-                            reservations = db.Reservations.Where(r => r.ReservationStatuse.NAME == BOOKINGSTATUS);
+                            reservations = reservations.Where(r => r.ReservationStatuse.NAME.Contains(BOOKINGSTATUS));
                         }
 
                         ViewBag.FindBOOKINGSTATUS = BOOKINGSTATUS;
