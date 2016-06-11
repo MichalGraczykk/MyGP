@@ -1,0 +1,65 @@
+﻿@model PagedList.IPagedList<DatabaseAccess.Reservation>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "ListOfTransactions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().RESERVATION_ID)
+        </th>
+        <th>
+            @Html.ActionLink("DATE_FROM", "ListOfTransactions", new { sorting = ViewBag.SortByDATE_FROM})
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().DATE_TO)
+        </th>
+        <th>
+            @Html.ActionLink("ORDER_DATE", "ListOfTransactions", new { sorting = ViewBag.SortByORDER_DATE})
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().OVERALL_PRICE)
+        </th>
+        <th>
+            ITEM
+        </th>
+        <th>
+            BOOKING STATUS
+        </th>
+    </tr>
+
+    @foreach (var r in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => r.RESERVATION_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => r.DATE_FROM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => r.DATE_TO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => r.ORDER_DATE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => r.OVERALL_PRICE)
+            </td>
+            <td>
+                @Html.ActionLink(r.Item.NAME, "OneItem", new { id = r.ITEM_ID })<br />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => r.ReservationStatuse.NAME)
+            </td>
+        </tr>
+    }
+</table>
+
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("ListOfTransactions",
+                    new { sorting = ViewBag.SortedBy, page }))

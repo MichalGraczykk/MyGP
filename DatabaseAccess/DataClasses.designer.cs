@@ -1293,7 +1293,7 @@ namespace DatabaseAccess
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RESERVATION_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RESERVATION_ID", DbType="Int NOT NULL", IsPrimaryKey=true, IsDbGenerated = true)]
 		public int RESERVATION_ID
 		{
 			get

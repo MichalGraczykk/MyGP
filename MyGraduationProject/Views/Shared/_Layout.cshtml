@@ -21,14 +21,14 @@
         <div class="navigation">
             <ol>
                 <li>@Html.ActionLink("Strona Główna", "Index", "Home")</li>
-                <li>@Html.ActionLink("O nas", "About", "Home")</li>
-
                 @if (ViewBag.Auth != null && ViewBag.Auth.ROLE_ID == 2)
                 {
+                    <li>@Html.ActionLink("Profil", "Index", "Client")</li>
                     <li>@Html.ActionLink("Asortyment", "ListOfArticles", "Client")</li>
                 }
                 else
                 {
+                    <li>@Html.ActionLink("O nas", "About", "Home")</li>
                     <li>@Html.ActionLink("Asortyment", "Assortment", "Home")</li>
                 }
 

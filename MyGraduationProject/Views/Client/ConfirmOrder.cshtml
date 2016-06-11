@@ -1,0 +1,106 @@
+﻿@model DatabaseAccess.Reservation
+
+@{
+    ViewBag.Title = "ConfirmOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detale</h2>
+<div class="smallContainer">
+    <hr />
+    <h4>dane rezerwacji</h4>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RESERVATION_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RESERVATION_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATE_FROM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATE_FROM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATE_TO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATE_TO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ORDER_DATE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ORDER_DATE)
+        </dd>
+    </dl>
+    <hr />
+    <h4>dane produktu</h4>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Item.NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item.NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item.DESCRPTION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item.DESCRPTION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item.PHOTO)
+        </dt>
+
+        <dd>
+            <a href="@Html.DisplayFor(model => model.Item.PHOTO)" target="_blank">KLIK</a>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Item.PRICE_PER_DAY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item.PRICE_PER_DAY)
+        </dd>
+    </dl>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ITEM_ID)
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ORDER_DATE)
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.DATE_FROM)
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.DATE_TO)
+
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Zamawiam" class="btn btn-default" /> <br />
+        @Html.ActionLink("Wróć do listy użytkowników", "Index")
+    </div>
+}

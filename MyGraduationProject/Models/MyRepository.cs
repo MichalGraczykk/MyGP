@@ -67,6 +67,13 @@ namespace MyGraduationProject.Models
             return reservation;
         }
 
+        public IEnumerable<Reservation> GetReservationsForUserId(int id)
+        {
+            var reservation = db.Reservations.Where(r => r.USER_ID == id);
+
+            return reservation;
+        }
+
         public IEnumerable<Item> GetListOfAvailableItems(DateTime startDate, DateTime endDate)
         {            
             //zapytanie zagniezdzone musi zwracac boola dla tego na koncu jest any(), any zwraca informacje czy wystepuje jakis element w liscie(jesli lista bedzie pusta to zwroci false w przeciwnym wypadku frue)

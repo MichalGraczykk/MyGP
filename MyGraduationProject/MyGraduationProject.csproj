@@ -243,6 +243,10 @@
     <Content Include="Views\Home\Assortment.cshtml" />
     <Content Include="Views\Client\Index.cshtml" />
     <Content Include="Views\Client\ListOfArticles.cshtml" />
+    <Content Include="Views\Client\EditProfile.cshtml" />
+    <Content Include="Views\Client\ListOfTransactions.cshtml" />
+    <Content Include="Views\Client\OneItem.cshtml" />
+    <Content Include="Views\Client\ConfirmOrder.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

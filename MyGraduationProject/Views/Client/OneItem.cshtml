@@ -1,0 +1,45 @@
+﻿@model DatabaseAccess.Item
+
+@{
+    ViewBag.Title = "OneItem";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DESCRPTION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PHOTO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRICE_PER_DAY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State.STATE_NAME)
+        </th>
+    </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.NAME)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.DESCRPTION)
+            </td>
+            <td>
+                <a href="@Html.DisplayFor(model => model.PHOTO)" target="_blank">KLIK</a>
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PRICE_PER_DAY)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.State.STATE_NAME)
+            </td>
+        </tr>
+</table>
+@Html.ActionLink("Wróć do listy tranzakcji", "ListOfTransactions")
+

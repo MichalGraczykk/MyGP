@@ -15,10 +15,63 @@ namespace MyGraduationProject.Controllers
         private MyRepository repo = new MyRepository();
 
         // GET: Client
+        //widok ten dostepny jest tylko dla klientów i wyświetla on dane ich konta oraz hiperłącza do edycji hasła i listy zamówień
         public ActionResult Index()
         {
-            //TODO zrobic edycje profilu
-            return View();
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+            {
+                ViewBag.Auth = (User)(Session["principal"]);
+                var current = new User();
+                current = (User)(Session["principal"]);
+
+                if (current.ROLE_ID == (int)(RolesEnum.client))
+                {
+                    ViewBag.Msg = null;
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult Index(string newPassword, string newPasswordConfirm)
+        {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+            {
+                var current = new User();
+                current = (User)(Session["principal"]);
+
+                if (current.ROLE_ID == (int)(RolesEnum.client))
+                {
+                    if (ModelState.IsValid)
+                    {
+                        if (newPassword != null && newPasswordConfirm != null && newPassword == newPasswordConfirm)
+                        {
+                            var user = new User();
+                            user = db.Users.Where(u => u.USER_ID == current.USER_ID).FirstOrDefault();
+                            user.PASSWORD = newPassword;
+                            db.SubmitChanges();
+                            Session["principal"] = null;
+                            return RedirectToAction("Index", "Home");
+                        }
+                    }
+                    ViewBag.Msg = "wpisz to samo hasło w obu polach";
+                    ViewBag.Auth = (User)(Session["principal"]);
+                    return View();
+                }
+                else
+                {
+                    ViewBag.Auth = (User)(Session["principal"]);
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult ListOfArticles(string sorting, string filtrationNAME, int? page, DateTime? dateFrom, DateTime? dateTo)
@@ -116,7 +169,8 @@ namespace MyGraduationProject.Controllers
                         newReservation.DATE_TO = dateT;
                         newReservation.ORDER_DATE = currentDate.Date;
                         newReservation.ITEM_ID = id;
-                        newReservation.OVERALL_PRICE = (item.PRICE_PER_DAY)*((dateF - dateT).Days);
+                        newReservation.Item = repo.GetItemById((int)id);
+                        newReservation.OVERALL_PRICE = (item.PRICE_PER_DAY)*((dateT - dateF).Days);
 
                         return View(newReservation);
                     }
@@ -131,7 +185,7 @@ namespace MyGraduationProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult ListOfArticles(Reservation reservation)
+        public ActionResult ConfirmOrder(Reservation reservation)
         {
             if (Session["principal"] != null)
             {
@@ -143,8 +197,6 @@ namespace MyGraduationProject.Controllers
                     DateTime currentDate = DateTime.Now;
                     if (reservation.ITEM_ID != null && reservation.DATE_FROM != null && reservation.DATE_TO != null && reservation.DATE_FROM < reservation.DATE_TO && reservation.DATE_FROM > currentDate)
                     {
-                        var item = repo.GetItemById((int)reservation.ITEM_ID);
-
                         Reservation newReservation = new Reservation();
 
                         DateTime dateF = (DateTime)reservation.DATE_FROM;
@@ -160,14 +212,15 @@ namespace MyGraduationProject.Controllers
                             newReservation.DATE_TO = dateT;
                             newReservation.ORDER_DATE = currentDate.Date;
                             newReservation.ITEM_ID = reservation.ITEM_ID;
+                            var item = repo.GetItemById((int)reservation.ITEM_ID);
                             newReservation.USER_ID = current.USER_ID;
-                            newReservation.OVERALL_PRICE = (item.PRICE_PER_DAY) * ((dateF - dateT).Days);
+                            newReservation.OVERALL_PRICE = (item.PRICE_PER_DAY) * ((dateT - dateF).Days);
+                            newReservation.STATUS_ID = 1;
 
                             db.Reservations.InsertOnSubmit(newReservation);
                             db.SubmitChanges();
 
-                            //TODO zwracamy odwolanie do kontrolera z lista zamowien uzytkownika
-                            return RedirectToAction("Index", "Home");
+                            return RedirectToAction("ListOfTransactions","Client");
                         }
                         //item przestał byc dostępny więc zwracamy widok z listą produktów
                         return RedirectToAction("ListOfArticles", "Client");
@@ -185,5 +238,105 @@ namespace MyGraduationProject.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+
+        public ActionResult ListOfTransactions(string sorting, int? page)
+        {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+            {
+                ViewBag.Auth = (User)(Session["principal"]);
+                var current = new User();
+                current = (User)(Session["principal"]);
+
+                if (current.ROLE_ID == (int)(RolesEnum.client))
+                {
+                    var reservations = repo.GetReservationsForUserId(current.USER_ID);
+
+                    ViewBag.SortedBy = sorting;
+                    ViewBag.SortByDATE_FROM = sorting == null ? "DATE_FROM" : "";
+                    ViewBag.SortByORDER_DATE = sorting == "ORDER_DATE_Malejaco" ? "ORDER_DATE_Rosnaco" : "ORDER_DATE_Malejaco";
+
+                    switch (sorting)
+                    {
+                        case "DATE_FROM_Malejaco":
+                            reservations = reservations.OrderByDescending(s => s.DATE_FROM);
+                            break;
+                        case "ORDER_DATE_Malejaco":
+                            reservations = reservations.OrderByDescending(s => s.ORDER_DATE);
+                            break;
+                        case "ORDER_DATE_Rosnaco":
+                            reservations = reservations.OrderBy(s => s.ORDER_DATE);
+                            break;
+                        default:
+                            reservations = reservations.OrderBy(s => s.DATE_FROM);
+                            break;
+                    }
+
+                    ViewBag.STATE_ID = new SelectList(repo.GetAllReservationStatuses(), "STATUS_ID", "NAME");
+
+                    int pageSize = 1;
+                    int pageNumber = (page ?? 1);
+                    return View(reservations.ToPagedList(pageNumber, pageSize));
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult DetailsOfTransaction()
+        {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+            {
+                ViewBag.Auth = (User)(Session["principal"]);
+                var current = new User();
+                current = (User)(Session["principal"]);
+
+                if (current.ROLE_ID == (int)(RolesEnum.client))
+                {
+
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult OneItem(int? id)
+        {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+            {
+                ViewBag.Auth = (User)(Session["principal"]);
+                var current = new User();
+                current = (User)(Session["principal"]);
+
+                if (current.ROLE_ID == (int)(RolesEnum.client))
+                {
+                    if (ModelState.IsValid)
+                    {
+                        if(id != null)
+                        {
+                            var item = db.Items.Where(i => i.ITEM_ID == id).FirstOrDefault();
+                            if(item != null)
+                                return View(item);
+                        }
+                        return RedirectToAction("ListOfTransactions", "Client");
+                    }
+                    return RedirectToAction("ListOfTransactions", "Client");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

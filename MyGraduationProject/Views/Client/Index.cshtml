@@ -3,5 +3,75 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h3>Twoje Dane to:</h3>
+<div class="smallContainer2">
+    <dl class="dl-horizontal">
+        <dt>
+            LOGIN:
+        </dt>
 
+        <dd>
+            @ViewBag.Auth.LOGIN
+        </dd>
+
+        <dt>
+            IMIĘ:
+        </dt>
+
+        <dd>
+            @ViewBag.Auth.NAME
+        </dd>
+
+        <dt>
+            NAZWISKO:
+        </dt>
+
+        <dd>
+            @ViewBag.Auth.SURNAME
+        </dd>
+
+        <dt>
+            ULICA:
+        </dt>
+
+        <dd>
+            @ViewBag.Auth.UsersAdress.STREET_NAME
+        </dd>
+
+        <dt>
+            NUMER DOMU:
+        </dt>
+
+        <dd>
+            @ViewBag.Auth.UsersAdress.STREET_NUMBER
+        </dd>
+
+        <dt>
+            NUMER LOKALU:
+        </dt>
+
+        <dd>
+            @ViewBag.Auth.UsersAdress.POSSESION_NUMBER
+        </dd>
+    </dl>
+</div>
+
+<div class="smallContainerCenter">
+    @Html.ActionLink("Moje tranzakcje", "ListOfTransactions")
+    <hr/>
+    <h3>Zmień hasło</h3>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <span>wpisz nowe hasło:</span><br />
+        @Html.Password("newPassword")<br/>
+        <span>Potwierdź nowe hasło:</span><br />
+        @Html.Password("newPasswordConfirm")<br/>
+        if (@ViewBag.Msg != null)
+        {
+            <span style="color:maroon">@ViewBag.Msg</span>
+            <br/>
+        }
+        <input type="submit" value="Zmień" class="btn btn-default" />
+    }
+</div>
