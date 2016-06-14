@@ -1,6 +1,6 @@
 body {
-	background-color: #505050;
-	color: white;
+	background-color: #bbbbbb;
+	color: #141414;
 	font-family: 'Lato', sans-serif;
 	font-size: 20px;
 	margin: 0px;
@@ -19,7 +19,7 @@ body {
 
 .header {
 	width: 1000px;
-	color: #3388ee;
+	color: white;
 	padding: 20px 0;
 	margin-left: auto;
 	margin-right: auto;
@@ -103,48 +103,71 @@ body {
 	width: 1000px;
 	text-align: center;
 	height: 45px;
-	background-color: #55bbff;
+	background-color: #404040;
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
-	border: 1px solid #88eeff;
+	border: 1px solid #696969;
 	border-radius: 20px 20px 20px 20px;
 }
 
 .move {
-	width: 175px;
-	height: 217px;
+    background-color:#c7c5c5;
+    font-size: 13px;
+    color:black;
 	position: fixed;
 	left: 0;
 	z-index: 100;
-	border-radius: 0px 20px 20px 0px;
+    border-radius: 0px 20px 20px 0px;
+    padding:5px;
+	box-shadow: 5px 5px 5px #6f6f6f;
 }
 
-ol {
-	margin: 0;
-	padding: 0;
+.move input[type="text"] {
+    width: 170px;
+    height: 35px;
+}
+
+
+.navigation ol {
+	margin: 0px;
+	padding: 0px;
 	list-style-type: none;
 	font-size: 22px;
 	height: 35px;
 	line-height: 200%;
 	display: inline-block;
+    color:white;
 }
 
-ol a {
+.navigation ol a {
 	color: white;
 	text-decoration: none;
 	display: block;
 }
 
 /* ol > li =dziedziczenie */
-ol>li {
+.navigation ol>li {
 	float: left;
 	width: 170px;
 	height: 43px;
 }
 
-.move>ol>li {
+.move ol{
+    margin: 0;
+	padding: 0;
+    list-style-type: none;
+}
+
+.move ol>li {
 	float: none;
+    height: auto;
+    max-height:80px;
+}
+
+.move ol>li a{
+    color: #282828; 
+    text-shadow: 1px 1px 2px #6d5f5f;
 }
 
 .move ol>li:first-child {
@@ -155,13 +178,13 @@ ol>li {
 	border-radius: 0px 0px 20px 0px;
 }
 
-ol>li:hover {
-	background-color: #4499ff;
+.navigation ol>li:hover {
+	background-color: #5a5a5a;
 }
 
-ol>li:hover>a {
+.navigation ol>li:hover>a {
     text-decoration:none;
-	color: #0044aa;
+	color: #1f1f1f;
 	transition: all 0.4s;
 	transform: scale(1.1);
 }
@@ -269,4 +292,39 @@ table td {
     transition: all 0.4s;
     transform: scale(1.1);
 	color: #55bbff; 
+}
+
+ol > li > ul
+{
+    
+	list-style-type:none;
+	padding:0;
+	margin:0;
+	height:40px;
+	display:none;
+}
+
+ol > li > ul > li
+{
+	background-color:#4b4b4b;
+	position: relative;
+	z-index:100;
+	border-top: 1px solid #878787;
+}
+
+ol > li:hover > ul
+{
+	display: block;
+}
+
+ol > li > ul > li:hover
+{
+	background-color:#5a5a5a;
+}
+
+ol > li > ul > li:hover > a
+{
+    transition: all 0.4s;
+	transform: scale(1.06);
+	color: #1f1f1f;
 }

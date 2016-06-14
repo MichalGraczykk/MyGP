@@ -61,7 +61,7 @@ namespace MyGraduationProject.Controllers
                                 break;
                         }
 
-                        int pageSize = 1;
+                        int pageSize = 5;
                         int pageNumber = (page ?? 1);
                         return View(users.ToPagedList(pageNumber, pageSize));
                     }
@@ -279,28 +279,6 @@ namespace MyGraduationProject.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // GET: Admins/Properties
-        public ActionResult Properties()
-        {
-            ViewBag.Auth = null;
-            if (Session["principal"] != null)
-            {
-                ViewBag.Auth = (User)(Session["principal"]);
-                var current = new User();
-                current = (User)(Session["principal"]);
-
-                if (current.ROLE_ID == (int)(RolesEnum.admin))
-                {
-                    return View();
-                }
-                else
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-            }
-            return RedirectToAction("Index", "Home");
-        }
-
         //GET: Admins/ListOfItems
         public ActionResult ListOfItems(string sorting, string filtrationNAME, int? page)
         {
@@ -344,7 +322,7 @@ namespace MyGraduationProject.Controllers
                                 break;
                         }
 
-                        int pageSize = 1;
+                        int pageSize = 5;
                         int pageNumber = (page ?? 1);
                         return View(items.ToPagedList(pageNumber, pageSize));
                     }
@@ -533,7 +511,7 @@ namespace MyGraduationProject.Controllers
                                 break;
                         }
                         ViewBag.STATE_ID = new SelectList(repo.GetAllReservationStatuses(), "STATUS_ID", "NAME");
-                        int pageSize = 1;
+                        int pageSize = 5;
                         int pageNumber = (page ?? 1);
                         return View(reservations.ToPagedList(pageNumber, pageSize));
                     }
@@ -635,20 +613,3 @@ namespace MyGraduationProject.Controllers
         }
     }
 }
-
-/*
- * 
- *             //rok,miesiac,dzien
-            var startDate = new DateTime(2016, 06, 05);
-            var endDate = new DateTime(2016, 07, 02);
-
-            var listOfAvailableItems = new List<Item>();
-            // pobierze liste itemow dostepnych w chwili wywolania widoku
-            listOfAvailableItems.AddRange(repo.GetListOfAvailableItems(startDate, endDate));
-
-            //dostępnosc produktu podczas tworzenia rezerwacji
-            //TODO isAvailable powinno byc false dla 2, dla 3,6 true
-            var itemId = 6;
-            var isAvailable = repo.isItemAvailable(itemId, startDate, endDate);
- * 
- */

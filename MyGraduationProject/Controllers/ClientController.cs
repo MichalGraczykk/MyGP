@@ -74,6 +74,8 @@ namespace MyGraduationProject.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+
+        //TODO zmien widok na nowy(kafelki)
         public ActionResult ListOfArticles(string sorting, string filtrationNAME, int? page, DateTime? dateFrom, DateTime? dateTo)
         {
             ViewBag.Auth = null;
@@ -274,7 +276,7 @@ namespace MyGraduationProject.Controllers
 
                     ViewBag.STATE_ID = new SelectList(repo.GetAllReservationStatuses(), "STATUS_ID", "NAME");
 
-                    int pageSize = 1;
+                    int pageSize = 5;
                     int pageNumber = (page ?? 1);
                     return View(reservations.ToPagedList(pageNumber, pageSize));
                 }
@@ -337,6 +339,15 @@ namespace MyGraduationProject.Controllers
                 }
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

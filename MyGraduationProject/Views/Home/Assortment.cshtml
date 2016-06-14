@@ -6,91 +6,106 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<table>
-    @using (Html.BeginForm())
-    {
-        <tr>
-            <td>
-                <span>NAME:</span>
-                @Html.TextBox("filtrationNAME")
-            </td>
-        </tr>
-            <tr>
-                <td>
-                    <input type="submit" value="Szukaj" class="btn btn-default" />
-                </td>
-            </tr>
-    }
-</table>
-
 <br />
+<span style="color:#1e1e1e; font-size:15px">
+    Kliknij w zdjęcie aby zobaczyć harmonogram wypożyczeń danego produktu
+</span>
+<div class="move">
+        
+            <ol>
+                <li>
+                    <span style="font-size:25px; font-family: 'Bree Serif', serif;">SORTUJ:</span>
+                </li>
 
-    <table>
-        @using (Html.BeginForm())
-        {
-            <tr>
-                <td colspan="2">
-                    Sprawdz dostępność produktów w czasie:
-                    <br/>
-                    <span style="color:#363636">(daty w formacie DD/MM/YYYY)</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Data rozpoczęcia zamówienia:</span><br />
+                <li>
+                        @Html.ActionLink("NAME", "Assortment", new { sorting = ViewBag.SortByNAME, filtrationNAME = ViewBag.FindNAME, dateTo = ViewBag.DateTo, dateFrom = ViewBag.DateFrom })
+                </li>
+
+                <li>
+                        @Html.ActionLink("PRICE_PER_DAY", "Assortment", new { sorting = ViewBag.SortByPRICE_PER_DAY, filtrationNAME = ViewBag.FindNAME, dateTo = ViewBag.DateTo, dateFrom = ViewBag.DateFrom })
+                </li>
+
+                <li>
+                    <hr />
+                </li>
+
+                <li>
+                    <span style="font-size:25px; font-family: 'Bree Serif', serif;">FILRTUJ:</span>
+                </li>
+@using (Html.BeginForm())
+{
+                <li>
+                    Nazwa:
+                </li>
+
+                <li>
+                    @Html.TextBox("filtrationNAME")
+                </li>
+
+                <li>
+                    Data rozpoczęcia zamówienia:
+                </li>
+
+                <li>
                     @Html.TextBox("dateFrom")
-                </td>
-                <td>
-                    <span>Data zakończenia zamówienia:</span><br />
+                </li>
+
+                <li>
+                    <span style="color:#363636; font-size:10px;">(DD/MM/YYYY)</span>
+                </li>
+
+                <li>
+                    Data zakończenia zamówienia:
+                </li>
+
+                <li>
                     @Html.TextBox("dateTo")
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <input type="submit" value="Sprawdz" class="btn btn-default" />
-                </td>
-            </tr>
-        }
-    </table>
-<br />
-<table class="table">
-    <tr>
-        <th>
-            @Html.ActionLink("NAME", "Assortment", new { sorting = ViewBag.SortByNAME, filtrationNAME = ViewBag.FindNAME, dateTo = ViewBag.DateTo, dateFrom = ViewBag.DateFrom })
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().DESCRPTION)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().PHOTO)
-        </th>
-        <th>
-            @Html.ActionLink("PRICE_PER_DAY", "Assortment", new { sorting = ViewBag.SortByPRICE_PER_DAY, filtrationNAME = ViewBag.FindNAME, dateTo = ViewBag.DateTo, dateFrom = ViewBag.DateFrom })
-        </th>
-    </tr>
+                </li>
 
-    @foreach (var i in Model)
-    {
-        <tr>
+                <li>
+                    <span style="color:#363636; font-size:10px;">(DD/MM/YYYY)</span>
+                </li>
 
-            <td>
-                @Html.DisplayFor(modelItem => i.NAME)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => i.DESCRPTION)
-            </td>
-            <td>
-                <a href="@Html.DisplayFor(modelItem => i.PHOTO)" target="_blank">KLIK</a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => i.PRICE_PER_DAY)
-            </td>
-        </tr>
-    }
-</table>
-<br />
+                <li>
+                    <input type="submit" value="Filtruj" class="btn btn-default" />
+                </li>
+}
+            </ol>       
+</div>
+@foreach (var i in Model)
+{
+    <div class="itemContainer">
+        <div class="leftHalfOfItem">
+            <span style="color: #282828; text-shadow: 1px 1px 2px #6d5f5f">
+                @Html.DisplayNameFor(model => model.First().NAME)
+            </span>
+            :
+            @Html.DisplayFor(modelItem => i.NAME)
+        </div>
+    
+        <div class="rightHalfOfItem">
+            <span style="color: #282828; text-shadow: 1px 1px 2px #6d5f5f">
+                @Html.DisplayNameFor(model => model.First().PRICE_PER_DAY)
+            </span>
+            :
+            @Html.DisplayFor(modelItem => i.PRICE_PER_DAY)
+        </div>
+        
+        <div class="photoOfItem">
+            <img src="@Html.DisplayFor(modelItem => i.PHOTO)"/>
+        </div>
 
-    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+        <div class="descriptionOfItem">
+            <span style="color: #282828; text-shadow: 1px 1px 2px #6d5f5f">
+                @Html.DisplayNameFor(model => model.First().DESCRPTION)
+            </span>
+            <br/>
+            @Html.DisplayFor(modelItem => i.DESCRPTION)
+        </div>
+    </div>
+}
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
 
     @Html.PagedListPager(Model, page => Url.Action("Assortment",
                     new { sorting = ViewBag.SortedBy, filtrationNAME = ViewBag.FindNAME, page, dateTo = ViewBag.DateTo, dateFrom = ViewBag.DateFrom }))

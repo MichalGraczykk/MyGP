@@ -27,6 +27,7 @@ namespace MyGraduationProject
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/fontello.css",
+                      "~/Content/presentationStyle.css",
                       "~/Content/PagedList.css"));
         }
     }

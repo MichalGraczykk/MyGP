@@ -4,169 +4,170 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container">
+    <h2>Detale</h2>
+    <div class="smallContainer">
+        <hr />
+        <h4>dane rezerwacji</h4>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.RESERVATION_ID)
+            </dt>
 
-<h2>Detale</h2>
-        <div class="smallContainer">
-            <hr />
-            <h4>dane rezerwacji</h4>
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.RESERVATION_ID)
-                </dt>
+            <dd>
+                @Html.DisplayFor(model => model.RESERVATION_ID)
+            </dd>
 
-                <dd>
-                    @Html.DisplayFor(model => model.RESERVATION_ID)
-                </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DATE_FROM)
+            </dt>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.DATE_FROM)
-                </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DATE_FROM)
+            </dd>
 
-                <dd>
-                    @Html.DisplayFor(model => model.DATE_FROM)
-                </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DATE_TO)
+            </dt>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.DATE_TO)
-                </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DATE_TO)
+            </dd>
 
-                <dd>
-                    @Html.DisplayFor(model => model.DATE_TO)
-                </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ORDER_DATE)
+            </dt>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.ORDER_DATE)
-                </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ORDER_DATE)
+            </dd>
+        </dl>
 
-                <dd>
-                    @Html.DisplayFor(model => model.ORDER_DATE)
-                </dd>
-            </dl>
-
-            @using (Html.BeginForm())
+        @using (Html.BeginForm())
             {
-                @Html.AntiForgeryToken()
+            @Html.AntiForgeryToken()
 
-                <div class="form-horizontal">
-                    <hr />
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.HiddenFor(model => model.RESERVATION_ID)
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.RESERVATION_ID)
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.STATUS_ID, "STATUS", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.DropDownList("STATUS_ID", null, htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.STATUS_ID, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Save" class="btn btn-default" />
-                        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.STATUS_ID, "STATUS", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("STATUS_ID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.STATUS_ID, "", new { @class = "text-danger" })
                     </div>
                 </div>
-            }
 
-            <hr />
-            <h4>dane użytkownika</h4>
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.USER_ID)
-                </dt>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
 
-                <dd>
-                    @Html.DisplayFor(model => model.USER_ID)
-                </dd>
+        <hr />
+        <h4>dane użytkownika</h4>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.USER_ID)
+            </dt>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.User.LOGIN)
-                </dt>
+            <dd>
+                @Html.DisplayFor(model => model.USER_ID)
+            </dd>
 
-                <dd>
-                    @Html.DisplayFor(model => model.User.LOGIN)
-                </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.User.LOGIN)
+            </dt>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.User.NAME)
-                </dt>
+            <dd>
+                @Html.DisplayFor(model => model.User.LOGIN)
+            </dd>
 
-                <dd>
-                    @Html.DisplayFor(model => model.User.NAME)
-                </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.User.NAME)
+            </dt>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.User.SURNAME)
-                </dt>
+            <dd>
+                @Html.DisplayFor(model => model.User.NAME)
+            </dd>
 
-                <dd>
-                    @Html.DisplayFor(model => model.User.SURNAME)
-                </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.User.SURNAME)
+            </dt>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.User.UsersAdress.STREET_NAME)
-                </dt>
+            <dd>
+                @Html.DisplayFor(model => model.User.SURNAME)
+            </dd>
 
-                <dd>
-                    @Html.DisplayFor(model => model.User.UsersAdress.STREET_NAME)
-                </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.User.UsersAdress.STREET_NAME)
+            </dt>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.User.UsersAdress.STREET_NUMBER)
-                </dt>
+            <dd>
+                @Html.DisplayFor(model => model.User.UsersAdress.STREET_NAME)
+            </dd>
 
-                <dd>
-                    @Html.DisplayFor(model => model.User.UsersAdress.STREET_NUMBER)
-                </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.User.UsersAdress.STREET_NUMBER)
+            </dt>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.User.UsersAdress.POSSESION_NUMBER)
-                </dt>
+            <dd>
+                @Html.DisplayFor(model => model.User.UsersAdress.STREET_NUMBER)
+            </dd>
 
-                <dd>
-                    @Html.DisplayFor(model => model.User.UsersAdress.POSSESION_NUMBER)
-                </dd>
-            </dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.User.UsersAdress.POSSESION_NUMBER)
+            </dt>
 
-            <hr />
-            <h4>dane produktu</h4>
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.Item.NAME)
-                </dt>
+            <dd>
+                @Html.DisplayFor(model => model.User.UsersAdress.POSSESION_NUMBER)
+            </dd>
+        </dl>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Item.NAME)
-                </dd>
+        <hr />
+        <h4>dane produktu</h4>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Item.NAME)
+            </dt>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Item.DESCRPTION)
-                </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Item.NAME)
+            </dd>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Item.DESCRPTION)
-                </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Item.DESCRPTION)
+            </dt>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Item.PHOTO)
-                </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Item.DESCRPTION)
+            </dd>
 
-                <dd>
-                    <a href="@Html.DisplayFor(model => model.Item.PHOTO)" target="_blank">KLIK</a>
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.Item.PRICE_PER_DAY)
-                </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Item.PHOTO)
+            </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Item.PRICE_PER_DAY)
-                </dd>
-                <dt>
-                    STATE_NAME
-                </dt>
+            <dd>
+                <a href="@Html.DisplayFor(model => model.Item.PHOTO)" target="_blank">KLIK</a>
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Item.PRICE_PER_DAY)
+            </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Item.State.STATE_NAME)
-                </dd>
-            </dl>
-        </div>
+            <dd>
+                @Html.DisplayFor(model => model.Item.PRICE_PER_DAY)
+            </dd>
+            <dt>
+                STATE_NAME
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Item.State.STATE_NAME)
+            </dd>
+        </dl>
+    </div>
+</div>

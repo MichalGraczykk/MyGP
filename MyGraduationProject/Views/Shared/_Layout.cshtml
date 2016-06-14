@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Bree+Serif&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
     <title>Michał Graczyk - Projekt Dyplomowy</title>
 
@@ -43,7 +44,16 @@
 
                 @if (ViewBag.Auth != null && ViewBag.Auth.ROLE_ID == 1)
                 {
-                    <li>@Html.ActionLink("Opcje", "Properties", "Admins")</li>
+                    <li>
+                        <a href="#">Opcje</a>
+                        <ul>
+                            <li>@Html.ActionLink("Stwórz Użytkownika", "Create", "Admins")</li>
+                            <li>@Html.ActionLink("Lista Użytkowników", "Index", "Admins")</li>
+                            <li>@Html.ActionLink("Dodaj Produkt", "CreateItem", "Admins")</li>
+                            <li>@Html.ActionLink("Lista Produktów", "ListOfItems", "Admins")</li>
+                            <li>@Html.ActionLink("Lista Zamówień", "ListOfReservations", "Admins")</li>
+                        </ul>
+                    </li>
                 }
                 else
                 {
@@ -52,9 +62,9 @@
 
             </ol>
         </div>
-        <div class="container">            
+                  
             @RenderBody()
-        </div>
+        
         <div class="socialmedia">
             <a href="http://facebook.com" target="_blank" class="socialmedia">
                 <div class="fb"><i class="icon-facebook"></i></div>
@@ -77,25 +87,25 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     <script>
-            $(document).ready(function () {
-                var NavY = $('.navigation').offset().top;
+		$(document).ready(function() {
+		var NavY = $('.nav').offset().top;
 
-                var moveNavigation = function () {
-                    var ScrollY = $(window).scrollTop();
+		var stickyNav = function(){
+		var ScrollY = $(window).scrollTop();
 
-                    if (ScrollY > NavY) {
-                        $('.navigation').addClass('move');
-                    } else {
-                        $('.navigation').removeClass('move');
-                    }
-                };
+		if (ScrollY > NavY) {
+			$('.nav').addClass('sticky');
+		} else {
+			$('.nav').removeClass('sticky');
+		}
+		};
 
-                moveNavigation();
+		stickyNav();
 
-                $(window).scroll(function () {
-                    moveNavigation();
-                });
-            });
+		$(window).scroll(function() {
+			stickyNav();
+		});
+		});
     </script>
 </body>
 </html>

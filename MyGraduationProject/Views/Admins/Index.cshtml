@@ -5,84 +5,85 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        <span>LOGIN:</span>
+        @Html.TextBox("filtrationLOGIN")
+        <input type="submit" value="Szukaj" class="btn btn-default" />
+    }
 
-@using (Html.BeginForm())
-{
-    <span>LOGIN:</span>
-    @Html.TextBox("filtrationLOGIN")
-    <input type="submit" value="Szukaj" class="btn btn-default" />
-}
+    <br />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().LOGIN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().PASSWORD)
+            </th>
+            <th>
+                @Html.ActionLink("NAME", "Index", new { sorting = ViewBag.SortByNAME, filtrationLOGIN = ViewBag.FindLOGIN })
+            </th>
+            <th>
+                @Html.ActionLink("SURNAME", "Index", new { sorting = ViewBag.SortBySURNAME, filtrationLOGIN = ViewBag.FindLOGIN })
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().AGE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().UsersAdress.STREET_NAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().UsersAdress.STREET_NUMBER)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().UsersAdress.POSSESION_NUMBER)
+            </th>
+            <th>
+                ROLA
+            </th>
+            <th></th>
+        </tr>
 
-<br/>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.First().LOGIN)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().PASSWORD)
-        </th>
-        <th>
-            @Html.ActionLink("NAME", "Index", new { sorting = ViewBag.SortByNAME, filtrationLOGIN = ViewBag.FindLOGIN })
-        </th>
-        <th>
-            @Html.ActionLink("SURNAME", "Index", new { sorting = ViewBag.SortBySURNAME, filtrationLOGIN = ViewBag.FindLOGIN })
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().AGE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().UsersAdress.STREET_NAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().UsersAdress.STREET_NUMBER)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().UsersAdress.POSSESION_NUMBER)
-        </th>
-        <th>
-            ROLA
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.LOGIN)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PASSWORD)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SURNAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AGE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UsersAdress.STREET_NAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UsersAdress.STREET_NUMBER)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UsersAdress.POSSESION_NUMBER)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Role.NAME)
-        </td>
-        <td>
-                        @Html.ActionLink("Edytuj", "Edit", new { id = item.USER_ID })<br/>
-                        @Html.ActionLink("Usuń", "Delete", new { id = item.USER_ID })
-        </td>
-    </tr>
-}
-</table>
-<br />
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LOGIN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PASSWORD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SURNAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AGE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UsersAdress.STREET_NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UsersAdress.STREET_NUMBER)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UsersAdress.POSSESION_NUMBER)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role.NAME)
+                </td>
+                <td>
+                    @Html.ActionLink("Edytuj", "Edit", new { id = item.USER_ID })<br />
+                    @Html.ActionLink("Usuń", "Delete", new { id = item.USER_ID })
+                </td>
+            </tr>
+        }
+    </table>
+    <br />
 
     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
 
@@ -90,3 +91,4 @@
                     new { page, sorting = ViewBag.SortedBy, filtrationLogin = ViewBag.FindLogin }))
 
 
+</div>

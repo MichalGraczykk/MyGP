@@ -5,67 +5,68 @@
     ViewBag.Title = "ListOfItems";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-@using (Html.BeginForm())
-{
-    <span>NAME:</span>
-    @Html.TextBox("filtrationNAME")
-    <input type="submit" value="Szukaj" class="btn btn-default" />
-}
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.First().ITEM_ID)
-        </th>
-        <th>
-            @Html.ActionLink("NAME", "ListOfItems", new { sorting = ViewBag.SortByNAME, filtrationNAME = ViewBag.FindNAME })
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().DESCRPTION)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().PHOTO)
-        </th>
-        <th>
-            @Html.ActionLink("PRICE_PER_DAY", "ListOfItems", new { sorting = ViewBag.SortByPRICE_PER_DAY, filtrationNAME = ViewBag.FindNAME })
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().State.STATE_NAME)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var i in Model)
+<div class="container">
+    @using (Html.BeginForm())
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => i.ITEM_ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => i.NAME)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => i.DESCRPTION)
-            </td>
-            <td>
-                <a href="@Html.DisplayFor(modelItem => i.PHOTO)" target="_blank">KLIK</a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => i.PRICE_PER_DAY)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => i.State.STATE_NAME)
-            </td>
-            <td>
-                @Html.ActionLink("Edytuj", "EditItem", new { id = i.ITEM_ID })<br />
-            </td>
-        </tr>
+        <span>NAME:</span>
+        @Html.TextBox("filtrationNAME")
+        <input type="submit" value="Szukaj" class="btn btn-default" />
     }
-</table>
-<br />
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().ITEM_ID)
+            </th>
+            <th>
+                @Html.ActionLink("NAME", "ListOfItems", new { sorting = ViewBag.SortByNAME, filtrationNAME = ViewBag.FindNAME })
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().DESCRPTION)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().PHOTO)
+            </th>
+            <th>
+                @Html.ActionLink("PRICE_PER_DAY", "ListOfItems", new { sorting = ViewBag.SortByPRICE_PER_DAY, filtrationNAME = ViewBag.FindNAME })
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().State.STATE_NAME)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => i.ITEM_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => i.NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => i.DESCRPTION)
+                </td>
+                <td>
+                    <a href="@Html.DisplayFor(modelItem => i.PHOTO)" target="_blank">KLIK</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => i.PRICE_PER_DAY)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => i.State.STATE_NAME)
+                </td>
+                <td>
+                    @Html.ActionLink("Edytuj", "EditItem", new { id = i.ITEM_ID })<br />
+                </td>
+            </tr>
+        }
+    </table>
+    <br />
 
     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
 
     @Html.PagedListPager(Model, page => Url.Action("ListOfItems",
-                    new { sorting = ViewBag.SortedBy, filtrationNAME = ViewBag.FindNAME , page }))
+                    new { sorting = ViewBag.SortedBy, filtrationNAME = ViewBag.FindNAME, page }))
+</div>

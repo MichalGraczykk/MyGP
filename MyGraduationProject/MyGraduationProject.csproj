@@ -170,6 +170,7 @@
     <Content Include="Content\fontello-ie7.css" />
     <Content Include="Content\fontello.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\presentationStyle.css" />
     <Content Include="fonts\fontello.svg" />
     <Content Include="Content\login.css" />
     <Content Include="Content\registration.css" />
@@ -226,14 +227,12 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Admins\Create.cshtml" />
     <Content Include="Views\Admins\Delete.cshtml" />
     <Content Include="Views\Admins\DetailsOfReservation.cshtml" />
     <Content Include="Views\Admins\Edit.cshtml" />
     <Content Include="Views\Admins\Index.cshtml" />
-    <Content Include="Views\Admins\Properties.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Admins\CreateItem.cshtml" />
     <Content Include="Views\Admins\ListOfItems.cshtml" />
