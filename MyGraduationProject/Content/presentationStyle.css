@@ -15,15 +15,57 @@ a:hover{
     text-decoration:none;
 }
 
+.toCalendar{
+    width: 480px;
+    margin-left: auto;  
+    float:none;
+}
+
+.fc-center h2{
+    font-size: 15px !important;
+}
+
+.fc-toolbar {
+    max-height: 30px;
+}
+
+#calendar {
+    max-width: 480px !important;
+    background-color: !important;
+    color: black;
+} 
+
+#calendar a{
+ background-color:#ff7500 !important;
+ border: 1px solid #d56737;
+}
+/*
+#calendar td{
+ background-color:green !important;
+}
+
+#calendar th{
+ background-color:blueviolet !important;
+ color:darkred;
+}
+*/
+
 .itemContainer a{
     color: #282828;
     text-shadow: 1px 1px 2px #6d5f5f;
 }
 
-.itemContainer img{
+.help{
     text-align:center;
+    margin-top:35px;
+}
+.photoOfItemFloat img{
+    max-width: 480px !important;
+    align-items:center;
+}
+
+.itemContainer img{
     max-width: 970px;
-    /*border-radius: 10px 10px 10px 10px;*/
 }
 
 .leftHalfOfItem{
@@ -45,12 +87,20 @@ a:hover{
 }
 
 .photoOfItem{
+    text-align:center;
     width: 970px;
-    margin-left: auto;
-	margin-right: auto;
     margin-top:10px;
     margin-bottom:10px;
+
 }
+.photoOfItemFloat{
+    width: 480px;
+    height: 400px;
+    margin-left: auto;
+    float:left !important;
+    display:block !important;
+}
+
 
 .descriptionOfItem{
     background-color:#acacac;

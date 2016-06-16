@@ -31,17 +31,6 @@ namespace MyGraduationProject.Controllers
             if (Session["principal"] != null)
                 ViewBag.Auth = (User)Session["principal"];
 
-            //ferrari enzo id 2
-            DateTime currDate = DateTime.Now;
-            var items = db.Reservations.Where(i => i.ITEM_ID == 2 && i.DATE_TO > currDate);
-            List<ToCallendar> tmp = new List<ToCallendar>();
-            TimeSpan correct = new TimeSpan(1, 0, 0, 0);
-            foreach(Reservation res in items)
-            {
-                tmp.Add(new ToCallendar(){title="reserved", start = res.DATE_FROM.Value.Add(correct), end = res.DATE_TO.Value.Add(correct) });
-            }
-            ViewBag.MyEventList = tmp;
-
             return View();
         }
 
@@ -146,6 +135,28 @@ namespace MyGraduationProject.Controllers
                 ViewBag.Auth = (User)Session["principal"];
 
             return View();
+        }
+
+        public ActionResult CalendarOfItem(int id)
+        {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+                ViewBag.Auth = (User)Session["principal"];
+
+            //ferrari enzo id 2
+            DateTime currDate = DateTime.Now;
+            var items = db.Reservations.Where(i => i.ITEM_ID == id && i.DATE_TO > currDate);
+            List<ToCallendar> tmp = new List<ToCallendar>();
+            TimeSpan correct = new TimeSpan(1, 0, 0, 0);
+            foreach (Reservation res in items)
+            {
+                tmp.Add(new ToCallendar() { title = "reserved", start = res.DATE_FROM.Value.Add(correct), end = res.DATE_TO.Value.Add(correct) });
+            }
+            ViewBag.MyEventList = tmp;
+
+            var item = repo.GetItemById(id);
+
+            return View(item);
         }
 
         protected override void Dispose(bool disposing)

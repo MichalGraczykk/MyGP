@@ -77,10 +77,11 @@
     <div class="itemContainer">
         <div class="leftHalfOfItem">
             <span style="font-family: 'Archivo Black', sans-serif; color: #313131">
+                
                 @Html.DisplayNameFor(model => model.First().NAME)
                 :
             </span>
-            @Html.DisplayFor(modelItem => i.NAME)
+            @Html.ActionLink(@i.NAME, "CalendarOfItem", new { id = i.ITEM_ID })
         </div>
     
         <div class="rightHalfOfItem">

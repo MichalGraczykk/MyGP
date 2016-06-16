@@ -9,27 +9,6 @@ body {
     background-image: url("mooning.png");
 }
 
-#calendar {
-    max-width: 500px !important;
-    margin: 0 auto;
-    padding-bottom: 30px;
-    background-color: !important;
-    color: black;
-} 
-
-#calendar a{
- background-color:#ff7500 !important;
-}
-
-#calendar td{
- background-color:green !important;
-}
-
-#calendar th{
- background-color:blueviolet !important;
- color:darkred;
-}
-
 .cen {
     text-align:center;
     margin-left:225px;
@@ -259,14 +238,14 @@ body {
 	color: #55bbff;
 }
 
-table {
+.container table {
     background-color: #505050;
 	border: #ccc 1px solid;
 	text-shadow: 0px 0px 10px #a7a7a7;
 	box-shadow: 1px 1px 5px #d1d1d1;
 }
 
-table th {
+.container table th {
 	background: #6c6c6c;
 	color: #033356;
     text-align:center;
@@ -278,7 +257,7 @@ table tr {
 }
 */
 
-table td {
+.container table td {
 	padding: 3px;
 	border-top: 1px solid #ffffff;
 	border-bottom: 1px solid #e0e0e0;
@@ -374,6 +353,16 @@ ol > li > ul > li:hover > a
     padding-top:40px;
     margin:auto;
     width:300px;
+}
+
+.calendarContainer {
+	min-height: 500px;
+	width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	padding-top: 10px;
+    font-size: 15px;
 }
 /* GOOGLE FONTS
 

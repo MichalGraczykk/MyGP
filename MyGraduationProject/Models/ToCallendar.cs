@@ -5,6 +5,7 @@ namespace MyGraduationProject.Models
 {
     public class ToCallendar
     {
+        public int id { get; set; }
 
         public string title { get; set; }
 

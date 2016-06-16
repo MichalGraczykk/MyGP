@@ -338,6 +338,7 @@
     <Content Include="Views\Client\ListOfTransactions.cshtml" />
     <Content Include="Views\Client\OneItem.cshtml" />
     <Content Include="Views\Client\ConfirmOrder.cshtml" />
+    <Content Include="Views\Home\CalendarOfItem.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

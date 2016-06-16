@@ -7,23 +7,4 @@
     <p>Strona ta jest Projektem Dyplomowym przygotowanym przez Michała Graczyka</p>
     <p>Jest to tylko <span style="color:#920000">szkielet</span> internetowej wypożyczalni przedmiotów w związku z tym wiele z użytych rozwiązań może zostać przerobionych w finalnej wersji oprogramowania dostarczanego klientom</p>
     <p>Nie należy sugerować się nazwami kolumn w tabelach ponieważ dla lepszego zrozumienia funkcjonowania strony przyjmują one nazwy takie same jak w bazie danych</p>
-    <div id="calendar"></div>
 </div>
-
-<script>
-    var MyEvents = @Html.Raw(Json.Encode(@ViewBag.MyEventList));
-	$(document).ready(function() {
-		$('#calendar').fullCalendar({
-			header: {
-				left: 'prev,next today',
-				center: 'title',
-				right: 'month,basicWeek,basicDay'
-			},
-			defaultDate: '2016-05-12',
-			editable: false,
-			eventLimit: true, // allow "more" link when too many events
-			events: MyEvents
-		});
-
-	});
-</script>
