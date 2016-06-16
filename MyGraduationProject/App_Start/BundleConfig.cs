@@ -9,7 +9,10 @@ namespace MyGraduationProject
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery.min.js",
+                        "~/Scripts/moment.min.js",
+                        "~/Scripts/jquery-ui.custom.min.js",
+                        "~/Scripts/fullcalendar.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -20,13 +23,18 @@ namespace MyGraduationProject
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/bootstrap.min.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap.min.css",
+                      "~/Content/bootstrap-theme.css",
+                      "~/Content/bootstrap-theme.css",
+                      "~/Content/animation.css",
+                      "~/Content/jquery.ui.all.css",
                       "~/Content/site.css",
                       "~/Content/fontello.css",
+                      "~/Content/fullcalendar.css",
                       "~/Content/presentationStyle.css",
                       "~/Content/PagedList.css"));
         }

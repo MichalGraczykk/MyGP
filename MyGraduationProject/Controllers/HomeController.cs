@@ -2,6 +2,7 @@
 using MyGraduationProject.Models;
 using PagedList;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -30,6 +31,17 @@ namespace MyGraduationProject.Controllers
             if (Session["principal"] != null)
                 ViewBag.Auth = (User)Session["principal"];
 
+            //ferrari enzo id 2
+            DateTime currDate = DateTime.Now;
+            var items = db.Reservations.Where(i => i.ITEM_ID == 2 && i.DATE_TO > currDate);
+            List<ToCallendar> tmp = new List<ToCallendar>();
+            TimeSpan correct = new TimeSpan(1, 0, 0, 0);
+            foreach(Reservation res in items)
+            {
+                tmp.Add(new ToCallendar(){title="reserved", start = res.DATE_FROM.Value.Add(correct), end = res.DATE_TO.Value.Add(correct) });
+            }
+            ViewBag.MyEventList = tmp;
+
             return View();
         }
 
@@ -44,7 +56,12 @@ namespace MyGraduationProject.Controllers
             ViewBag.SortByPRICE_PER_DAY = sorting == "PRICE_PER_DAY_Malejaco" ? "PRICE_PER_DAY_Rosnaco" : "PRICE_PER_DAY_Malejaco";
             ViewBag.dateFrom = null;
             ViewBag.dateTo = null;
+            ViewBag.FindNAME = null;
+
             var items = repo.GetAvailableItems();
+
+            int pageSize = 2;
+            int pageNumber = (page ?? 1);
 
             if (ModelState.IsValid)
             {
@@ -59,9 +76,8 @@ namespace MyGraduationProject.Controllers
                 {
                     //TODO sprawdz czemu nie dziala
                     items = items.Where(i => i.NAME.Contains(filtrationNAME));
+                    ViewBag.FindNAME = filtrationNAME;
                 }
-
-                ViewBag.FindNAME = filtrationNAME;
 
                 switch (sorting)
                 {
@@ -79,13 +95,12 @@ namespace MyGraduationProject.Controllers
                         break;
                 }
 
-                int pageSize = 2;
-                int pageNumber = (page ?? 1);
+                
                 return View(items.ToPagedList(pageNumber, pageSize));
             }
             else
             {
-                return View(items);
+                return View(items.ToPagedList(pageNumber, pageSize));
             }
         }
 

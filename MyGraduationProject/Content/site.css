@@ -1,10 +1,33 @@
 body {
-	background-color: #bbbbbb;
+	
 	color: #141414;
 	font-family: 'Lato', sans-serif;
 	font-size: 20px;
 	margin: 0px;
     text-align: center;
+    /* Background pattern from subtlepatterns.com */
+    background-image: url("mooning.png");
+}
+
+#calendar {
+    max-width: 500px !important;
+    margin: 0 auto;
+    padding-bottom: 30px;
+    background-color: !important;
+    color: black;
+} 
+
+#calendar a{
+ background-color:#ff7500 !important;
+}
+
+#calendar td{
+ background-color:green !important;
+}
+
+#calendar th{
+ background-color:blueviolet !important;
+ color:darkred;
 }
 
 .cen {
@@ -20,13 +43,14 @@ body {
 .header {
 	width: 1000px;
 	color: white;
+    /*padding pierwsza wartosc oznacza zapis w pionie a druga w poziomie */
 	padding: 20px 0;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
 	font-size: 40px;
 }
-/*padding pierwsza wartosc oznacza zapis w pionie a druga w poziomie */
+
 .container {
 	min-height: 500px;
 	width: 1000px;
@@ -54,9 +78,7 @@ body {
 	text-decoration: none;
 	border-radius: 20px 20px 0px 0px;
 }
-.socialmedia:hover {
-	color:white;
-}
+
 .footer {
 	width: 1000px;
 	text-align: center;
@@ -64,6 +86,22 @@ body {
 	padding: 5px;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.soc{
+    width: 1000px;
+    bottom:39px;
+	text-align: center;
+	background-color: #404040;
+	margin-left: auto;
+	margin-right: auto;
+	color: white;
+	text-decoration: none;
+	border-radius: 20px 20px 0px 0px;
+}
+
+.soc:hover {
+	color:white;
 }
 
 .fb {
@@ -78,7 +116,7 @@ body {
 }
 
 .yt {
-	width: 333px;
+	width:  333px;
 	height: 110px;
 	float: left;
 }
@@ -89,7 +127,7 @@ body {
 }
 
 .tw {
-	width: 333px;
+	width:  334px;
 	height: 110px;
 	float: left;
 	border-radius: 0px 20px 0px 0px;
@@ -111,9 +149,13 @@ body {
 	border-radius: 20px 20px 20px 20px;
 }
 
+/* #ff8925 
+    background-image: url("mooning.png");
+*/
 .move {
-    background-color:#c7c5c5;
-    font-size: 13px;
+    background-color: #ff8925;
+    opacity: 0.7;
+    font-size: 10px;
     color:black;
 	position: fixed;
 	left: 0;
@@ -124,8 +166,8 @@ body {
 }
 
 .move input[type="text"] {
-    width: 170px;
-    height: 35px;
+    width: 160px;
+    height: 25px;
 }
 
 
@@ -167,7 +209,6 @@ body {
 
 .move ol>li a{
     color: #282828; 
-    text-shadow: 1px 1px 2px #6d5f5f;
 }
 
 .move ol>li:first-child {
@@ -184,7 +225,7 @@ body {
 
 .navigation ol>li:hover>a {
     text-decoration:none;
-	color: #1f1f1f;
+	color: #ff7500;
 	transition: all 0.4s;
 	transform: scale(1.1);
 }
@@ -326,5 +367,25 @@ ol > li > ul > li:hover > a
 {
     transition: all 0.4s;
 	transform: scale(1.06);
-	color: #1f1f1f;
+	color: #ff7500;
 }
+
+.loginContainer{
+    padding-top:40px;
+    margin:auto;
+    width:300px;
+}
+/* GOOGLE FONTS
+
+    font-family: 'Righteous', cursive;
+
+    font-family: 'Russo One', sans-serif;
+
+    font-family: 'Archivo Black', sans-serif;
+
+    font-family: 'Shadows Into Light Two', cursive;
+
+    font-family: 'Audiowide', cursive;
+
+    font-family: 'Lato', sans-serif;
+*/

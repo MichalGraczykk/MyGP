@@ -14,7 +14,7 @@
         
             <ol>
                 <li>
-                    <span style="font-size:25px; font-family: 'Bree Serif', serif;">SORTUJ:</span>
+                    <span style="font-size:25px; font-family: 'Righteous', cursive;">SORTUJ:</span>
                 </li>
 
                 <li>
@@ -30,7 +30,7 @@
                 </li>
 
                 <li>
-                    <span style="font-size:25px; font-family: 'Bree Serif', serif;">FILRTUJ:</span>
+                    <span style="font-size:25px; font-family: 'Righteous', cursive;">FILRTUJ:</span>
                 </li>
 @using (Html.BeginForm())
 {
@@ -76,18 +76,18 @@
 {
     <div class="itemContainer">
         <div class="leftHalfOfItem">
-            <span style="color: #282828; text-shadow: 1px 1px 2px #6d5f5f">
+            <span style="font-family: 'Archivo Black', sans-serif; color: #313131">
                 @Html.DisplayNameFor(model => model.First().NAME)
+                :
             </span>
-            :
             @Html.DisplayFor(modelItem => i.NAME)
         </div>
     
         <div class="rightHalfOfItem">
-            <span style="color: #282828; text-shadow: 1px 1px 2px #6d5f5f">
+            <span style="font-family: 'Archivo Black', sans-serif; color: #313131">
                 @Html.DisplayNameFor(model => model.First().PRICE_PER_DAY)
+                :
             </span>
-            :
             @Html.DisplayFor(modelItem => i.PRICE_PER_DAY)
         </div>
         
@@ -96,7 +96,7 @@
         </div>
 
         <div class="descriptionOfItem">
-            <span style="color: #282828; text-shadow: 1px 1px 2px #6d5f5f">
+            <span style="font-family: 'Archivo Black', sans-serif; color: #313131">
                 @Html.DisplayNameFor(model => model.First().DESCRPTION)
             </span>
             <br/>
