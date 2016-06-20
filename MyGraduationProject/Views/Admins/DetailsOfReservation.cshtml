@@ -41,6 +41,14 @@
             <dd>
                 @Html.DisplayFor(model => model.ORDER_DATE)
             </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.OVERALL_PRICE)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.OVERALL_PRICE)
+            </dd>
         </dl>
 
         @using (Html.BeginForm())
@@ -148,13 +156,6 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Item.PHOTO)
-            </dt>
-
-            <dd>
-                <a href="@Html.DisplayFor(model => model.Item.PHOTO)" target="_blank">KLIK</a>
-            </dd>
-            <dt>
                 @Html.DisplayNameFor(model => model.Item.PRICE_PER_DAY)
             </dt>
 
@@ -169,5 +170,9 @@
                 @Html.DisplayFor(model => model.Item.State.STATE_NAME)
             </dd>
         </dl>
+
+        <a href="@Html.DisplayFor(model => model.Item.PHOTO)" target="_blank">
+            <img src="@Html.DisplayFor(model => model.Item.PHOTO)" width="500" style="border:1px solid white; border-radius: 10px 10px 0px 0px" />
+        </a>
     </div>
 </div>

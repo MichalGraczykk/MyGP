@@ -81,7 +81,7 @@
                 @Html.DisplayNameFor(model => model.First().NAME)
                 :
             </span>
-            @Html.ActionLink(@i.NAME, "CalendarOfItem", new { id = i.ITEM_ID })
+            @Html.DisplayFor(modelItem => i.NAME)
         </div>
     
         <div class="rightHalfOfItem">
@@ -93,7 +93,9 @@
         </div>
         
         <div class="photoOfItem">
-            <img src="@Html.DisplayFor(modelItem => i.PHOTO)"/>
+            <a href="@Url.Action("CalendarOfItem", "Home", new { id = i.ITEM_ID })">
+                <img src="@Html.DisplayFor(modelItem => i.PHOTO)"/>
+            </a>
         </div>
 
         <div class="descriptionOfItem">
