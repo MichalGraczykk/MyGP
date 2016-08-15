@@ -143,6 +143,8 @@ namespace MyGraduationProject.Controllers
             if (Session["principal"] != null)
                 ViewBag.Auth = (User)Session["principal"];
 
+            //TODO test github
+
             //ferrari enzo id 2
             DateTime currDate = DateTime.Now;
             var items = db.Reservations.Where(i => i.ITEM_ID == id && i.DATE_TO > currDate);
