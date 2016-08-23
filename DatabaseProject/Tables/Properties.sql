@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[Properties] (
+    [PROPERTY_ID] INT           IDENTITY (1, 1) NOT NULL,
+    [NAME]        NVARCHAR (20) NOT NULL,
+    PRIMARY KEY CLUSTERED ([PROPERTY_ID] ASC)
+);

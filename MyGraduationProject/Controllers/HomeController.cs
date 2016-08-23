@@ -31,6 +31,12 @@ namespace MyGraduationProject.Controllers
             if (Session["principal"] != null)
                 ViewBag.Auth = (User)Session["principal"];
 
+            Role test = new Role();
+            test.NAME = "test";
+
+            db.Roles.InsertOnSubmit(test);
+            db.SubmitChanges();
+
             return View();
         }
 
@@ -106,7 +112,9 @@ namespace MyGraduationProject.Controllers
             if (ModelState.IsValid)
             {
                 //zapytanie które pobierze nam z bazy użytkownika o podanym loginie i haśle
-                var user = repo.GetUserByLoginAndPass(model.LOGIN, model.PASSWORD);
+                //var user = repo.GetUserByLoginAndPass(model.LOGIN, model.PASSWORD);
+
+                var user = db.Users.Where(u => u.LOGIN == model.LOGIN && u.PASSWORD == model.PASSWORD).FirstOrDefault();
 
                 if (user != null)
                 {
@@ -152,7 +160,7 @@ namespace MyGraduationProject.Controllers
             TimeSpan correct = new TimeSpan(1, 0, 0, 0);
             foreach (Reservation res in items)
             {
-                tmp.Add(new ToCallendar() { title = "reserved", start = res.DATE_FROM.Value.Add(correct), end = res.DATE_TO.Value.Add(correct) });
+                tmp.Add(new ToCallendar() { title = "reserved", start = res.DATE_FROM.Add(correct), end = res.DATE_TO.Add(correct) });
             }
             ViewBag.MyEventList = tmp;
 

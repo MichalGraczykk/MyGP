@@ -356,10 +356,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Documents\Visual Studio 2015\Projects\MyGraduationProject.Database\MyGraduationProject.Database.sqlproj">
-      <Project>{fa4ae918-722c-4bb3-a430-a5d2c5f188c3}</Project>
-      <Name>MyGraduationProject.Database</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DatabaseAccess\DatabaseAccess.csproj">
       <Project>{640b152c-247a-4620-bed2-771752c40893}</Project>
       <Name>DatabaseAccess</Name>

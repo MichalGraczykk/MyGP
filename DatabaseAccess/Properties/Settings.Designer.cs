@@ -26,12 +26,35 @@ namespace DatabaseAccess.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\ProjectsV13;Initial Catalog=MyGraduationProject.Database;In" +
-            "tegrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=T" +
-            "rue")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\aspnet-WebApp" +
+            "lication1-20160819032236.mdf;Initial catalog=MyGraduationProjectDatabase;Integra" +
+            "ted Security=True;MultipleActiveResultSets=True;")]
         public string MyGraduationProject_DatabaseConnectionString {
             get {
                 return ((string)(this["MyGraduationProject_DatabaseConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\aspnet-WebApp" +
+            "lication1-20160819032236.mdf;Initial Catalog=MyGraduationProjectDatabase;Integra" +
+            "ted Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework" +
+            "")]
+        public string MyGraduationProjectDatabaseConnectionString {
+            get {
+                return ((string)(this["MyGraduationProjectDatabaseConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=C:\Users\Misiek\Desktop\MyGraduationProject\MyGraduationProject\App_Data\aspnet-WebApplication1-20160819032236.mdf;Initial Catalog=MyGraduationProjectDatabase;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework")]
+        public string MyGraduationProjectDatabaseConnectionString1 {
+            get {
+                return ((string)(this["MyGraduationProjectDatabaseConnectionString1"]));
             }
         }
     }
