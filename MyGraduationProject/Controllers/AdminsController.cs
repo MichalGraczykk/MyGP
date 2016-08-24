@@ -455,7 +455,7 @@ namespace MyGraduationProject.Controllers
                         itemToEdit.STATE_ID = item.STATE_ID;
 
                         db.SubmitChanges();
-                        return RedirectToAction("Index");
+                        return RedirectToAction("ListOfItems", "Admins");
                     }
                     ViewBag.STATE_ID = new SelectList(repo.GetAllStatuses(), "STATE_ID", "STATE_NAME", item.STATE_ID);
                     return View(item);
@@ -602,6 +602,330 @@ namespace MyGraduationProject.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+
+        // GET: Admins/ListOfProperties
+        public ActionResult ListOfProperties()
+        {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+            {
+                ViewBag.Auth = (User)(Session["principal"]);
+                var current = new User();
+                current = (User)(Session["principal"]);
+
+                if (current.ROLE_ID == (int)(RolesEnum.admin))
+                {
+                    var props = db.Properties;
+                    return View(props);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult ListOfProperties(string newProp)
+        {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+            {
+                ViewBag.Auth = (User)(Session["principal"]);
+                var current = new User();
+                current = (User)(Session["principal"]);
+
+                if (current.ROLE_ID == (int)(RolesEnum.admin))
+                {
+                    if (newProp != null && newProp != "")
+                    {
+                        var check = db.Properties.Where(u => u.NAME == newProp).FirstOrDefault();
+
+                        if (check == null)
+                        {
+                            var tmp = new Property();
+                            tmp.NAME = newProp;
+                            db.Properties.InsertOnSubmit(tmp);
+                            db.SubmitChanges();
+                        }
+                    }
+                    var props = db.Properties;
+                    return View(props);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        // GET: Admins/DeleteProperty/1
+        public ActionResult DeleteProperty(int? id)
+        {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+            {
+                ViewBag.Auth = (User)(Session["principal"]);
+                var current = new User();
+                current = (User)(Session["principal"]);
+
+                if (current.ROLE_ID == (int)(RolesEnum.admin))
+                {
+                    if (id != null)
+                    {
+                        var tmpProp = db.Properties.Where(p => p.PROPERTY_ID == id).FirstOrDefault();
+
+                        if (tmpProp != null)
+                        {
+                            var tmpConn = db.Connectors.Where(c => c.PropValue.PROPERTY_ID == tmpProp.PROPERTY_ID);
+                            if(tmpConn != null) { 
+                                db.Connectors.DeleteAllOnSubmit(tmpConn);
+                            }
+
+                            var tmpVal = db.PropValues.Where(p => p.PROPERTY_ID == tmpProp.PROPERTY_ID);
+                            if (tmpVal != null) {
+                                db.PropValues.DeleteAllOnSubmit(tmpVal);
+                            }
+                            db.Properties.DeleteOnSubmit(tmpProp);
+                            db.SubmitChanges();
+                        }
+                    }
+                    return RedirectToAction("ListOfProperties", "Admins");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        // GET: Admins/EditProperty/1
+        public ActionResult EditProperty(int? id)
+        {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+            {
+                ViewBag.Auth = (User)(Session["principal"]);
+                var current = new User();
+                current = (User)(Session["principal"]);
+
+                if (current.ROLE_ID == (int)(RolesEnum.admin))
+                {
+                    if (id != null)
+                    {
+                        var prop = db.Properties.Where(p => p.PROPERTY_ID == id).FirstOrDefault();
+
+                        if (prop != null)
+                            return View(prop);
+
+                        return RedirectToAction("ListOfProperties");
+                    }
+                    return RedirectToAction("ListOfProperties");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult EditProperty(Property propEdited)
+        {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+            {
+                ViewBag.Auth = (User)(Session["principal"]);
+                var current = new User();
+                current = (User)(Session["principal"]);
+
+                if (current.ROLE_ID == (int)(RolesEnum.admin))
+                {
+                    if (propEdited != null)
+                    {
+                        var prop = db.Properties.Where(p => p.PROPERTY_ID == propEdited.PROPERTY_ID).FirstOrDefault();
+
+                        if (prop != null) {
+                            prop.NAME = propEdited.NAME;
+                            db.SubmitChanges();
+                        }
+
+                        return RedirectToAction("ListOfProperties");
+                    }
+                    return RedirectToAction("ListOfProperties");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        // GET: Admins/ValuesOfProperty/1
+        public ActionResult ValuesOfProperty(int id)
+        {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+            {
+                ViewBag.Auth = (User)(Session["principal"]);
+                var current = new User();
+                current = (User)(Session["principal"]);
+
+                if (current.ROLE_ID == (int)(RolesEnum.admin))
+                {
+                    var values = db.PropValues.Where(i => i.PROPERTY_ID == id);
+                    return View(values);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult ValuesOfProperty(string newVal, int? id)
+        {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+            {
+                ViewBag.Auth = (User)(Session["principal"]);
+                var current = new User();
+                current = (User)(Session["principal"]);
+
+                if (current.ROLE_ID == (int)(RolesEnum.admin))
+                {
+                    if (newVal != null)
+                    {
+                        var check = db.PropValues.Where(u => u.VALUE == newVal).FirstOrDefault();
+
+                        if (check == null && id != null)
+                        {
+                            var tmp = new PropValue();
+                            tmp.VALUE = newVal;
+                            tmp.PROPERTY_ID = (int)id;
+
+                            db.PropValues.InsertOnSubmit(tmp);
+                            db.SubmitChanges();
+                        }
+                    }
+                    var values = db.PropValues.Where(i => i.PROPERTY_ID == id);
+                    return View(values);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        // GET: Admins/EditValueOfProperty/1
+        public ActionResult EditValueOfProperty(int? id)
+        {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+            {
+                ViewBag.Auth = (User)(Session["principal"]);
+                var current = new User();
+                current = (User)(Session["principal"]);
+
+                if (current.ROLE_ID == (int)(RolesEnum.admin))
+                {
+                    if (id != null)
+                    {
+                        var value = db.PropValues.Where(p => p.VALUE_ID == id).FirstOrDefault();
+
+                        if (value != null)
+                            return View(value);
+                    }
+                    return RedirectToAction("ListOfProperties");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult EditValueOfProperty(PropValue valueEdited)
+        {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+            {
+                ViewBag.Auth = (User)(Session["principal"]);
+                var current = new User();
+                current = (User)(Session["principal"]);
+
+                if (current.ROLE_ID == (int)(RolesEnum.admin))
+                {
+                    if (valueEdited != null)
+                    {
+                        var val = db.PropValues.Where(p => p.VALUE_ID == valueEdited.VALUE_ID).FirstOrDefault();
+
+                        if (val != null)
+                        {
+                            val.VALUE = valueEdited.VALUE;
+                            db.SubmitChanges();
+                        }
+                    }
+                    return RedirectToAction("ListOfProperties");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        // GET: Admins/DeleteProperty/1
+        public ActionResult DeleteValueOfProperty(int? id)
+        {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+            {
+                ViewBag.Auth = (User)(Session["principal"]);
+                var current = new User();
+                current = (User)(Session["principal"]);
+
+                if (current.ROLE_ID == (int)(RolesEnum.admin))
+                {
+                    if (id != null)
+                    {
+                        var tmpVal = db.PropValues.Where(p => p.VALUE_ID == id).FirstOrDefault();
+
+                        if (tmpVal != null)
+                        {
+                            var tmpConn = db.Connectors.Where(c => c.PropValue.VALUE_ID == tmpVal.VALUE_ID);
+                            if (tmpConn != null)
+                            {
+                                db.Connectors.DeleteAllOnSubmit(tmpConn);
+                            }
+
+                            db.PropValues.DeleteOnSubmit(tmpVal);
+                            db.SubmitChanges();
+                        }
+                    }
+                    return RedirectToAction("ListOfProperties", "Admins");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+
 
         protected override void Dispose(bool disposing)
         {

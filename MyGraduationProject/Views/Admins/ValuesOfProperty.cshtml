@@ -1,0 +1,39 @@
+﻿@model IEnumerable<DatabaseAccess.PropValue>
+@{
+    ViewBag.Title = "ValuesOfProperty";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box">
+    <table class="table table-hover table-striped table-condensed table-bordered">
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => i.VALUE_ID)
+                </td>
+                <td>
+                   @Html.DisplayFor(modelItem => i.VALUE)
+                </td>
+                <td>
+                    @Html.ActionLink("Edytuj", "EditValueOfProperty", new { id = i.VALUE_ID })
+                </td>
+                <td>
+                    @Html.ActionLink("Usuń", "DeleteValueOfProperty", new { id = i.VALUE_ID })
+                </td>
+            </tr>
+        }
+    </table>
+
+    <div class="loginContainer">
+        <hr />
+        @using (Html.BeginForm("id = model.First().PROPERTY_ID, newVal"))
+        {
+            @Html.TextBox("newVal")
+            <br />
+            <input type="submit" value="Dodaj nową wartość" class="btn btn-default" />
+        }
+    </div>
+    @Html.ActionLink("Wróć do listy właściwości", "ListOfProperties")
+</div>
+

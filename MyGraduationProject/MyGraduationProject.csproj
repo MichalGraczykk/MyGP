@@ -177,6 +177,7 @@
     <Content Include="Content\mooning.png" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\presentationStyle.css" />
+    <Content Include="Content\site.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -207,7 +208,6 @@
     <Content Include="fonts\fontello.svg" />
     <Content Include="Content\login.css" />
     <Content Include="Content\registration.css" />
-    <Content Include="Content\site.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -339,6 +339,10 @@
     <Content Include="Views\Client\OneItem.cshtml" />
     <Content Include="Views\Client\ConfirmOrder.cshtml" />
     <Content Include="Views\Home\CalendarOfItem.cshtml" />
+    <Content Include="Views\Admins\ListOfProperties.cshtml" />
+    <Content Include="Views\Admins\ValuesOfProperty.cshtml" />
+    <Content Include="Views\Admins\EditProperty.cshtml" />
+    <Content Include="Views\Admins\EditValueOfProperty.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

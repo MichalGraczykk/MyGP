@@ -8,6 +8,13 @@ body {
     /* Background pattern from subtlepatterns.com */
     background-image: url("mooning.png");
 }
+.box{
+    margin-top:20px;
+    max-width: 1000px;
+    min-height:600px;
+    margin-left:auto;
+    margin-right:auto;
+}
 
 .cen {
     text-align:center;
@@ -34,7 +41,8 @@ body {
 
 .container {
 	min-height: 500px;
-	width: 1000px;
+	max-width:1000px;
+	min-width:1000px;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
@@ -55,8 +63,10 @@ body {
 	background-color: #404040;
 	margin-left: auto;
 	margin-right: auto;
+	margin-top:5px;
 	color: white;
 	text-decoration: none;
+	height:110px;
 }
 
 .socCenter{

@@ -1,0 +1,26 @@
+﻿@model DatabaseAccess.PropValue
+
+@{
+    ViewBag.Title = "EditValueOfProperty";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box">
+    <div class="loginContainer">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.VALUE_ID)
+
+            @Html.EditorFor(model => model.VALUE, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.VALUE, "", new { @class = "text-danger" })
+            <hr>
+            <input type="submit" value="Zapisz" class="btn btn-default" /> <br />
+            <hr>
+            @Html.ActionLink("Wróć do listy właściwości", "ListOfProperties", "Admins")
+        }
+    </div>
+</div>
+

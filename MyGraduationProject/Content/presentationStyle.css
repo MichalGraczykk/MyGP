@@ -1,15 +1,28 @@
-﻿.itemContainer{
+﻿.allOfItemsContainer{
+	max-width: 1000px;
+	margin-left:auto;
+	margin-right:auto;
+	float:none;
+	margin-bottom:10px;
+	margin-top:10px;
+}
+
+.itemContainer{
     text-align: center;
     margin-left: auto;
 	margin-right: auto;
     padding:10px;
-    width: 990px;
+    width: 320px;
+	min-height:280px;
     background-color:#e4e4e4;
-    border-radius: 20px 20px 20px 20px;
-    margin-bottom:10px;
-    margin-top:10px;
+    border: 1px solid #ffcc33;
+    margin:5px;
     color:black;
+	float:left;
+	border-radius:10px 10px 10px 10px;
 }
+
+
 
 a{
     text-decoration:none;
@@ -36,6 +49,8 @@ a:hover{
 }
 
 #calendar {
+	margin-left:auto;
+	margin-right:auto;
     max-width: 480px !important;
     background-color: !important;
     color: black;
@@ -71,10 +86,54 @@ a:hover{
 }
 
 .itemContainer img{
-    max-width: 970px;
+    max-width: 300px;
+	max-height: 200px;
+	border-radius:5px 5px 5px 5px;
 }
 
 .leftHalfOfItem{
+	border-radius:5px 5px 5px 5px;
+    background-color: #d2d2d2;
+    width: 300px;
+    display:block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.rightHalfOfItem{
+    background-color:#cbcbcb;
+    width: 300px;
+	margin-top:10px;
+    margin-bottom:10px;
+    margin-left: auto;
+	margin-right: auto;
+    display:block;
+	border-radius:5px 5px 5px 5px;
+}
+
+.photoOfItem {
+    text-align: center;
+    width: 300px;
+    margin-top: 10px;
+}
+
+
+
+/*ONE ITEM PRESENTATION*/
+.oneItemContainer{
+    text-align: center;
+    margin-left: auto;
+	margin-right: auto;
+    padding:10px;
+    width: 990px;
+    background-color:#e4e4e4;
+    border-radius: 20px 20px 20px 20px;
+    margin-bottom:10px;
+    margin-top:10px;
+    color:black;
+}
+
+.leftHalfOfOneItem{
     border-radius: 15px 0px 0px 0px;
     background-color:#acacac;
     width: 480px;
@@ -82,7 +141,7 @@ a:hover{
     display:block;
 }
 
-.rightHalfOfItem{
+.rightHalfOfOneItem{
     float:none;
     border-radius: 0px 15px 0px 0px;
     background-color:#acacac;
@@ -92,13 +151,6 @@ a:hover{
     display:block;
 }
 
-.photoOfItem{
-    text-align:center;
-    width: 970px;
-    margin-top:10px;
-    margin-bottom:10px;
-
-}
 .photoOfItemFloat{
     width: 480px;
     height: 400px;
@@ -106,7 +158,6 @@ a:hover{
     float:left !important;
     display:block !important;
 }
-
 
 .descriptionOfItem{
     background-color:#acacac;
@@ -116,3 +167,5 @@ a:hover{
     margin-top:10px;
     border-radius: 0px 0px 15px 15px;
 }
+
+

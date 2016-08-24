@@ -30,7 +30,7 @@
                 </li>
 
                 <li>
-                    <span style="font-size:25px; font-family: 'Righteous', cursive;">FILRTUJ:</span>
+                    <span style="font-size:25px; font-family: 'Righteous', cursive;">FILTRUJ:</span>
                 </li>
 @using (Html.BeginForm())
 {
@@ -72,43 +72,46 @@
 }
             </ol>       
 </div>
-@foreach (var i in Model)
-{
-    <div class="itemContainer">
-        <div class="leftHalfOfItem">
-            <span style="font-family: 'Archivo Black', sans-serif; color: #313131">
-                
-                @Html.DisplayNameFor(model => model.First().NAME)
-                :
-            </span>
-            @Html.DisplayFor(modelItem => i.NAME)
-        </div>
-    
-        <div class="rightHalfOfItem">
-            <span style="font-family: 'Archivo Black', sans-serif; color: #313131">
-                @Html.DisplayNameFor(model => model.First().PRICE_PER_DAY)
-                :
-            </span>
-            @Html.DisplayFor(modelItem => i.PRICE_PER_DAY)
-        </div>
-        
-        <div class="photoOfItem">
-            <a href="@Url.Action("CalendarOfItem", "Home", new { id = i.ITEM_ID })">
-                <img src="@Html.DisplayFor(modelItem => i.PHOTO)"/>
-            </a>
-        </div>
 
-        <div class="descriptionOfItem">
-            <span style="font-family: 'Archivo Black', sans-serif; color: #313131">
-                @Html.DisplayNameFor(model => model.First().DESCRPTION)
-            </span>
-            <br/>
-            @Html.DisplayFor(modelItem => i.DESCRPTION)
+<div class="allOfItemsContainer">
+    @foreach (var i in Model)
+    {
+        <div class="itemContainer">
+            <div class="leftHalfOfItem">
+                <span style="font-family: 'Archivo Black', sans-serif; color: #313131">
+                    @Html.DisplayNameFor(model => model.First().NAME)
+                    :
+                </span>
+                @Html.DisplayFor(modelItem => i.NAME)
+            </div>
+
+            <div class="rightHalfOfItem">
+                <span style="font-family: 'Archivo Black', sans-serif; color: #313131">
+                    @Html.DisplayNameFor(model => model.First().PRICE_PER_DAY)
+                    :
+                </span>
+                @Html.DisplayFor(modelItem => i.PRICE_PER_DAY)
+            </div>
+
+            <div class="photoOfItem">
+                <a href="@Url.Action("CalendarOfItem", "Home", new { id = i.ITEM_ID })">
+                    <img src="@Html.DisplayFor(modelItem => i.PHOTO)" />
+                </a>
+            </div>
+            @*
+    <div class="descriptionOfItem">
+        <span style="font-family: 'Archivo Black', sans-serif; color: #313131">
+            @Html.DisplayNameFor(model => model.First().DESCRPTION)
+        </span>
+        <br />
+        @Html.DisplayFor(modelItem => i.DESCRPTION)
+    </div>*@
         </div>
-    </div>
-}
+    }
+</div>
+<div style="clear:both;"></div>
 
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
 
-    @Html.PagedListPager(Model, page => Url.Action("Assortment",
+        @Html.PagedListPager(Model, page => Url.Action("Assortment",
                     new { sorting = ViewBag.SortedBy, filtrationNAME = ViewBag.FindNAME, page, dateTo = ViewBag.DateTo, dateFrom = ViewBag.DateFrom }))

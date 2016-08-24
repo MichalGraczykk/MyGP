@@ -31,12 +31,6 @@ namespace MyGraduationProject.Controllers
             if (Session["principal"] != null)
                 ViewBag.Auth = (User)Session["principal"];
 
-            Role test = new Role();
-            test.NAME = "test";
-
-            db.Roles.InsertOnSubmit(test);
-            db.SubmitChanges();
-
             return View();
         }
 
@@ -55,7 +49,7 @@ namespace MyGraduationProject.Controllers
 
             var items = repo.GetAvailableItems();
 
-            int pageSize = 2;
+            int pageSize = 20;
             int pageNumber = (page ?? 1);
 
             if (ModelState.IsValid)
