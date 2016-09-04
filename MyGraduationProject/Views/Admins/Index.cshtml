@@ -5,7 +5,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="container">
+<div class="box">
     @using (Html.BeginForm())
     {
         <span>LOGIN:</span>
@@ -14,7 +14,7 @@
     }
 
     <br />
-    <table class="table">
+    <table class="table table-bordered table-condensed table-hover">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.First().LOGIN)

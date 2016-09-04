@@ -4,6 +4,7 @@ using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace MyGraduationProject.Controllers
@@ -161,6 +162,59 @@ namespace MyGraduationProject.Controllers
             var item = repo.GetItemById(id);
 
             return View(item);
+        }
+
+        // GET: /Home/Ajaks  int? propertyID = null
+        [HttpGet]
+        public async Task<ActionResult> Ajaks()
+        {
+            /* var props = db.Properties;
+             ViewBag.props = props;
+
+             var container = new ajaksK();
+             container.properties = props;
+             var model = new List<PropValue> { new PropValue { VALUE_ID = 0, VALUE = "DEFAULT" } };
+             container.pValues = model;
+
+             return View(container);*/
+
+            var model = GetFullAndPartialViewModel();
+            return this.View(model);
+        }
+
+        [HttpGet]
+        public ActionResult GetCategoryProducts(int categoryId)
+        {
+                
+                var model = GetFullAndPartialViewModel(categoryId);
+            return PartialView("_ajaks", model.pValues);
+        }
+
+        [HttpGet]
+        private ajaksK GetFullAndPartialViewModel(int categoryId = 0)
+        {
+            var fullAndPartialViewModel = new ajaksK();
+            fullAndPartialViewModel.properties = db.Properties;
+
+           // if(categoryId == 0)
+             //   fullAndPartialViewModel.pValues = new List<PropValue> { new PropValue() { PROPERTY_ID = 0, VALUE = "POST DEFAULT" } };
+           // else if (!db.PropValues.Where(p => p.VALUE_ID == categoryId).Any())
+                fullAndPartialViewModel.pValues = db.PropValues.Where(p => p.PROPERTY_ID == categoryId);
+           // else
+             //   fullAndPartialViewModel.pValues = new List<PropValue> { new PropValue() { PROPERTY_ID = 0, VALUE = "POST DEFAULT" } };
+
+            fullAndPartialViewModel.items = db.Items;
+            return fullAndPartialViewModel;
+        }
+
+        public PartialViewResult test(int id)
+        {
+            var model = db.PropValues.Where(p => p.PROPERTY_ID == id).ToList();
+
+            if (id == 0)
+                model = new List<PropValue> { new PropValue { VALUE_ID = 0, VALUE = "DEFAULT" } };
+
+            return PartialView("_ajaks", model);
         }
 
         protected override void Dispose(bool disposing)

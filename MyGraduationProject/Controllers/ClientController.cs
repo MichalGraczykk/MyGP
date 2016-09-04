@@ -21,9 +21,13 @@ namespace MyGraduationProject.Controllers
             ViewBag.Auth = null;
             if (Session["principal"] != null)
             {
-                ViewBag.Auth = (User)(Session["principal"]);
-                var current = new User();
-                current = (User)(Session["principal"]);
+                var tmp = new User();
+                tmp = (User)(Session["principal"]);
+
+                var current = db.Users.Where(u => u.USER_ID == tmp.USER_ID).FirstOrDefault();
+
+                Session["principal"] = current;
+                ViewBag.Auth = current;
 
                 if (current.ROLE_ID == (int)(RolesEnum.client))
                 {

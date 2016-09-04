@@ -5,8 +5,8 @@
     ViewBag.Title = "ListOfTransactions";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<table class="table">
+<div class="box">
+<table class="table table-bordered table-condensed table-hover">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.First().RESERVATION_ID)
@@ -63,3 +63,4 @@
 
     @Html.PagedListPager(Model, page => Url.Action("ListOfTransactions",
                     new { sorting = ViewBag.SortedBy, page }))
+</div>
