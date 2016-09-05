@@ -314,10 +314,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ajaksK.cs" />
+    <Compile Include="Models\AssortmentContainer.cs" />
     <Compile Include="Models\Enums\ReservationStatusesEnum.cs" />
     <Compile Include="Models\Enums\RolesEnum.cs" />
     <Compile Include="Models\Enums\StatesEnum.cs" />
+    <Compile Include="Models\ItemContainer.cs" />
     <Compile Include="Models\LoginView.cs" />
     <Compile Include="Models\MyRepository.cs" />
     <Compile Include="Models\ToCallendar.cs" />
@@ -354,6 +355,8 @@
     <Content Include="Views\Admins\EditValueOfProperty.cshtml" />
     <Content Include="Views\Home\Ajaks.cshtml" />
     <Content Include="Views\Home\_ajaks.cshtml" />
+    <Content Include="Views\Admins\PropertiesOfItem.cshtml" />
+    <Content Include="Views\Admins\_PropertiesOfItem.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

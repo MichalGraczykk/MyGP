@@ -1,4 +1,4 @@
-﻿@model MyGraduationProject.Models.ajaksK
+﻿@model MyGraduationProject.Models.AssortmentContainer
 @{
     ViewBag.Title = "ajaks";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,10 +6,10 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#ddlCategory").change(function () {
-            var categoryId = $("#ddlCategory").val();
-            console.log(categoryId);
-            $("#dvCategoryResults").load('@(Url.Action("GetCategoryProducts","Home",null, Request.Url.Scheme))?categoryId=' + categoryId);
+        $("#ddlProperties").change(function () {
+            var propertyId = $("#ddlProperties").val();
+            console.log(propertyId);
+            $("#dvPropertiesResults").load('@(Url.Action("GetPropValues","Home",null, Request.Url.Scheme))?propertyId=' + propertyId);
         });
     });
 </script>  
@@ -18,27 +18,15 @@
 
 <div class="box">
     <div class="loginContainer">
-   @*  @using (Ajax.BeginForm("test", "Home", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "relod" }))
+   @*  @using (Html.BeginForm())
     { *@
-        <label for="ddlCategory"><strong>Select a category</strong></label>
-       @* @Html.DropDownListFor(m => m.CategoryId,
-    new SelectList(Model.CategoryList, "CategoryId", "CategoryName", Model.CategoryId), new { id = "ddlCategory", @class = "test" }) *@
         @Html.DropDownListFor(m => m.properties,
-        new SelectList(Model.properties, "PROPERTY_ID", "NAME"), new { id = "ddlCategory", @class = "form-control" })
-        @*
-        @Html.DropDownList("id", new SelectList(Model.properties, "PROPERTY_ID", "NAME"), htmlAttributes: new { @class = "form-control" })*@
+        new SelectList(Model.properties, "PROPERTY_ID", "NAME"), new { id = "ddlProperties", @class = "form-control" })
         <hr />
-        <div id="dvCategoryResults">
+        <div id="dvPropertiesResults">
             @{Html.RenderPartial("_ajaks", Model.pValues);}
         </div>
-       @* <input type="submit" value="Jebnij" class="btn btn-default" />
+       @* <input type="submit" value="Wyslij" class="btn btn-default" />
     }*@
-        
-        @*
-        @using (Ajax.BeginForm("Ajaaaks","Home", new AjaxOptions { HttpMethod = "Post"}))
-        @Html.DropDownListFor(x => x.name, new SelectList(ViewBag.props, "PROPERTY_ID", "NAME"))
-        @Html.DropDownList("ROLE_ID", null, htmlAttributes: new { @class = "form-control" })
-        <button type="submit" id="findButton">find</button>
-        <input type = "submit" value = "POST" class="btn btn-default" />*@
     </div>
 </div>

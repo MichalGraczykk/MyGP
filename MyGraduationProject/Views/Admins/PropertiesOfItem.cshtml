@@ -1,0 +1,53 @@
+﻿@model MyGraduationProject.Models.ItemContainer
+@{
+    ViewBag.Title = "PropertiesOfItem";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#ddlProperties").change(function () {
+            var propertyId = $("#ddlProperties").val();
+            console.log(propertyId);
+            $("#dvPropertiesResults").load('@(Url.Action("GetPropValues","Home",null, Request.Url.Scheme))?propertyId=' + propertyId);
+        });
+    });
+</script>
+
+<div class="box">
+    <h5>
+        Aby edytować wartość właściwości wystarczy dodać ją podownie(z nową wartością).
+        <br/>
+        Aby usunąć powiązanie właściwości z produktem należy kliknąć na nazwę właściwości.
+    </h5>
+    <div class="loginContainer">
+            <dl class="dl-horizontal" style="font-size:15px;">
+                @foreach (var i in Model.connectors)
+                {
+                    <dt>
+                        @Html.ActionLink(i.PropValue.Property.NAME, "DeleteConnector", new { VAL_ID = i.PropValue.VALUE_ID,  ITEM_ID = Model.item.ITEM_ID})
+                        <span>: </span>
+                    </dt>
+                    <dd style="text-align:left;">
+                        @i.PropValue.VALUE
+                    </dd>
+                }
+             </dl>
+             <hr/>
+                @using (Html.BeginForm())
+                {
+                    @Html.Hidden("ITEM_ID", Model.item.ITEM_ID)
+
+                    @Html.DropDownListFor(m => m.properties,
+                        new SelectList(Model.properties, "PROPERTY_ID", "NAME"), new { id = "ddlProperties", @class = "form-control" })
+                    <hr />
+                    <div id="dvPropertiesResults">
+                        @{Html.RenderPartial("_PropertiesOfItem", Model.pValues);}
+                    </div>
+                    <input type="submit" value="Dodaj" class="btn btn-default" />
+                }
+        </div>
+    </div>
+
+
+

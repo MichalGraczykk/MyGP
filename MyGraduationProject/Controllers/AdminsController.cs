@@ -925,6 +925,129 @@ namespace MyGraduationProject.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        // GET: Admins/PropertiesOfItem/1
+        [HttpGet]
+        public ActionResult PropertiesOfItem(int id)
+        {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+            {
+                ViewBag.Auth = (User)(Session["principal"]);
+                var current = new User();
+                current = (User)(Session["principal"]);
+
+                if (current.ROLE_ID == (int)(RolesEnum.admin))
+                {
+                    var currentProps = db.Connectors.Where(c => c.ITEM_ID == id);
+                    if (db.Connectors.Where(c => c.ITEM_ID == id).Any())
+                    {
+                        ViewBag.curProps = currentProps;
+                    }
+                    else
+                    {
+                        ViewBag.curProps = null;
+                    }
+                    var model = GetFullAndPartialViewPropertiesModel();
+                    model.item = db.Items.Where(i => i.ITEM_ID == id).FirstOrDefault();
+                    model.connectors = db.Connectors.Where(c => c.ITEM_ID == id).OrderBy(c => c.PropValue.Property.NAME);
+
+                    return this.View(model);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        // POST: Admins/PropertiesOfItem/1
+        [HttpPost]
+        public ActionResult PropertiesOfItem(int VAL_ID,int ITEM_ID)
+        {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+            {
+                ViewBag.Auth = (User)(Session["principal"]);
+                var current = new User();
+                current = (User)(Session["principal"]);
+
+                if (current.ROLE_ID == (int)(RolesEnum.admin))
+                {
+                    //var item = db.Items.Where(i => i.ITEM_ID == ITEM_ID).FirstOrDefault();
+                    var value = db.PropValues.Where(p => p.VALUE_ID == VAL_ID).FirstOrDefault();
+                    var checker = db.Connectors.Where(c => c.ITEM_ID == ITEM_ID && c.PropValue.PROPERTY_ID == value.PROPERTY_ID).FirstOrDefault();
+                    if(checker == null)
+                    {
+                        var newConnector = new Connector();
+                        newConnector.ITEM_ID = ITEM_ID;
+                        newConnector.VALUE_ID = VAL_ID;
+                        db.Connectors.InsertOnSubmit(newConnector);
+                        db.SubmitChanges();
+                    }
+                    else
+                    {
+                        checker.VALUE_ID = VAL_ID;
+
+                        db.SubmitChanges();
+                    }
+                    return RedirectToAction("PropertiesOfItem","Admins", ITEM_ID);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult DeleteConnector(int VAL_ID, int ITEM_ID)
+        {
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+            {
+                ViewBag.Auth = (User)(Session["principal"]);
+                var current = new User();
+                current = (User)(Session["principal"]);
+
+                if (current.ROLE_ID == (int)(RolesEnum.admin))
+                {
+                    //var item = db.Items.Where(i => i.ITEM_ID == ITEM_ID).FirstOrDefault();
+                    //var value = db.PropValues.Where(p => p.VALUE_ID == VAL_ID).FirstOrDefault();
+                    var checker = db.Connectors.Where(c => c.ITEM_ID == ITEM_ID && c.PropValue.VALUE_ID == VAL_ID).FirstOrDefault();
+                    if(checker != null)
+                    {
+                        db.Connectors.DeleteOnSubmit(checker);
+                        db.SubmitChanges();
+                    }
+
+                    return RedirectToAction("PropertiesOfItem", "Admins",new { id = ITEM_ID });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public ActionResult GetPropValues(int propertyId)
+        {
+
+            var model = GetFullAndPartialViewPropertiesModel(propertyId);
+            return PartialView("_PropertiesOfItem", model.pValues);
+        }
+
+        [HttpGet]
+        private ItemContainer GetFullAndPartialViewPropertiesModel(int propertyId = 0)
+        {
+            var fullAndPartialViewModel = new ItemContainer();
+            fullAndPartialViewModel.properties = db.Properties;
+            fullAndPartialViewModel.pValues = db.PropValues.Where(p => p.PROPERTY_ID == propertyId);
+
+            return fullAndPartialViewModel;
+        }
 
 
         protected override void Dispose(bool disposing)

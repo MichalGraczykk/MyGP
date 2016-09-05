@@ -6,11 +6,11 @@ using System.Web;
 
 namespace MyGraduationProject.Models
 {
-    public class ajaksK
+    public class ItemContainer
     {
-        public IEnumerable<Item> items { get; set; }
+        public IEnumerable<Connector> connectors { get; set; }
+        public Item item { get; set; }
         public IEnumerable<PropValue> pValues { get; set; }
         public IEnumerable<Property> properties { get; set; }
-
     }
 }
