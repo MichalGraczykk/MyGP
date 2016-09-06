@@ -15,6 +15,23 @@
     });
 </script>
 
+<script type="text/javascript">
+  $(function(){
+      $('#dPicker').datepicker({
+      dateFormat: 'dd/mm/yy',
+      inline: true,
+      showOtherMonths: true,
+      dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    });
+      $('#dPickerr').datepicker({
+        dateFormat: 'dd/mm/yy',
+        inline: true,
+        showOtherMonths: true,
+        dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    });
+  });
+</script>
+
 <br />
 <span style="color:#1e1e1e; font-size:15px">
     Kliknij w zdjęcie aby zobaczyć harmonogram wypożyczeń danego produktu
@@ -27,11 +44,11 @@
                 </li>
 
                 <li>
-                        @Html.ActionLink("NAME", "Assortment", new { sorting = ViewBag.SortByNAME, filtrationNAME = ViewBag.FindNAME, dateTo = ViewBag.DateTo, dateFrom = ViewBag.DateFrom, VAL_ID = ViewBag.VAL_ID })
+                        @Html.ActionLink("NAME", "Assortment", new { sorting = ViewBag.SortByNAME, filtrationNAME = ViewBag.FindNAME, dateTo = ViewBag.DateT, dateFrom = ViewBag.DateF, VAL_ID = ViewBag.VAL_ID })
                 </li>
                 
                 <li>
-                        @Html.ActionLink("PRICE_PER_DAY", "Assortment", new { sorting = ViewBag.SortByPRICE_PER_DAY, filtrationNAME = ViewBag.FindNAME, dateTo = ViewBag.DateTo, dateFrom = ViewBag.DateFrom, VAL_ID = ViewBag.VAL_ID })
+                        @Html.ActionLink("PRICE_PER_DAY", "Assortment", new { sorting = ViewBag.SortByPRICE_PER_DAY, filtrationNAME = ViewBag.FindNAME, dateTo = ViewBag.DateT, dateFrom = ViewBag.DateF, VAL_ID = ViewBag.VAL_ID })
                 </li>
 
                 <li>
@@ -56,7 +73,7 @@
                 </li>
 
                 <li>
-                    @Html.TextBox("dateFrom")
+                    @Html.TextBox("dateFrom", null, new { id = "dPicker" })
                 </li>
 
                 <li>
@@ -68,7 +85,7 @@
                 </li>
 
                 <li>
-                    @Html.TextBox("dateTo")
+                    @Html.TextBox("dateTo", null,  new { id = "dPickerr" })
                 </li>
 
                 <li>

@@ -12,6 +12,7 @@ namespace MyGraduationProject
                         "~/Scripts/jquery-3.1.0.js",
                         "~/Scripts/jquery.unobtrusive-ajax.min.js",
                         "~/Scripts/moment.min.js",
+                        "~/Scripts/jquery-ui-1.12.0.min.js",
                         "~/Scripts/jquery-ui.custom.min.js",
                         "~/Scripts/fullcalendar.min.js"));
 

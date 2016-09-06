@@ -4,6 +4,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script type="text/javascript">
+  $(function(){
+      $('#dPicker').datepicker({
+      dateFormat: 'dd/mm/yy',
+      inline: true,
+      showOtherMonths: true,
+      dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    });
+      $('#dPickerr').datepicker({
+        dateFormat: 'dd/mm/yy',
+        inline: true,
+        showOtherMonths: true,
+        dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    });
+  });
+</script>
+
 @if (ViewBag.Auth != null)
 {
 <div class="move" style="top:250px;">
@@ -17,7 +34,7 @@
             </li>
 
                 <li>
-                    @Html.TextBox("tDateFrom")
+                    @Html.TextBox("tDateFrom", null, new { id = "dPicker" })
                 </li>
 
                 <li>
@@ -29,7 +46,7 @@
                 </li>
 
                 <li>
-                    @Html.TextBox("tDateTo")
+                    @Html.TextBox("tDateTo", null, new { id = "dPickerr" })
                 </li>
 
                 <li>

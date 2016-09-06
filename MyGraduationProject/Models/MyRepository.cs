@@ -74,12 +74,12 @@ namespace MyGraduationProject.Models
             return reservation;
         }
 
-        public IEnumerable<Item> GetListOfAvailableItems(DateTime startDate, DateTime endDate)
+        public IEnumerable<Item> GetListOfAvailableItems(IEnumerable<Item> source,DateTime startDate, DateTime endDate)
         {            
             //zapytanie zagniezdzone musi zwracac boola dla tego na koncu jest any(), any zwraca informacje czy wystepuje jakis element w liscie(jesli lista bedzie pusta to zwroci false w przeciwnym wypadku frue)
             // pobierze liste itemow dostepnych w chwili wywolania widoku
-            var itemsOfOutRange = db.Items.Where(i => i.Reservations.Where(reservation => reservation.DATE_FROM > startDate && reservation.DATE_FROM > endDate || reservation.DATE_TO < startDate && reservation.DATE_TO < endDate || reservation.STATUS_ID == (int)ReservationStatusesEnum.CANCELLED).Any() && i.STATE_ID == (int)(StatesEnum.AVAILABLE));
-            var itemsWithoutReservation = db.Items.Where(i => !i.Reservations.Any() && i.STATE_ID == (int)(StatesEnum.AVAILABLE));
+            var itemsOfOutRange = source.Where(i => i.Reservations.Where(reservation => reservation.DATE_FROM > startDate && reservation.DATE_FROM > endDate || reservation.DATE_TO < startDate && reservation.DATE_TO < endDate || reservation.STATUS_ID == (int)ReservationStatusesEnum.CANCELLED).Any() && i.STATE_ID == (int)(StatesEnum.AVAILABLE));
+            var itemsWithoutReservation = source.Where(i => !i.Reservations.Any() && i.STATE_ID == (int)(StatesEnum.AVAILABLE));
             var listOfAvailableItems = new List<Item>(); // Finalna lista dostepnych itemow
             listOfAvailableItems.AddRange(itemsOfOutRange);
             listOfAvailableItems.AddRange(itemsWithoutReservation);

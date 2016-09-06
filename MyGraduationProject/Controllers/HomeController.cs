@@ -1,6 +1,5 @@
 ﻿using DatabaseAccess;
 using MyGraduationProject.Models;
-using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +33,7 @@ namespace MyGraduationProject.Controllers
             return View();
         }
         // GET/POST: Home/Assortment
-        public ActionResult Assortment(string sorting, string filtrationNAME, DateTime? dateFrom, DateTime? dateTo,int? VAL_ID = null)
+        public ActionResult Assortment(string sorting, string filtrationNAME, DateTime? dateFrom = null, DateTime? dateTo = null,int? VAL_ID = null)
         {
             ViewBag.Auth = null;
             if (Session["principal"] != null)
@@ -43,14 +42,14 @@ namespace MyGraduationProject.Controllers
             ViewBag.SortedBy = sorting;
             ViewBag.SortByNAME = sorting == null ? "NAME_Malejaco" : "";
             ViewBag.SortByPRICE_PER_DAY = sorting == "PRICE_PER_DAY_Malejaco" ? "PRICE_PER_DAY_Rosnaco" : "PRICE_PER_DAY_Malejaco";
-            ViewBag.dateFrom = null;
-            ViewBag.dateTo = null;
+            ViewBag.dateF = null;
+            ViewBag.dateT = null;
             ViewBag.FindNAME = null;
             ViewBag.VAL_ID = null;
 
             var model = new AssortmentContainer();
             model.properties = db.Properties;
-
+            model.pValues = new List<PropValue> { new PropValue { VALUE_ID = 0, VALUE = "DEFAULT", PROPERTY_ID = 0 } };
             if (ModelState.IsValid)
             {
                 var items = repo.GetAvailableItems();
@@ -60,7 +59,7 @@ namespace MyGraduationProject.Controllers
                     var tmp = db.Connectors.Where(c => c.VALUE_ID == VAL_ID);
                     if (tmp == null)
                     {
-                        //TODO sprawdz czy dane sa ok
+                        model.items = items;
                         return View(model);
                     }
                     List<Item> tmpItems = new List<Item>();
@@ -75,15 +74,14 @@ namespace MyGraduationProject.Controllers
 
                 if (dateFrom != null && dateTo != null)
                 {
-                    items = repo.GetListOfAvailableItems((DateTime)(dateFrom), (DateTime)(dateTo));
-                    ViewBag.dateFrom = dateFrom;
-                    ViewBag.dateTo = dateTo;
-                }                
+                    items = repo.GetListOfAvailableItems(items, (DateTime)(dateFrom), (DateTime)(dateTo));
+                    ViewBag.dateF = dateFrom;
+                    ViewBag.dateT = dateTo;
+                }
 
                 if (filtrationNAME != null && filtrationNAME != "")
                 {
-                    //TODO sprawdz upper
-                    items = items.Where(i => i.NAME.Contains(filtrationNAME));
+                    items = items.Where(i => i.NAME.ToUpper().Contains(filtrationNAME.ToUpper()));
                     ViewBag.FindNAME = filtrationNAME;
                 }
 
@@ -102,15 +100,14 @@ namespace MyGraduationProject.Controllers
                         items = items.OrderBy(s => s.NAME);
                         break;
                 }
-
                 model.items = items;
-                model.pValues = new List<PropValue> { new PropValue {VALUE_ID = 0, VALUE = "DEFAULT", PROPERTY_ID = 0 } };
+                
                 return View(model);
             }
             else
             {
-                model.pValues = new List<PropValue> { new PropValue { VALUE_ID = 0, VALUE = "DEFAULT", PROPERTY_ID = 0 } };
-                model.items = db.Items;
+                
+                model.items = repo.GetAvailableItems();
                 return View(model);
             }
         }
@@ -220,7 +217,7 @@ namespace MyGraduationProject.Controllers
 
             return View(item);
         }
-
+        //TODO do usuniecia
         // GET: /Home/Ajaks
         [HttpGet]
         public ActionResult Ajaks()
@@ -233,7 +230,7 @@ namespace MyGraduationProject.Controllers
         public ActionResult GetPropValues(int propertyId)
         {
                 
-                var model = GetFullAndPartialViewModel(propertyId);
+            var model = GetFullAndPartialViewModel(propertyId);
             return PartialView("_ajaks", model.pValues);
         }
 
