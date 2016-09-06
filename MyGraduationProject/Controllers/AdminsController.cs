@@ -263,7 +263,6 @@ namespace MyGraduationProject.Controllers
 
                 if (current.ROLE_ID == (int)(RolesEnum.admin))
                 {
-                    //TODO dorobic try catche zeby transakcje wykonywaly sie zaleznie od siebie 
                     var user = repo.GetUserById((int)id);
                     var adress = user.UsersAdress;
                     db.UsersAdresses.DeleteOnSubmit(adress);
@@ -1012,8 +1011,6 @@ namespace MyGraduationProject.Controllers
 
                 if (current.ROLE_ID == (int)(RolesEnum.admin))
                 {
-                    //var item = db.Items.Where(i => i.ITEM_ID == ITEM_ID).FirstOrDefault();
-                    //var value = db.PropValues.Where(p => p.VALUE_ID == VAL_ID).FirstOrDefault();
                     var checker = db.Connectors.Where(c => c.ITEM_ID == ITEM_ID && c.PropValue.VALUE_ID == VAL_ID).FirstOrDefault();
                     if(checker != null)
                     {

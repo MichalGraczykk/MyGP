@@ -3,6 +3,46 @@
     ViewBag.Title = "CalendarOfItem";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@if (ViewBag.Auth != null)
+{
+<div class="move" style="top:250px;">
+    <ol>
+        @using (Html.BeginForm())
+        {
+            @Html.Hidden("ITEM_ID", Model.ITEM_ID)
+
+            <li>
+                Data rozpoczęcia zamówienia:
+            </li>
+
+                <li>
+                    @Html.TextBox("tDateFrom")
+                </li>
+
+                <li>
+                    <span style="color:#363636; font-size:10px;">(DD/MM/YYYY)</span>
+                </li>
+
+                <li>
+                    Data zakończenia zamówienia:
+                </li>
+
+                <li>
+                    @Html.TextBox("tDateTo")
+                </li>
+
+                <li>
+                    <span style="color:#363636; font-size:10px;">(DD/MM/YYYY)</span>
+                </li>
+
+                <li>
+                    <input type="submit" value="Zamów" class="btn btn-default" />
+                </li>
+        }
+    </ol>
+</div>
+}
 <div class="calendarContainer">
 
     <div class="oneItemContainer">

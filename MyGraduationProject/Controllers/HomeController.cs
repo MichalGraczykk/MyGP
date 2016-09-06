@@ -33,8 +33,8 @@ namespace MyGraduationProject.Controllers
 
             return View();
         }
-
-        public ActionResult Assortment(string sorting, string filtrationNAME, int? page, DateTime? dateFrom, DateTime? dateTo)
+        // GET/POST: Home/Assortment
+        public ActionResult Assortment(string sorting, string filtrationNAME, DateTime? dateFrom, DateTime? dateTo,int? VAL_ID = null)
         {
             ViewBag.Auth = null;
             if (Session["principal"] != null)
@@ -46,15 +46,34 @@ namespace MyGraduationProject.Controllers
             ViewBag.dateFrom = null;
             ViewBag.dateTo = null;
             ViewBag.FindNAME = null;
+            ViewBag.VAL_ID = null;
 
-            var items = repo.GetAvailableItems();
-
-            int pageSize = 20;
-            int pageNumber = (page ?? 1);
+            var model = new AssortmentContainer();
+            model.properties = db.Properties;
 
             if (ModelState.IsValid)
             {
-                if(dateFrom != null && dateTo != null)
+                var items = repo.GetAvailableItems();
+
+                if (VAL_ID != null && VAL_ID != 0)
+                {
+                    var tmp = db.Connectors.Where(c => c.VALUE_ID == VAL_ID);
+                    if (tmp == null)
+                    {
+                        //TODO sprawdz czy dane sa ok
+                        return View(model);
+                    }
+                    List<Item> tmpItems = new List<Item>();
+                    foreach (var i in tmp)
+                    {
+                        tmpItems.Add(i.Item);
+                    }
+                    items = tmpItems;
+
+                }
+                ViewBag.VAL_ID = VAL_ID;
+
+                if (dateFrom != null && dateTo != null)
                 {
                     items = repo.GetListOfAvailableItems((DateTime)(dateFrom), (DateTime)(dateTo));
                     ViewBag.dateFrom = dateFrom;
@@ -63,7 +82,7 @@ namespace MyGraduationProject.Controllers
 
                 if (filtrationNAME != null && filtrationNAME != "")
                 {
-                    //TODO sprawdz czemu nie dziala
+                    //TODO sprawdz upper
                     items = items.Where(i => i.NAME.Contains(filtrationNAME));
                     ViewBag.FindNAME = filtrationNAME;
                 }
@@ -84,13 +103,24 @@ namespace MyGraduationProject.Controllers
                         break;
                 }
 
-                
-                return View(items.ToPagedList(pageNumber, pageSize));
+                model.items = items;
+                model.pValues = new List<PropValue> { new PropValue {VALUE_ID = 0, VALUE = "DEFAULT", PROPERTY_ID = 0 } };
+                return View(model);
             }
             else
             {
-                return View(items.ToPagedList(pageNumber, pageSize));
+                model.pValues = new List<PropValue> { new PropValue { VALUE_ID = 0, VALUE = "DEFAULT", PROPERTY_ID = 0 } };
+                model.items = db.Items;
+                return View(model);
             }
+        }
+
+        [HttpGet]
+        public ActionResult _PartialBrowser(int propertyId)
+        {
+            var tmpDEF = new List<PropValue> { new PropValue { VALUE_ID = 0, VALUE = "DEFAULT", PROPERTY_ID = 0 } };
+            tmpDEF.AddRange(db.PropValues.Where(p => p.PROPERTY_ID == propertyId));
+            return PartialView("_PartialBrowser", tmpDEF);
         }
 
         // GET: /Home/Login
@@ -145,9 +175,6 @@ namespace MyGraduationProject.Controllers
             if (Session["principal"] != null)
                 ViewBag.Auth = (User)Session["principal"];
 
-            //TODO test github
-
-            //ferrari enzo id 2
             DateTime currDate = DateTime.Now;
             var items = db.Reservations.Where(i => i.ITEM_ID == id && i.DATE_TO > currDate);
             List<ToCallendar> tmp = new List<ToCallendar>();
@@ -159,6 +186,37 @@ namespace MyGraduationProject.Controllers
             ViewBag.MyEventList = tmp;
 
             var item = repo.GetItemById(id);
+
+            return View(item);
+        }
+
+        [HttpPost]
+        public ActionResult CalendarOfItem(int? ITEM_ID, DateTime? tDateFrom, DateTime? tDateTo)
+        {
+            if(ITEM_ID == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            DateTime currentDate = DateTime.Now;
+            if (ITEM_ID != null && tDateFrom != null && tDateTo != null && tDateFrom < tDateTo && tDateFrom > currentDate)
+            {
+                return RedirectToAction("ConfirmOrder", "Client", new { id = ITEM_ID, dateFrom = tDateFrom, dateTo = tDateTo});
+            }
+
+            ViewBag.Auth = null;
+            if (Session["principal"] != null)
+                ViewBag.Auth = (User)Session["principal"];
+
+            var items = db.Reservations.Where(i => i.ITEM_ID == ITEM_ID && i.DATE_TO > currentDate);
+            List<ToCallendar> tmp = new List<ToCallendar>();
+            TimeSpan correct = new TimeSpan(1, 0, 0, 0);
+            foreach (Reservation res in items)
+            {
+                tmp.Add(new ToCallendar() { title = "reserved", start = res.DATE_FROM.Add(correct), end = res.DATE_TO.Add(correct) });
+            }
+            ViewBag.MyEventList = tmp;
+
+            var item = repo.GetItemById((int)ITEM_ID);
 
             return View(item);
         }

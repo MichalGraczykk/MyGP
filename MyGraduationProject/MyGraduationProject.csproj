@@ -227,10 +227,10 @@
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
+    <None Include="scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="scripts\fullcalendar.js" />
     <Content Include="scripts\fullcalendar.min.js" />
     <Content Include="scripts\gcal.js" />
-    <None Include="scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="scripts\jquery-3.1.0.js" />
     <Content Include="scripts\jquery-3.1.0.min.js" />
     <Content Include="scripts\jquery-3.1.0.slim.js" />
@@ -261,11 +261,16 @@
     <Content Include="scripts\lang\en-au.js" />
     <Content Include="scripts\lang\en-ca.js" />
     <Content Include="scripts\lang\en-gb.js" />
+    <Content Include="scripts\lang\en-ie.js" />
+    <Content Include="scripts\lang\en-nz.js" />
     <Content Include="scripts\lang\es.js" />
+    <Content Include="scripts\lang\eu.js" />
     <Content Include="scripts\lang\fa.js" />
     <Content Include="scripts\lang\fi.js" />
     <Content Include="scripts\lang\fr-ca.js" />
+    <Content Include="scripts\lang\fr-ch.js" />
     <Content Include="scripts\lang\fr.js" />
+    <Content Include="scripts\lang\gl.js" />
     <Content Include="scripts\lang\he.js" />
     <Content Include="scripts\lang\hi.js" />
     <Content Include="scripts\lang\hr.js" />
@@ -275,10 +280,12 @@
     <Content Include="scripts\lang\it.js" />
     <Content Include="scripts\lang\ja.js" />
     <Content Include="scripts\lang\ko.js" />
+    <Content Include="scripts\lang\lb.js" />
     <Content Include="scripts\lang\lt.js" />
     <Content Include="scripts\lang\lv.js" />
     <Content Include="scripts\lang\nb.js" />
     <Content Include="scripts\lang\nl.js" />
+    <Content Include="scripts\lang\nn.js" />
     <Content Include="scripts\lang\pl.js" />
     <Content Include="scripts\lang\pt-br.js" />
     <Content Include="scripts\lang\pt.js" />
@@ -295,6 +302,25 @@
     <Content Include="scripts\lang\vi.js" />
     <Content Include="scripts\lang\zh-cn.js" />
     <Content Include="scripts\lang\zh-tw.js" />
+    <Content Include="scripts\lib\cupertino\images\animated-overlay.gif" />
+    <Content Include="scripts\lib\cupertino\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
+    <Content Include="scripts\lib\cupertino\images\ui-bg_flat_15_cd0a0a_40x100.png" />
+    <Content Include="scripts\lib\cupertino\images\ui-bg_glass_100_e4f1fb_1x400.png" />
+    <Content Include="scripts\lib\cupertino\images\ui-bg_glass_50_3baae3_1x400.png" />
+    <Content Include="scripts\lib\cupertino\images\ui-bg_glass_80_d7ebf9_1x400.png" />
+    <Content Include="scripts\lib\cupertino\images\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
+    <Content Include="scripts\lib\cupertino\images\ui-bg_highlight-hard_70_000000_1x100.png" />
+    <Content Include="scripts\lib\cupertino\images\ui-bg_highlight-soft_100_deedf7_1x100.png" />
+    <Content Include="scripts\lib\cupertino\images\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
+    <Content Include="scripts\lib\cupertino\images\ui-icons_2694e8_256x240.png" />
+    <Content Include="scripts\lib\cupertino\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="scripts\lib\cupertino\images\ui-icons_3d80b3_256x240.png" />
+    <Content Include="scripts\lib\cupertino\images\ui-icons_72a7cf_256x240.png" />
+    <Content Include="scripts\lib\cupertino\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="scripts\lib\cupertino\jquery-ui.min.css" />
+    <Content Include="scripts\lib\jquery-ui.custom.min.js" />
+    <Content Include="scripts\lib\jquery.min.js" />
+    <Content Include="scripts\lib\moment.min.js" />
     <Content Include="scripts\modernizr-2.6.2.js" />
     <Content Include="scripts\moment.min.js" />
     <Content Include="scripts\respond.js" />
@@ -343,9 +369,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Assortment.cshtml" />
     <Content Include="Views\Client\Index.cshtml" />
-    <Content Include="Views\Client\ListOfArticles.cshtml" />
     <Content Include="Views\Client\EditProfile.cshtml" />
-    <Content Include="Views\Client\ListOfTransactions.cshtml" />
     <Content Include="Views\Client\OneItem.cshtml" />
     <Content Include="Views\Client\ConfirmOrder.cshtml" />
     <Content Include="Views\Home\CalendarOfItem.cshtml" />
@@ -357,6 +381,7 @@
     <Content Include="Views\Home\_ajaks.cshtml" />
     <Content Include="Views\Admins\PropertiesOfItem.cshtml" />
     <Content Include="Views\Admins\_PropertiesOfItem.cshtml" />
+    <Content Include="Views\Home\_PartialBrowser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

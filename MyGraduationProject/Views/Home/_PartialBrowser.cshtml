@@ -1,0 +1,4 @@
+﻿@model IEnumerable<DatabaseAccess.PropValue>
+
+@Html.DropDownList("VAL_ID", new SelectList(Model, "VALUE_ID", "VALUE"), htmlAttributes: new { @class = "form-control" })
+<hr />

@@ -115,6 +115,7 @@ a:hover{
     text-align: center;
     width: 300px;
     margin-top: 10px;
+
 }
 
 
@@ -153,7 +154,9 @@ a:hover{
 
 .photoOfItemFloat{
     width: 480px;
-    height: 400px;
+    height: 380px;
+    margin-top:20px;
+    min-height: 80px;
     margin-left: auto;
     float:left !important;
     display:block !important;
@@ -167,5 +170,3 @@ a:hover{
     margin-top:10px;
     border-radius: 0px 0px 15px 15px;
 }
-
-
