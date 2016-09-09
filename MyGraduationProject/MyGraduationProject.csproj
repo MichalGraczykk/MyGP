@@ -398,6 +398,7 @@
     <Content Include="Views\Admins\PropertiesOfItem.cshtml" />
     <Content Include="Views\Admins\_PropertiesOfItem.cshtml" />
     <Content Include="Views\Home\_PartialBrowser.cshtml" />
+    <Content Include="Views\Client\ListOfTransactions.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

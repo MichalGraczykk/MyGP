@@ -114,8 +114,8 @@ namespace MyGraduationProject.Controllers
                     if (ModelState.IsValid)
                     {
                         //sprawdzamy czy podany login nie jest zajęty
-                        var validation = repo.GetUserByLogin(user.LOGIN);
-                        if (validation == null)
+                        var validation = repo.FreeLoginConfirm(user.LOGIN);
+                        if (validation == false)
                         {
                             db.Users.InsertOnSubmit(user);
                             db.SubmitChanges();

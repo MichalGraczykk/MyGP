@@ -5,7 +5,7 @@
     ViewBag.Title = "ListOfItems";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="container">
+<div class="box">
     @using (Html.BeginForm())
     {
         <span>NAME:</span>
@@ -13,7 +13,7 @@
         <input type="submit" value="Szukaj" class="btn btn-default" />
     }
 
-    <table class="table">
+    <table class="table table-bordered table-condensed table-hover" style="font-size:15px;">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.First().ITEM_ID)

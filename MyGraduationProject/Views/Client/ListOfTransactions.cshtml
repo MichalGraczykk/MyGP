@@ -2,30 +2,23 @@
 @using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "ListOfReservations";
+    ViewBag.Title = "ListOfTransactions";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="box">
-    @using (Html.BeginForm())
-    {
-        <span>BOOKING STATUS:</span>
-        @Html.TextBox("BOOKINGSTATUS")
-        <input type="submit" value="Szukaj" class="btn btn-default" />
-    }
-
-    <table class="table table-bordered table-condensed table-hover" style="font-size:15px;">
+    <table class="table table-bordered table-condensed table-hover">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.First().RESERVATION_ID)
             </th>
             <th>
-                @Html.ActionLink("DATE_FROM", "ListOfReservations", new { sorting = ViewBag.SortByDATE_FROM, BOOKINGSTATUS = ViewBag.FindBOOKINGSTATUS })
+                @Html.ActionLink("DATE_FROM", "ListOfTransactions", new { sorting = ViewBag.SortByDATE_FROM })
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.First().DATE_TO)
             </th>
             <th>
-                @Html.ActionLink("ORDER_DATE", "ListOfReservations", new { sorting = ViewBag.SortByORDER_DATE, BOOKINGSTATUS = ViewBag.FindBOOKINGSTATUS })
+                @Html.ActionLink("ORDER_DATE", "ListOfTransactions", new { sorting = ViewBag.SortByORDER_DATE })
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.First().OVERALL_PRICE)
@@ -34,12 +27,8 @@
                 ITEM
             </th>
             <th>
-                PURCHASER
-            </th>
-            <th>
                 BOOKING STATUS
             </th>
-            <th></th>
         </tr>
 
         @foreach (var r in Model)
@@ -61,16 +50,12 @@
                     @Html.DisplayFor(modelItem => r.OVERALL_PRICE)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => r.Item.NAME)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => r.User.LOGIN)
+                    <a href="@Url.Action("CalendarOfItem", "Home", new { id = r.ITEM_ID })">
+                        @r.Item.NAME
+                    </a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => r.ReservationStatuse.NAME)
-                </td>
-                <td>
-                    @Html.ActionLink("Szczegóły", "DetailsOfReservation", new { id = r.RESERVATION_ID })<br />
                 </td>
             </tr>
         }
@@ -78,6 +63,6 @@
 
     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
 
-    @Html.PagedListPager(Model, page => Url.Action("ListOfReservations",
-                    new { sorting = ViewBag.SortedBy, BOOKINGSTATUS = ViewBag.FindBOOKINGSTATUS, page }))
+    @Html.PagedListPager(Model, page => Url.Action("ListOfTransactions",
+                    new { sorting = ViewBag.SortedBy, page }))
 </div>

@@ -30,6 +30,12 @@ namespace MyGraduationProject.Models
             return user;
         }
 
+        public bool FreeLoginConfirm(string login)
+        {
+            var user = db.Users.Where(u => u.LOGIN == login).Any();
+            return user;
+        }
+
         public User GetUserByLoginAndPass(string login, string password)
         {
             var user = db.Users.Where(u => u.LOGIN == login && u.PASSWORD == password).FirstOrDefault();

@@ -225,3 +225,28 @@ a:hover{
   position: relative;
   margin: -1px;
 }
+
+.profileSmallRectangle{
+    margin-top:10px;
+    margin-bottom:10px;
+    margin-left:auto;
+    margin-right:auto;
+    width:400px;
+    background-color:#b7b7b7;
+    border:1px solid #eeeeee;
+    padding:2px;
+    padding-left:8px;
+    font-family: 'Audiowide', cursive;
+    text-align:center;
+}
+
+.profileSmallRectangle:hover{
+    background-color:rgba(255, 94, 0, 0.38);
+}
+
+.centerSmallContainer400{
+    width:400px;
+    margin-left:auto;
+    margin-right:auto;
+    font-family: 'Audiowide', cursive;
+}

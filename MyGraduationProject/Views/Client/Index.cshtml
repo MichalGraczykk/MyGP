@@ -3,75 +3,52 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3>Twoje Dane to:</h3>
-<div class="smallContainer2">
-    <dl class="dl-horizontal">
-        <dt>
-            LOGIN:
-        </dt>
+    <div class="profileSmallRectangle" style="background-color:rgba(255, 86, 0, 0.60);">
+        Twoje Dane to:
+    </div>
+    <div class="profileSmallRectangle">
+        LOGIN: 
+        @ViewBag.Auth.LOGIN
+    </div>
+    <div class="profileSmallRectangle">
+        IMIĘ:
+        @ViewBag.Auth.NAME
+    </div>
+    <div class="profileSmallRectangle">
+        NAZWISKO:
+        @ViewBag.Auth.SURNAME
+    </div>
+    <div class="profileSmallRectangle">
+        ULICA:
+        @ViewBag.Auth.UsersAdress.STREET_NAME
+    </div>
+    <div class="profileSmallRectangle">
+        NUMER DOMU:
+        @ViewBag.Auth.UsersAdress.STREET_NUMBER
+    </div>
+    <div class="profileSmallRectangle">
+        NUMER LOKALU:
+        @ViewBag.Auth.UsersAdress.POSSESION_NUMBER
+    </div>
 
-        <dd>
-            @ViewBag.Auth.LOGIN
-        </dd>
-
-        <dt>
-            IMIĘ:
-        </dt>
-
-        <dd>
-            @ViewBag.Auth.NAME
-        </dd>
-
-        <dt>
-            NAZWISKO:
-        </dt>
-
-        <dd>
-            @ViewBag.Auth.SURNAME
-        </dd>
-
-        <dt>
-            ULICA:
-        </dt>
-
-        <dd>
-            @ViewBag.Auth.UsersAdress.STREET_NAME
-        </dd>
-
-        <dt>
-            NUMER DOMU:
-        </dt>
-
-        <dd>
-            @ViewBag.Auth.UsersAdress.STREET_NUMBER
-        </dd>
-
-        <dt>
-            NUMER LOKALU:
-        </dt>
-
-        <dd>
-            @ViewBag.Auth.UsersAdress.POSSESION_NUMBER
-        </dd>
-    </dl>
-</div>
-
-<div class="smallContainerCenter">
+<div class="centerSmallContainer400" >
+    <hr />
     @Html.ActionLink("Moje tranzakcje", "ListOfTransactions")
-    <hr/>
+    <hr />
     <h3>Zmień hasło</h3>
     @using (Html.BeginForm())
     {
+        <div style="width:300px; margin:auto">
         @Html.AntiForgeryToken()
-        <span>wpisz nowe hasło:</span><br />
-        @Html.Password("newPassword")<br/>
-        <span>Potwierdź nowe hasło:</span><br />
-        @Html.Password("newPasswordConfirm")<br/>
-        if (@ViewBag.Msg != null)
+        @Html.Password("newPassword", null, new { @class = "form-control", @placeholder = "wpisz nowe hasło" })
+        @Html.Password("newPasswordConfirm", null, new { @class = "form-control", @placeholder = "potwierdź nowe hasło" })
+        @if (@ViewBag.Msg != null)
         {
             <span style="color:maroon">@ViewBag.Msg</span>
-            <br/>
+            <br />
         }
         <input type="submit" value="Zmień" class="btn btn-default" />
+        </div>
+        <br/>
     }
 </div>
