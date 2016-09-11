@@ -78,7 +78,7 @@ namespace MyGraduationProject.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult ConfirmOrder(int? id, DateTime? dateFrom, DateTime? dateTo)
+        public ActionResult ConfirmOrder(int id, DateTime? dateFrom, DateTime? dateTo)
         {
             ViewBag.Auth = null;
             if (Session["principal"] != null)
@@ -90,9 +90,9 @@ namespace MyGraduationProject.Controllers
                 if (current.ROLE_ID == (int)(RolesEnum.client))
                 {
                     DateTime currentDate = DateTime.Now;
-                    if (id != null && dateFrom != null && dateTo != null && dateFrom < dateTo && dateFrom > currentDate)
+                    if (dateFrom != null && dateTo != null && dateFrom < dateTo && dateFrom > currentDate)
                     {
-                        var item = repo.GetItemById((int)id);
+                        var item = repo.GetItemById(id);
 
                         Reservation newReservation = new Reservation();
 
@@ -131,7 +131,7 @@ namespace MyGraduationProject.Controllers
                 if (current.ROLE_ID == (int)(RolesEnum.client))
                 {
                     DateTime currentDate = DateTime.Now;
-                    if (reservation.ITEM_ID != null && reservation.DATE_FROM != null && reservation.DATE_TO != null && reservation.DATE_FROM < reservation.DATE_TO && reservation.DATE_FROM > currentDate)
+                    if (reservation.DATE_FROM != null && reservation.DATE_TO != null && reservation.DATE_FROM < reservation.DATE_TO && reservation.DATE_FROM > currentDate)
                     {
                         Reservation newReservation = new Reservation();
 

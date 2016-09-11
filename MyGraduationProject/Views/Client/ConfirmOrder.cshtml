@@ -5,78 +5,56 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<h2>Detale</h2>
-<div class="smallContainer">
+<div class="centerSmallContainer700">
+    <h2>Detale</h2>
     <hr />
-    <h4>dane rezerwacji</h4>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.RESERVATION_ID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RESERVATION_ID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DATE_FROM)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DATE_FROM)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DATE_TO)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DATE_TO)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ORDER_DATE)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ORDER_DATE)
-        </dd>
-    </dl>
+    <div class="profileSmallRectangle" style="background-color:#ffd674">
+        dane rezerwacji
+    </div>
+    <div class="profileSmallRectangle">
+        @Html.DisplayNameFor(model => model.DATE_FROM)
+        <br />
+        @Html.DisplayFor(model => model.DATE_FROM)
+    </div>
+    <div class="profileSmallRectangle">
+        @Html.DisplayNameFor(model => model.DATE_TO)
+        <br />
+        @Html.DisplayFor(model => model.DATE_TO)
+    </div>
+    <div class="profileSmallRectangle">
+        @Html.DisplayNameFor(model => model.ORDER_DATE)
+        <br />
+        @Html.DisplayFor(model => model.ORDER_DATE)
+    </div>
+    <div class="profileSmallRectangle">
+        @Html.DisplayNameFor(model => model.OVERALL_PRICE)
+        <br />
+        @Html.DisplayFor(model => model.OVERALL_PRICE)
+    </div>
     <hr />
-    <h4>dane produktu</h4>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Item.NAME)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Item.NAME)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Item.DESCRPTION)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Item.DESCRPTION)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Item.PHOTO)
-        </dt>
-
-        <dd>
-            <a href="@Html.DisplayFor(model => model.Item.PHOTO)" target="_blank">KLIK</a>
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Item.PRICE_PER_DAY)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Item.PRICE_PER_DAY)
-        </dd>
-    </dl>
+    <div class="profileSmallRectangle" style="background-color:#ffd674">
+        dane produktu
+    </div>
+    <div class="profileSmallRectangle">
+        @Html.DisplayNameFor(model => model.Item.NAME)
+        <br/>
+        @Html.DisplayFor(model => model.Item.NAME)
+    </div>
+    <div class="profileSmallRectangle">
+        @Html.DisplayNameFor(model => model.Item.DESCRPTION)
+        <br />
+        @Html.DisplayFor(model => model.Item.DESCRPTION)
+    </div>
+    <div class="profileSmallRectangle">
+        @Html.DisplayNameFor(model => model.Item.PHOTO)
+        <br />
+        <a href="@Html.DisplayFor(model => model.Item.PHOTO)" target="_blank">KLIK</a>
+    </div>
+    <div class="profileSmallRectangle">
+        @Html.DisplayNameFor(model => model.Item.PRICE_PER_DAY)
+        <br />
+        @Html.DisplayFor(model => model.Item.PRICE_PER_DAY)
+    </div>
 </div>
 @using (Html.BeginForm())
 {

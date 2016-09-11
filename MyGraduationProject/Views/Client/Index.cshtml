@@ -2,12 +2,12 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<div class="centerSmallContainer400">
     <div class="profileSmallRectangle" style="background-color:rgba(255, 86, 0, 0.60);">
         Twoje Dane to:
     </div>
     <div class="profileSmallRectangle">
-        LOGIN: 
+        LOGIN:
         @ViewBag.Auth.LOGIN
     </div>
     <div class="profileSmallRectangle">
@@ -31,24 +31,23 @@
         @ViewBag.Auth.UsersAdress.POSSESION_NUMBER
     </div>
 
-<div class="centerSmallContainer400" >
-    <hr />
-    @Html.ActionLink("Moje tranzakcje", "ListOfTransactions")
-    <hr />
-    <h3>Zmień hasło</h3>
-    @using (Html.BeginForm())
-    {
-        <div style="width:300px; margin:auto">
-        @Html.AntiForgeryToken()
-        @Html.Password("newPassword", null, new { @class = "form-control", @placeholder = "wpisz nowe hasło" })
-        @Html.Password("newPasswordConfirm", null, new { @class = "form-control", @placeholder = "potwierdź nowe hasło" })
-        @if (@ViewBag.Msg != null)
+        <hr />
+        @Html.ActionLink("Moje tranzakcje", "ListOfTransactions")
+        <hr />
+        <h3>Zmień hasło</h3>
+        @using (Html.BeginForm())
         {
-            <span style="color:maroon">@ViewBag.Msg</span>
+            <div style="width:300px; margin:auto">
+                @Html.AntiForgeryToken()
+                @Html.Password("newPassword", null, new { @class = "form-control", @placeholder = "wpisz nowe hasło" })
+                @Html.Password("newPasswordConfirm", null, new { @class = "form-control", @placeholder = "potwierdź nowe hasło" })
+                @if (@ViewBag.Msg != null)
+                {
+                    <span style="color:maroon">@ViewBag.Msg</span>
+                    <br />
+                }
+                <input type="submit" value="Zmień" class="btn btn-default" />
+            </div>
             <br />
         }
-        <input type="submit" value="Zmień" class="btn btn-default" />
-        </div>
-        <br/>
-    }
-</div>
+    </div>

@@ -22,8 +22,6 @@
 	border-radius:10px 10px 10px 10px;
 }
 
-
-
 a{
     text-decoration:none;
     color: #b75400;
@@ -60,16 +58,6 @@ a:hover{
  background-color:#ff7500 !important;
  border: 1px solid #d56737;
 }
-/*
-#calendar td{
- background-color:green !important;
-}
-
-#calendar th{
- background-color:blueviolet !important;
- color:darkred;
-}
-*/
 
 .itemContainer a{
     color: #282828;
@@ -231,12 +219,10 @@ a:hover{
     margin-bottom:10px;
     margin-left:auto;
     margin-right:auto;
-    width:400px;
     background-color:#b7b7b7;
     border:1px solid #eeeeee;
     padding:2px;
     padding-left:8px;
-    font-family: 'Audiowide', cursive;
     text-align:center;
 }
 
@@ -249,4 +235,30 @@ a:hover{
     margin-left:auto;
     margin-right:auto;
     font-family: 'Audiowide', cursive;
+}
+
+.centerSmallContainer700{
+    width:700px;
+    margin-left:auto;
+    margin-right:auto;
+    font-family: 'Lato', sans-serif;
+}
+
+.centerSmallContainer550{
+    width:550px;
+    margin-left:auto;
+    margin-right:auto;
+    font-family: 'Lato', sans-serif;
+}
+
+.profileSmallRectangle2{
+    margin-top:10px;
+    margin-bottom:10px;
+    margin-left:auto;
+    margin-right:auto;
+    background-color:#b7b7b7;
+    border:1px solid #eeeeee;
+    padding:2px;
+    padding-left:8px;
+    text-align:center;
 }

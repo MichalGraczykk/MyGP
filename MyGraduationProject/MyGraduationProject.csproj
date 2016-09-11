@@ -238,6 +238,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="ClassDiagram1.cd" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
@@ -416,7 +417,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DatabaseAccess\DatabaseAccess.csproj">
+    <ProjectReference Include="..\..\fullcalendar-3.0.0\MyGraduationProject\DatabaseAccess\DatabaseAccess.csproj">
       <Project>{640b152c-247a-4620-bed2-771752c40893}</Project>
       <Name>DatabaseAccess</Name>
     </ProjectReference>

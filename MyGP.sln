@@ -5,9 +5,9 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGraduationProject", "MyGraduationProject\MyGraduationProject.csproj", "{021C29D7-D2F1-47FA-A075-F04CBB0C2321}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseAccess", "DatabaseAccess\DatabaseAccess.csproj", "{640B152C-247A-4620-BED2-771752C40893}"
-EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DatabaseProject", "DatabaseProject\DatabaseProject.sqlproj", "{81F8B62D-A248-4DD2-A7C4-A51783074C6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseAccess", "..\fullcalendar-3.0.0\MyGraduationProject\DatabaseAccess\DatabaseAccess.csproj", "{640B152C-247A-4620-BED2-771752C40893}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,16 +19,16 @@ Global
 		{021C29D7-D2F1-47FA-A075-F04CBB0C2321}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{021C29D7-D2F1-47FA-A075-F04CBB0C2321}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{021C29D7-D2F1-47FA-A075-F04CBB0C2321}.Release|Any CPU.Build.0 = Release|Any CPU
-		{640B152C-247A-4620-BED2-771752C40893}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{640B152C-247A-4620-BED2-771752C40893}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{640B152C-247A-4620-BED2-771752C40893}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{640B152C-247A-4620-BED2-771752C40893}.Release|Any CPU.Build.0 = Release|Any CPU
 		{81F8B62D-A248-4DD2-A7C4-A51783074C6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{81F8B62D-A248-4DD2-A7C4-A51783074C6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81F8B62D-A248-4DD2-A7C4-A51783074C6B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{81F8B62D-A248-4DD2-A7C4-A51783074C6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81F8B62D-A248-4DD2-A7C4-A51783074C6B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{81F8B62D-A248-4DD2-A7C4-A51783074C6B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{640B152C-247A-4620-BED2-771752C40893}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{640B152C-247A-4620-BED2-771752C40893}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{640B152C-247A-4620-BED2-771752C40893}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{640B152C-247A-4620-BED2-771752C40893}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
