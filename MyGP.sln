@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGraduationProject", "MyGr
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DatabaseProject", "DatabaseProject\DatabaseProject.sqlproj", "{81F8B62D-A248-4DD2-A7C4-A51783074C6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseAccess", "..\fullcalendar-3.0.0\MyGraduationProject\DatabaseAccess\DatabaseAccess.csproj", "{640B152C-247A-4620-BED2-771752C40893}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseAccess", "DatabaseAccess\DatabaseAccess.csproj", "{640B152C-247A-4620-BED2-771752C40893}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

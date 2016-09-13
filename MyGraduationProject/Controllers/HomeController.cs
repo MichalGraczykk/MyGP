@@ -1,5 +1,6 @@
 ﻿using DatabaseAccess;
 using MyGraduationProject.Models;
+using MyGraduationProject.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -173,7 +174,7 @@ namespace MyGraduationProject.Controllers
                 ViewBag.Auth = (User)Session["principal"];
 
             DateTime currDate = DateTime.Now;
-            var items = db.Reservations.Where(i => i.ITEM_ID == id && i.DATE_TO > currDate);
+            var items = db.Reservations.Where(i => i.ITEM_ID == id && i.DATE_TO > currDate && i.STATUS_ID != (int)ReservationStatusesEnum.CANCELLED);
             List<ToCallendar> tmp = new List<ToCallendar>();
             TimeSpan correct = new TimeSpan(1, 0, 0, 0);
             foreach (Reservation res in items)
@@ -216,33 +217,6 @@ namespace MyGraduationProject.Controllers
             var item = repo.GetItemById((int)ITEM_ID);
 
             return View(item);
-        }
-        //TODO do usuniecia
-        // GET: /Home/Ajaks
-        [HttpGet]
-        public ActionResult Ajaks()
-        {
-            var model = GetFullAndPartialViewModel();
-            return this.View(model);
-        }
-
-        [HttpGet]
-        public ActionResult GetPropValues(int propertyId)
-        {
-                
-            var model = GetFullAndPartialViewModel(propertyId);
-            return PartialView("_ajaks", model.pValues);
-        }
-
-        [HttpGet]
-        private AssortmentContainer GetFullAndPartialViewModel(int propertyId = 0)
-        {
-            var fullAndPartialViewModel = new AssortmentContainer();
-            fullAndPartialViewModel.properties = db.Properties;
-            fullAndPartialViewModel.pValues = db.PropValues.Where(p => p.PROPERTY_ID == propertyId);
-            fullAndPartialViewModel.items = db.Items;
-
-            return fullAndPartialViewModel;
         }
 
         protected override void Dispose(bool disposing)

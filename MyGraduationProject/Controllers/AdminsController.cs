@@ -193,7 +193,7 @@ namespace MyGraduationProject.Controllers
                             userToEdit.PASSWORD = user.PASSWORD;
                             userToEdit.NAME = user.NAME;
                             userToEdit.SURNAME = user.SURNAME;
-                            userToEdit.AGE = user.AGE;
+                            userToEdit.PESEL = user.PESEL;
                             userToEdit.UsersAdress.STREET_NAME = user.UsersAdress.STREET_NAME;
                             userToEdit.UsersAdress.STREET_NUMBER = user.UsersAdress.STREET_NUMBER;
                             userToEdit.UsersAdress.POSSESION_NUMBER = user.UsersAdress.POSSESION_NUMBER;
@@ -587,10 +587,17 @@ namespace MyGraduationProject.Controllers
                             return HttpNotFound();
                         }
 
-                        reservationToEdit.STATUS_ID = reservation.STATUS_ID;
-
-                        db.SubmitChanges();
-
+                        if (reservationToEdit.STATUS_ID == (int)ReservationStatusesEnum.CANCELLED && repo.isItemAvailable((int)reservationToEdit.ITEM_ID, reservationToEdit.DATE_FROM, reservationToEdit.DATE_TO))
+                        {
+                            reservationToEdit.STATUS_ID = reservation.STATUS_ID;
+                            db.SubmitChanges();
+                        }
+                        else if(reservationToEdit.STATUS_ID != (int)ReservationStatusesEnum.CANCELLED)
+                        {
+                            reservationToEdit.STATUS_ID = reservation.STATUS_ID;
+                            db.SubmitChanges();
+                        }
+                            
                         return RedirectToAction("ListOfReservations", "Admins");
                     }
                 }
@@ -973,7 +980,6 @@ namespace MyGraduationProject.Controllers
 
                 if (current.ROLE_ID == (int)(RolesEnum.admin))
                 {
-                    //var item = db.Items.Where(i => i.ITEM_ID == ITEM_ID).FirstOrDefault();
                     var value = db.PropValues.Where(p => p.VALUE_ID == VAL_ID).FirstOrDefault();
                     var checker = db.Connectors.Where(c => c.ITEM_ID == ITEM_ID && c.PropValue.PROPERTY_ID == value.PROPERTY_ID).FirstOrDefault();
                     if(checker == null)

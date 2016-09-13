@@ -238,7 +238,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="ClassDiagram1.cd" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
@@ -386,8 +385,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Assortment.cshtml" />
     <Content Include="Views\Client\Index.cshtml" />
-    <Content Include="Views\Client\EditProfile.cshtml" />
-    <Content Include="Views\Client\OneItem.cshtml" />
     <Content Include="Views\Client\ConfirmOrder.cshtml" />
     <Content Include="Views\Home\CalendarOfItem.cshtml" />
     <Content Include="Views\Admins\ListOfProperties.cshtml" />
@@ -395,7 +392,6 @@
     <Content Include="Views\Admins\EditProperty.cshtml" />
     <Content Include="Views\Admins\EditValueOfProperty.cshtml" />
     <Content Include="Views\Home\Ajaks.cshtml" />
-    <Content Include="Views\Home\_ajaks.cshtml" />
     <Content Include="Views\Admins\PropertiesOfItem.cshtml" />
     <Content Include="Views\Admins\_PropertiesOfItem.cshtml" />
     <Content Include="Views\Home\_PartialBrowser.cshtml" />
@@ -417,7 +413,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\fullcalendar-3.0.0\MyGraduationProject\DatabaseAccess\DatabaseAccess.csproj">
+    <ProjectReference Include="..\DatabaseAccess\DatabaseAccess.csproj">
       <Project>{640b152c-247a-4620-bed2-771752c40893}</Project>
       <Name>DatabaseAccess</Name>
     </ProjectReference>
