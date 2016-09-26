@@ -10,9 +10,6 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => i.VALUE_ID)
-                </td>
-                <td>
                    @Html.DisplayFor(modelItem => i.VALUE)
                 </td>
                 <td>
@@ -25,7 +22,7 @@
         }
     </table>
 
-    <div class="loginContainer">
+    <div class="loginContainer" style="padding-top:0px;">
         <hr />
         @using (Html.BeginForm("id = model.First().PROPERTY_ID, newVal"))
         {

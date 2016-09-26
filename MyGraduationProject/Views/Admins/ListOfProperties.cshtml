@@ -12,9 +12,6 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => i.PROPERTY_ID)
-                </td>
-                <td>
                     @Html.ActionLink(@i.NAME, "ValuesOfProperty", new { id = i.PROPERTY_ID })
                 </td>
                 <td>

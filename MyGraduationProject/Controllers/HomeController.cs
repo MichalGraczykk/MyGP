@@ -219,6 +219,25 @@ namespace MyGraduationProject.Controllers
             return View(item);
         }
 
+        [HttpGet]
+        public ActionResult GetPropValues(int propertyId)
+        {
+
+            var model = GetFullAndPartialViewModel(propertyId);
+            return PartialView("_PropValues", model.pValues);
+        }
+
+        [HttpGet]
+        private AssortmentContainer GetFullAndPartialViewModel(int propertyId = 0)
+        {
+            var fullAndPartialViewModel = new AssortmentContainer();
+            fullAndPartialViewModel.properties = db.Properties;
+            fullAndPartialViewModel.pValues = db.PropValues.Where(p => p.PROPERTY_ID == propertyId);
+            fullAndPartialViewModel.items = db.Items;
+
+            return fullAndPartialViewModel;
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
